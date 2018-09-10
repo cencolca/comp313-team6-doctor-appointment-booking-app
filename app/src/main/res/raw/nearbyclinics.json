@@ -1,0 +1,187 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "CrQCIQEAACH3b3SE5EQQWPwiBYTqiWvp96xkPaMC4rFHDGvO63ZfEei7RhPyHY0ux6uHz2vhg8AqtZr8fP6DgHuyL1CnOTn5KFFMlCQoau0m4GnCHoDqVUhEGfciXfpjmsLHKj6hpr1BesiJx_y5k94XPr3QT3khoxafDOhy8ZflQFBcyVJyG_458uUXZq1hmTwsV2XOohdqKFwHgUPbs1sOHIOnAjHE8eByuf-FfSdazQvlYRH3be8zz_7dLoI2rUJorcZMa-_Mgy5yWVxgftkU-eVMQ8PT1DSedEW_gJKMvk_uS3uQ4byqG8t3Mdpyke1aWhJ2Iv9x9xrRjUP4W3DT1JGbxNnIwRlQnIl66Mz0M2o0_ra4Q4qQTSFp3Sp6TMP6t_YlcD_iA9I9xQG-aMjBhvIkAg0SEG6TyoRrnaH5ybFS_km7iSwaFC6u9cNRYUZjGkaFyJF6XVyJykFY",
+   "results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 43.795553,
+               "lng" : -79.239705
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.79690198029149,
+                  "lng" : -79.23835601970849
+               },
+               "southwest" : {
+                  "lat" : 43.79420401970849,
+                  "lng" : -79.24105398029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/school-71.png",
+         "id" : "37864e43df0a7f0e7dfc637511c0b8d56a3a9c18",
+         "name" : "Markham Rd Walk-in Clinic",
+         "place_id" : "ChIJo41CyuDQ1IkRSFiY9iFPAWg",
+         "plus_code" : {
+            "compound_code" : "QQW6+64 Toronto, Ontario, Canada",
+            "global_code" : "87M2QQW6+64"
+         },
+         "reference" : "CmRRAAAA7TUiODMNMbCDzCDxcjjKN5PvTr-3PKj0ZqkOxzSvIPZdSJe4YgjEryYGja7wijrTEgZoA_p7W8qYesHeAG0Sjm6CI2JEJNawSbwSf7THMGv9Udc3hRRoGY19_VP-rM3JEhCRYU_kFe0_xKChdX6T_po1GhRB3H33vpn_zczWq-vON8q3I4TVig",
+         "scope" : "GOOGLE",
+         "types" : [ "school", "point_of_interest", "establishment" ],
+         "vicinity" : "1825 Markham Rd, Toronto"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 43.7887165,
+               "lng" : -79.2357239
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.7901288802915,
+                  "lng" : -79.23406576970849
+               },
+               "southwest" : {
+                  "lat" : 43.7874309197085,
+                  "lng" : -79.2367637302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "b900aafd7ccbb5ec70de8885a2e0434c53aca1fa",
+         "name" : "Gastroenterology Center",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2268,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109262063072225106954/photos\"\u003eWynn Fitness Clubs (East)\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAT2yBErZuhIa3HpSZFrO77dE5Bm-gO1WBFf92a1IhF_UAEs--fBU90w_Ie-2JOxJifbCOolOuOiwywK7Ruq7spTDBUBRx02u5KG28RAavKOKzCSM1s2bufqeh-6V6xkO4EhBacGjixXer3KPXc0fUu1n1GhRVPXRfVDwjPg0P7CzvR_pzALk8bQ",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJkdo8DuXQ1IkRh5KLfoYmSts",
+         "plus_code" : {
+            "compound_code" : "QQQ7+FP Toronto, Ontario, Canada",
+            "global_code" : "87M2QQQ7+FP"
+         },
+         "rating" : 3.9,
+         "reference" : "CmRSAAAAO78ZmyWRgQVNQyxW2dgPZBVBzlPFmR3VzplzaT0q8y1lzaP3Hvxc4EfjarYMzE_BRiMX9iXhvFL3ImMXWRiEWMGoTToe4x3Hx9_LnttZb3VYeMVnWFbZq1XUXjAfM26yEhCsHNG_eiKTtuWA8o0oR1rbGhQO3B4vwu1IZE29wMi5iSoaFH84_g",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "school", "point_of_interest", "establishment" ],
+         "vicinity" : "10 Milner Business Court, Scarborough"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 43.7781108,
+               "lng" : -79.2280212
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.77907663029151,
+                  "lng" : -79.2265088197085
+               },
+               "southwest" : {
+                  "lat" : 43.77637866970851,
+                  "lng" : -79.22920678029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/school-71.png",
+         "id" : "6b17696cd0c0f19aefdb5baa579c8095b8a3622a",
+         "name" : "Ellesmere Health Clinic",
+         "photos" : [
+            {
+               "height" : 800,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/114842505477372159901/photos\"\u003eChen Shaowei\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAFtoCijCOZgSAJmwg0PwWkUVa8qiTqQ6PoqgxhrHx1Y8EGVPjNYb3TAEVr0DTmyyK9QNyvI2aU3Dj_0DuwS7JQmMnKWaotnwsR51tSy9FXRT5uO4obUTR5CB1a9zyqfJkEhAR4bFdVcbEVOv35KrzBA9rGhQupS49pulDeMuRHTIdwDK-kAJKaQ",
+               "width" : 1080
+            }
+         ],
+         "place_id" : "ChIJd_2o7PXQ1IkR4hNL8b1plEg",
+         "plus_code" : {
+            "compound_code" : "QQHC+6Q Toronto, Ontario, Canada",
+            "global_code" : "87M2QQHC+6Q"
+         },
+         "rating" : 3.6,
+         "reference" : "CmRRAAAA2EitUkA1x5MJaE95IZTMFvBKJ8dAqUVGHXBh_S5OxVwLjuj_LaL1NDER3MffEiTsy6_4y1m8CWN23YuDYgJQ7Qomfvud98DkYS_cqKb63Zr1Ha-3DqhAvrL0edQJfyDkEhBoc5oBORBcMsF8oNAKFoH-GhTxGA270varbiPMIATxl3suMklslg",
+         "scope" : "GOOGLE",
+         "types" : [ "school", "point_of_interest", "establishment" ],
+         "vicinity" : "2222 Ellesmere Road, Scarborough"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 43.7942657,
+               "lng" : -79.2368862
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.7956431302915,
+                  "lng" : -79.2355486197085
+               },
+               "southwest" : {
+                  "lat" : 43.7929451697085,
+                  "lng" : -79.2382465802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/school-71.png",
+         "id" : "1ad0dc21be15eb5894c452a1c9b47534e88e7d50",
+         "name" : "Sheppard Clinic",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "place_id" : "ChIJ9V1DqufQ1IkRfAQf0WxIi0U",
+         "plus_code" : {
+            "compound_code" : "QQV7+P6 Toronto, Ontario, Canada",
+            "global_code" : "87M2QQV7+P6"
+         },
+         "rating" : 5,
+         "reference" : "CmRRAAAA3X2Ktsv3-pROJfVqUxT63MbVehFJRNmWOhHtebxUZ0WZe4-bUd3QMPuDPsx3TFqCe2BHk45SIXH_hIzvbsK-30_gPNEAoLNiDuClIjFZkFmVZhWOT7Kjg9CwBqOE-Ti9EhAgOoUPgjXs_AzbBxSDmVrvGhTSFcPQOq3MnVhffQNLlw3PdufTug",
+         "scope" : "GOOGLE",
+         "types" : [ "school", "point_of_interest", "establishment" ],
+         "vicinity" : "5600 Sheppard Avenue East, Scarborough"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 43.7800062,
+               "lng" : -79.2432441
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.78145893029149,
+                  "lng" : -79.24193776970849
+               },
+               "southwest" : {
+                  "lat" : 43.7787609697085,
+                  "lng" : -79.24463573029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/school-71.png",
+         "id" : "a8f512906cf5d22a96c8db08e5d7a07987428cf7",
+         "name" : "Progress Medical Center",
+         "place_id" : "ChIJAdLTW1TQ1IkRKrgEtyJADr4",
+         "plus_code" : {
+            "compound_code" : "QQJ4+2P Toronto, Ontario, Canada",
+            "global_code" : "87M2QQJ4+2P"
+         },
+         "rating" : 3.7,
+         "reference" : "CmRSAAAApSOuUQe5oFNnlbPSlP51mxnFju7ORTeTzesQCKtLVWX0xooOxaGPj2nG6_mPoI9SViEpkT8Z2XpzIIwyvEJXRAwzMk53OcZa89H6oyJLI2l35mPLIFJTBIo9lq7xM-NqEhBGlVedlHSqKr0u91DctnTpGhR47ripveDV6mRuGa3ZRpDBUiO1Ew",
+         "scope" : "GOOGLE",
+         "types" : [ "school", "point_of_interest", "establishment" ],
+         "vicinity" : "801 Progress Avenue, Scarborough"
+      }
+   ],
+   "status" : "OK"
+}

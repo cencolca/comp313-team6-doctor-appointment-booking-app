@@ -1,0 +1,32 @@
+<resources>
+    <string name="google_place_api">AIzaSyDXPrRsFiTlESAhSXoQkKT78SJF2nKABDI</string>
+
+    <string name="app_name">Book Doctor Appointment</string>
+    <string name="strDrUnAvailable">"*** Un-Available***"</string>
+
+    <string name="userName">User Name: </string>
+    <string name="password">Pasword:</string>
+    <string name="bioData">Enter Student Bio-Data</string>
+    <string name="lblFName">First Name:</string>
+    <string name="lblLName">Last Name:</string>
+    <string name="lblAddress">Address:</string>
+    <string name="lblCity">City:</string>
+    <string name="lblPostcode">Post Code:</string>
+    <string name="chooseProg">Choose The Program</string>
+    <string name="payInfo">Enter Payment Details</string>
+    <string name="nameOnCard">Name On Card: </string>
+    <string name="address">Address: </string>
+    <string name="phone">Phone: </string>
+    <string name="cardType">Card Type: </string>
+    <string name="cardNumber">Card Number: </string>
+    <string name="cardExpiry">Expiry:</string>
+    <string name="lblSummary">Summary</string>
+    <string name="lblAllStudents">List Of All Students</string>
+
+    <string name="starting_from_intent">STARTING_FROM_INTENT</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="dashOpen">Open Dashboard</string>
+    <string name="dashClose">Close Dashboard</string>
+
+</resources>

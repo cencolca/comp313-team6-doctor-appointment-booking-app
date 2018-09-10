@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--Binding Data to Views-->
+    <!--https://guides.codepath.com/android/Applying-Data-Binding-for-Views-->
+<data>
+
+    <variable
+        name="dr"
+        type="comp231.drbooking.Model_DrProfile" />
+    <!--props MUST be PUBLIC on ViewModel class to be accessed here-->
+</data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".DrProfile"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/txtDrName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text='@{dr.name}' />
+
+    <TextView
+        android:id="@+id/txtDrSpecialty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text='@{dr.specialty}' />
+    <TextView
+        android:id="@+id/txtDrEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text='@{"Email: " + dr.email}' />
+    <TextView
+        android:id="@+id/txtDrPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text='@{"Phone: " + dr.phone}' />
+</LinearLayout>
+</layout>

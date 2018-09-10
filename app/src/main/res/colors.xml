@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorTaskDesc">#3be910</color>
+
+
+    <color name="actionbar">#553283</color>
+
+
+    <color name="dashboard_segment1">#9600e1ff</color>
+    <color name="dashboard_segment2">#96ff0057</color>
+    <color name="dashboard_segment3">#96ff9800</color>
+    <color name="dashboard_segment4">#9600ff83</color>
+
+
+    <color name="dashboard_segment1_h">#9600535e</color>
+    <color name="dashboard_segment2_h">#9659001e</color>
+    <color name="dashboard_segment3_h">#965e3800</color>
+    <color name="dashboard_segment4_h">#96014e29</color>
+
+</resources>

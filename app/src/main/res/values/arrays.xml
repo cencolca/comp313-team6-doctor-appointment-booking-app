@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="DrNames" >
+        <item>~Select Doctor~</item>
+        <item>Doctor 1</item>
+        <item>Lady Doctor 1</item>
+        <item>John Doe</item>
+        <item>Surgeon</item>
+        <item>Physician</item>
+        <item>Pediatrician</item>
+    </string-array>
+
+    <string-array name="DrSpecialty" >
+        <item>All</item>
+        <item>General Physician</item>
+        <item>Gynecologist</item>
+        <item>Pediatrician</item>
+        <item>Surgeon</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Dashboard">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/btnAppointments"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#45b29d"
+                android:gravity="center_horizontal|center_vertical"
+                android:onClick="clk_allAppointments"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/dashboardImage"
+                    app:srcCompat="@drawable/ic_appointments" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="All Appointments" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#a1d044"
+                android:gravity="center_horizontal|center_vertical"
+                android:onClick="clk_newAppMap"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/dashboardImage"
+                    app:srcCompat="@drawable/ic_map" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="New Appointment - Map" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/btnSettings"
+                android:layout_height="match_parent"
+                android:background="#efc94c"
+                android:gravity="center_horizontal|center_vertical"
+                android:onClick="clk_Settings"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/dashboardImage"
+                    app:srcCompat="@drawable/ic_settings" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Settings" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/button3"
+                android:layout_height="match_parent"
+                android:background="#e27a3f"
+                android:gravity="center_horizontal|center_vertical"
+                android:onClick="clk_Testing"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/dashboardImage"
+                    app:srcCompat="@drawable/ic_star" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Testing" />
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+    <!--<Button-->
+    <!--android:id="@+id/btnPlacePicker"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="30dp"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:onClick="clk_newAppPlacePicker"-->
+    <!--android:text="New Appointment - PlacePicker"-->
+    <!--android:visibility="gone" />-->
+
+</LinearLayout>

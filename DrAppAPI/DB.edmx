@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DBTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="DB.User" />
+          <EntitySet Name="Appointments" EntityType="DB.Appointment" />
+          <EntitySet Name="Doctors" EntityType="DB.Doctor" />
+          <EntitySet Name="Clinics" EntityType="DB.Clinic" />
+          <EntitySet Name="Specialties" EntityType="DB.Specialty" />
+          <EntitySet Name="DrInClinics" EntityType="DB.DrInClinic" />
+          <EntitySet Name="FieldOfDrs" EntityType="DB.FieldOfDr" />
+          <AssociationSet Name="UserAppointment" Association="DB.UserAppointment">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="AppointmentClinic" Association="DB.AppointmentClinic">
+            <End Role="Appointment" EntitySet="Appointments" />
+            <End Role="Clinic" EntitySet="Clinics" />
+          </AssociationSet>
+          <AssociationSet Name="AppointmentDoctor" Association="DB.AppointmentDoctor">
+            <End Role="Appointment" EntitySet="Appointments" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="ClinicDrInClinic" Association="DB.ClinicDrInClinic">
+            <End Role="Clinic" EntitySet="Clinics" />
+            <End Role="DrInClinic" EntitySet="DrInClinics" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorDrInClinic" Association="DB.DoctorDrInClinic">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DrInClinic" EntitySet="DrInClinics" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorFieldOfDr" Association="DB.DoctorFieldOfDr">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="FieldOfDr" EntitySet="FieldOfDrs" />
+          </AssociationSet>
+          <AssociationSet Name="SpecialtyFieldOfDr" Association="DB.SpecialtyFieldOfDr">
+            <End Role="Specialty" EntitySet="Specialties" />
+            <End Role="FieldOfDr" EntitySet="FieldOfDrs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameOfUser" Type="String" Nullable="true" />
+          <Property Name="loginName" Type="String" Nullable="false" />
+          <Property Name="pw" Type="String" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="phone" Type="String" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="DB.UserAppointment" FromRole="User" ToRole="Appointment" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id_Appointment" />
+          </Key>
+          <Property Name="Id_Appointment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="DB.UserAppointment" FromRole="Appointment" ToRole="User" />
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clinic" Relationship="DB.AppointmentClinic" FromRole="Appointment" ToRole="Clinic" />
+          <Property Name="Id_Clinic" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="DB.AppointmentDoctor" FromRole="Appointment" ToRole="Doctor" />
+          <Property Name="Id_Doctor" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentTime" Type="String" Nullable="false" />
+          <Property Name="CreationTime" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+          </Key>
+          <Property Name="Id_Doctor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Appointments" Relationship="DB.AppointmentDoctor" FromRole="Doctor" ToRole="Appointment" />
+          <NavigationProperty Name="DrInClinics" Relationship="DB.DoctorDrInClinic" FromRole="Doctor" ToRole="DrInClinic" />
+          <NavigationProperty Name="FieldOfDrs" Relationship="DB.DoctorFieldOfDr" FromRole="Doctor" ToRole="FieldOfDr" />
+          <Property Name="nameOfDr" Type="String" Nullable="false" />
+          <Property Name="phone" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clinic">
+          <Key>
+            <PropertyRef Name="Id_Clinic" />
+          </Key>
+          <Property Name="Id_Clinic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Appointments" Relationship="DB.AppointmentClinic" FromRole="Clinic" ToRole="Appointment" />
+          <NavigationProperty Name="DrInClinics" Relationship="DB.ClinicDrInClinic" FromRole="Clinic" ToRole="DrInClinic" />
+          <Property Name="nameOfClinic" Type="String" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" />
+          <Property Name="phone" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="Id_Specialty" />
+          </Key>
+          <Property Name="Id_Specialty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="FieldOfDrs" Relationship="DB.SpecialtyFieldOfDr" FromRole="Specialty" ToRole="FieldOfDr" />
+          <Property Name="SpecialtyTitle" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DrInClinic" >
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+            <PropertyRef Name="Id_Clinic" />
+          </Key>
+          <NavigationProperty Name="Clinic" Relationship="DB.ClinicDrInClinic" FromRole="DrInClinic" ToRole="Clinic" />
+          <Property Name="Id_Clinic" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="DB.DoctorDrInClinic" FromRole="DrInClinic" ToRole="Doctor" />
+          <Property Name="Id_Doctor" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldOfDr" >
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+            <PropertyRef Name="Id_Specialty" />
+          </Key>
+          <NavigationProperty Name="Doctor" Relationship="DB.DoctorFieldOfDr" FromRole="FieldOfDr" ToRole="Doctor" />
+          <Property Name="Id_Doctor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Specialty" Relationship="DB.SpecialtyFieldOfDr" FromRole="FieldOfDr" ToRole="Specialty" />
+          <Property Name="Id_Specialty" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserAppointment">
+          <End Type="DB.User" Role="User" Multiplicity="1" />
+          <End Type="DB.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppointmentClinic">
+          <End Type="DB.Appointment" Role="Appointment" Multiplicity="*" />
+          <End Type="DB.Clinic" Role="Clinic" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Clinic">
+              <PropertyRef Name="Id_Clinic" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Id_Clinic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppointmentDoctor">
+          <End Type="DB.Appointment" Role="Appointment" Multiplicity="*" />
+          <End Type="DB.Doctor" Role="Doctor" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClinicDrInClinic">
+          <End Type="DB.Clinic" Role="Clinic" Multiplicity="1" />
+          <End Type="DB.DrInClinic" Role="DrInClinic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clinic">
+              <PropertyRef Name="Id_Clinic" />
+            </Principal>
+            <Dependent Role="DrInClinic">
+              <PropertyRef Name="Id_Clinic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DoctorDrInClinic">
+          <End Type="DB.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="DB.DrInClinic" Role="DrInClinic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="DrInClinic">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DoctorFieldOfDr">
+          <End Type="DB.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="DB.FieldOfDr" Role="FieldOfDr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="FieldOfDr">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SpecialtyFieldOfDr">
+          <End Type="DB.Specialty" Role="Specialty" Multiplicity="1" />
+          <End Type="DB.FieldOfDr" Role="FieldOfDr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialty">
+              <PropertyRef Name="Id_Specialty" />
+            </Principal>
+            <Dependent Role="FieldOfDr">
+              <PropertyRef Name="Id_Specialty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DB" />
+        <Alias Key="Target" Value="DB.Store" />
+        <EntityContainerMapping CdmEntityContainer="DBContainer" StorageEntityContainer="DBTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

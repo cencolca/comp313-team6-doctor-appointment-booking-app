@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
+
+    <!--https://github.com/priyankapakhale/GoogleMapsNearbyPlacesDemo-->
+    <!--https://www.youtube.com/watch?v=_Oljjn1fIAc-->
+    <EditText
+        android:id="@+id/TF_location"
+        android:layout_width="290dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="940 progress Ave Toronto" />
+
+    <Button
+        android:id="@+id/B_search"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/TF_location"
+        android:onClick="onClick"
+        android:text="Search" />
+
+
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="comp231.drbooking.MapsActivity"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentBottom="true"
+    android:layout_below="@+id/B_hopistals"/>
+
+    <Button
+        android:id="@+id/B_hopistals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TF_location"
+        android:onClick="onClick"
+        android:text="Hospitals" />
+
+    <Button
+        android:id="@+id/B_schools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TF_location"
+        android:layout_toEndOf="@+id/B_hopistals"
+        android:enabled="false"
+        android:onClick="onClick"
+        android:text="Schools"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/B_restaurants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TF_location"
+        android:layout_toEndOf="@+id/B_schools"
+        android:enabled="false"
+        android:onClick="onClick"
+        android:text="Restautants"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/B_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/B_restaurants"
+        android:layout_toEndOf="@+id/B_restaurants"
+        android:enabled="false"
+        android:onClick="onClick"
+        android:text="To"
+        android:visibility="invisible" />
+</RelativeLayout>
