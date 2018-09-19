@@ -9,7 +9,7 @@
 
     <variable
         name="dr"
-        type="comp231.drbooking.Model_DrProfile" />
+        type="com.comp313.models.DrProfile" />
     <!--props MUST be PUBLIC on ViewModel class to be accessed here-->
 </data>
 <LinearLayout

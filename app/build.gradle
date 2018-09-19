@@ -14,7 +14,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         applicationId "comp231.drbooking"
-        minSdkVersion 17
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
