@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.DrProfile;
 
-import comp231.drbooking.R;
-import comp231.drbooking.databinding.ActivityDrProfileBinding;
+import com.comp313.R;
+import com.comp313.databinding.ActivityDrProfileBinding;
 
 public class DrProfileActivity extends AppCompatActivity {
 

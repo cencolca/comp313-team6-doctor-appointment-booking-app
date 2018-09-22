@@ -168,7 +168,7 @@ public class DbAdapter extends AsyncTask<Object, Integer, String>//<args,progres
         switch (ctx.getClass().getSimpleName())
         {
             //Go to Dashboard - on successful login
-            case "Login":
+            case "LoginActivity":
             if(jsonResponse.equals("0"))
             {
                 Toast.makeText(ctx, jsonResponse + " Login Failed", Toast.LENGTH_LONG).show();
@@ -207,7 +207,7 @@ public class DbAdapter extends AsyncTask<Object, Integer, String>//<args,progres
             }
             break;
             //
-            case "NewUserRegister":
+            case "RegisterActivity":
                 if(jsonResponse.equals("0"))//user already exists
                 {
 
@@ -241,7 +241,7 @@ public class DbAdapter extends AsyncTask<Object, Integer, String>//<args,progres
                 }
             break;
             //
-            case "BookingDetails":
+            case "BookingDetailsActivity":
                 if(jsonResponse.equals("0"))
                 {
                     Toast.makeText(ctx.getApplicationContext(), jsonResponse + " Appointment unavailable, Choose another time!", Toast.LENGTH_LONG).show();
@@ -267,11 +267,11 @@ public class DbAdapter extends AsyncTask<Object, Integer, String>//<args,progres
                 }
              break;
             //
-            case "Bookings_All":
+            case "Bookings_AllActivity":
                 callBk.onResponseFromServer(jsonResponse, ctx);
                 break;
             //
-            case "Settings":
+            case "SettingsActivity":
                 if(callBk != null)
                 {
                     callBk.onResponseFromServer(jsonResponse, ctx);
@@ -282,7 +282,7 @@ public class DbAdapter extends AsyncTask<Object, Integer, String>//<args,progres
                 }
             break;
             //
-            case "AdminDashboard":
+            case "AdminDashboardActivity":
                 callBk.onResponseFromServer(jsonResponse, ctx);
                 break;
             //

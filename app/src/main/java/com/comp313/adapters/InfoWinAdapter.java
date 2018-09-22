@@ -17,7 +17,7 @@ import com.comp313.activities.BookingDetailsActivity;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.model.Marker;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class InfoWinAdapter implements InfoWindowAdapter
 {

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 /*
  * By: SHAFIQ-UR-REHMAN

@@ -15,7 +15,7 @@ import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.User;
 import com.google.gson.Gson;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class LoginActivity extends BaseActivity
 {

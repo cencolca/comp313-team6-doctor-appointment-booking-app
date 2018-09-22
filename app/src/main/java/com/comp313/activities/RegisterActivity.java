@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import java.util.Map;
 import java.util.Random;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class RegisterActivity extends BaseActivity {
 

@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class GetNearbyPlacesData extends AsyncTask<Object, String, String>//args,progress,result
 {

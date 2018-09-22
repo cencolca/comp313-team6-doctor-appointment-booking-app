@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.media.MediaPlayer;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class ServiceIntro extends IntentService
 {

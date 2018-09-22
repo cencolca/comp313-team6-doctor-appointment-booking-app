@@ -3,7 +3,7 @@ package com.comp313.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class VerifyEmailActivity extends AppCompatActivity {
 

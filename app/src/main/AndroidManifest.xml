@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="comp231.drbooking"
+    package="com.comp313"
     android:versionCode="1"
     android:versionName="DrApp1">
 
@@ -32,7 +32,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".SplashScreen">
+        <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,23 +40,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Login" />
-        <activity android:name=".FindClinic" />
-        <activity android:name=".BookingDetails" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.FindClinicActivity" />
+        <activity android:name=".activities.BookingDetailsActivity" />
 
         <!-- <activity android:name=".Dashboard" /> -->
-        <activity android:name=".NewUserRegister" />
-        <activity android:name=".Bookings_All" />
-        <activity android:name=".Settings" />
-        <activity android:name=".VerifyEmail" />
-        <activity android:name=".DrProfile" />
-        <activity android:name=".Dashboard" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.Bookings_AllActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.VerifyEmailActivity" />
+        <activity android:name=".activities.DrProfileActivity" />
+        <activity android:name=".activities.DashboardActivity" />
 
-        <service android:name=".ServiceIntro" />
+        <service android:name=".helpers.ServiceIntro" />
 
-        <activity android:name=".AdminDashboard"></activity>
+        <activity android:name=".activities.AdminDashboardActivity"></activity>
     </application>
 
 </manifest>

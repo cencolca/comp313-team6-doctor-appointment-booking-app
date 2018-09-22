@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Toast;
 
+import com.comp313.R;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -24,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 
-import comp231.drbooking.R;
+
 
 import static com.google.android.gms.location.places.Place.TYPE_DOCTOR;
 import static com.google.android.gms.location.places.Place.TYPE_HOSPITAL;

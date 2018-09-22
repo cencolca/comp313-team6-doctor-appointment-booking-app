@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.comp313.helpers.ServiceIntro;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class SplashScreenActivity extends AppCompatActivity
 {

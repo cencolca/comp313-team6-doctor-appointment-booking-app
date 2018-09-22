@@ -35,7 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 
 public class BookingDetailsActivity extends BaseActivity implements ICallBackFromDbAdapter
@@ -377,7 +377,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
     {
         int DrSelectedIndex = spinDrList.getSelectedItemPosition();
         String DrSelectedName = spinDrList.getSelectedItem().toString();
-        i = new Intent(this, DrProfile.class);
+        i = new Intent(this, DrProfileActivity.class);
         i.putExtra("DrSelectedIndex", DrSelectedIndex);
         i.putExtra("DrSelectedName", DrSelectedName);
         startActivity(i);

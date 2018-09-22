@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 
 public class Bookings_AllActivity extends BaseActivity implements ICallBackFromDbAdapter

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.comp313.R;
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.adapters.User_Adapter;
 import com.comp313.dataaccess.DbAdapter;
@@ -27,7 +28,7 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-import comp231.drbooking.R;
+
 
 
 public class AdminDashboardActivity extends BaseActivity implements ICallBackFromDbAdapter {

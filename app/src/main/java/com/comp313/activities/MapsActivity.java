@@ -42,7 +42,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 public class MapsActivity extends BaseActivity implements OnMapReadyCallback, LocationListener {
 

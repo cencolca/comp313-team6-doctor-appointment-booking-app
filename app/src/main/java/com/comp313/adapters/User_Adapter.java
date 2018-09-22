@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import comp231.drbooking.R;
+import com.comp313.R;
 
 //custom ArrayAdapter to display list of Model_Booking class
 public class User_Adapter extends ArrayAdapter<User>
