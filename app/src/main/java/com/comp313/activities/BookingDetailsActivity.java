@@ -41,7 +41,7 @@ import com.comp313.R;
 public class BookingDetailsActivity extends BaseActivity implements ICallBackFromDbAdapter
 {
 
-    //region Variables
+    //region Variablesdsdsd
     boolean isYES = false;
     TextView dateTxtV, timeTxtV, txtV;
     Button btnCancelApp;
