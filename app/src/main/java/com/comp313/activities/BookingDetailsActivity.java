@@ -216,7 +216,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
     private void GetDrArray()
     {
         dbAdapter = new DbAdapter(this, "GetDrNamesArray", this);
-        paramsApiUri[0] = "https://drappdb.firebaseio.com/DrProfiles.json?auth=xuMPG9VJbpjYXXPgPPAgwKYCA1kyx4Lvg4YNkz1a"; //Before Firebase >>> //= VariablesGlobal.API_URI + "/api/values/doctors";
+        paramsApiUri[0] = "https://drappdb.firebaseio.com/DrProfiles.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB; //Before Firebase >>> //= VariablesGlobal.API_URI + "/api/values/doctors";
         paramsApiUri[1] = formData = "";
         paramsApiUri[2] = "GET";
         dbAdapter.execute(paramsApiUri);

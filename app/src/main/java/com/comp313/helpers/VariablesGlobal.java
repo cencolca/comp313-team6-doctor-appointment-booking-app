@@ -21,9 +21,8 @@ public class VariablesGlobal
     public static List<DrProfile> DrProfiles =new ArrayList<>();
     public static String filterDrNamesBy = "All";
     public static   List<String> DrNamesListFiltered = new ArrayList<String>();
-
-
     public static ArrayAdapter spinAdapter;
+    public static String KeyToAccessFirebaseDB = "xuMPG9VJbpjYXXPgPPAgwKYCA1kyx4Lvg4YNkz1a";
 
 
 }

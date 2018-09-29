@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.comp313.adapters.InfoWinAdapter;
 import com.comp313.dataaccess.GetNearbyPlacesData;
+import com.comp313.helpers.VariablesGlobal;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -291,7 +292,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                 String hospital = "hospital";
                 String url = getUrl(latitude, longitude, hospital);
                 dataTransfer[0] = mMap;
-                dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=xuMPG9VJbpjYXXPgPPAgwKYCA1kyx4Lvg4YNkz1a";//Instead of Google, get hardCoded addresses from Firebase
+                dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB;//Instead of Google, get hardCoded addresses from Firebase
 
                 getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
 
