@@ -291,7 +291,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                 String hospital = "hospital";
                 String url = getUrl(latitude, longitude, hospital);
                 dataTransfer[0] = mMap;
-                dataTransfer[1] = url;
+                dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=xuMPG9VJbpjYXXPgPPAgwKYCA1kyx4Lvg4YNkz1a";//Instead of Google, get hardCoded addresses from Firebase
 
                 getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
 
