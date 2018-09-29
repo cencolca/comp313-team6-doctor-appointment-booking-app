@@ -1,6 +1,6 @@
 # Doctor appointment booking app for Android - Prototype
 
-[![CircleCI](https://circleci.com/gh/loccenten/comp313-team6-doctor-appointment-booking-app.svg?style=svg)](https://circleci.com/gh/loccenten/comp313-team6-doctor-appointment-booking-app)
+[![CircleCI](https://circleci.com/gh/loccenten/comp313-team6-doctor-appointment-booking-app.svg?style=svg&circle-token=4f8fcaad17630cdf3aceafbeb40981c024986acf)](https://circleci.com/gh/loccenten/comp313-team6-doctor-appointment-booking-app)
 
 ## Technologies
 - Android
