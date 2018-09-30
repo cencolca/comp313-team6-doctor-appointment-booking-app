@@ -13,7 +13,7 @@ android {
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        applicationId "comp231.drbooking"
+        applicationId "com.comp313"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
@@ -49,7 +49,11 @@ dependencies {
     //Snackbar
     implementation 'com.android.support:design:26.1.0'
 
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:11.4.0'
+
     //https://stackoverflow.com/questions/40268805/how-to-update-google-play-service-on-emulator-android-studio/40375645#40375645
     //compile 'com.google.android.gms:play-services-maps:9.6.0'
     //Do as 1st answer here:https://stackoverflow.com/questions/35476182/updating-google-play-services-in-emulator
 }
+apply plugin: 'com.google.gms.google-services'
