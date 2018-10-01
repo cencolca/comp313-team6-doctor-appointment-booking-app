@@ -58,6 +58,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     InfoWinAdapter infoWinAdapter;
     public static MapsActivity instance = null;
     AlertDialog mGPSDialog;
+    Object[] dataTransfer;
+    GetNearbyPlacesData getNearbyPlacesData;
     //endregion
 
     @Override
@@ -149,6 +151,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("My Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //
+        mMap.setInfoWindowAdapter(infoWinAdapter);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker)
+            {
+                Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
+                i.putExtra("infoWinTitle", marker.getTitle());//address included here!!
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -233,9 +247,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
     public void onClick(View v)
     {
-        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData(this);
-        Object dataTransfer[] = new Object[2];//will hold 2 objs
-
+        getNearbyPlacesData = new GetNearbyPlacesData(this);
+        dataTransfer = new Object[2];//will hold 2 objs
 
         //
         switch (v.getId())
@@ -286,8 +299,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                         e.printStackTrace();
                     }
                 }
+                showNearbyClinics();
                 break;
-            case R.id.B_hopistals:
+ /*            case R.id.B_hopistals:
                 mMap.clear();
                 String hospital = "hospital";
                 String url = getUrl(latitude, longitude, hospital);
@@ -299,7 +313,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                 Toast.makeText(this, "Showing nearby hospitals", Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.B_restaurants:
+           case R.id.B_restaurants:
                 mMap.clear();
                 String school = "school";
                 url = getUrl(latitude, longitude, school);
@@ -322,8 +336,21 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
                 Toast.makeText(this, "Showing nearby restaurants", Toast.LENGTH_LONG).show();
 
-                break;
+                break;*/
         }
+    }
+
+    private void showNearbyClinics()
+    {
+        mMap.clear();
+        String hospital = "hospital";
+        String url = getUrl(latitude, longitude, hospital);
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB;//Instead of Google, get hardCoded addresses from Firebase
+
+        getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
+
+        Toast.makeText(this, "Showing nearby hospitals", Toast.LENGTH_LONG).show();
     }
 
 

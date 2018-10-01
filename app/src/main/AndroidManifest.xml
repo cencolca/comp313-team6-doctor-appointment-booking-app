@@ -56,7 +56,8 @@
 
         <service android:name=".helpers.ServiceIntro" />
 
-        <activity android:name=".activities.AdminDashboardActivity"></activity>
+        <activity android:name=".activities.AdminDashboardActivity" />
+        <activity android:name=".activities.SelectTime"></activity>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ package com.comp313.activities;
  * Purpose: Activity to either display a new booking details or existing booking details once user clicks on an item in list of all bookings
  */
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -17,10 +18,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.comp313.adapters.DrList_Adapter;
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.dataaccess.DbAdapter;
 import com.comp313.helpers.VariablesGlobal;
@@ -33,6 +36,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import com.comp313.R;
@@ -41,7 +45,7 @@ import com.comp313.R;
 public class BookingDetailsActivity extends BaseActivity implements ICallBackFromDbAdapter
 {
 
-    //region Variablesdsdsd
+    //region Variables
     boolean isYES = false;
     TextView dateTxtV, timeTxtV, txtV;
     Button btnCancelApp;
@@ -55,6 +59,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
     Object[] paramsApiUri;
     public static BookingDetailsActivity instance;
     AdapterView.OnItemSelectedListener spinListener;
+    ListView lv_DrList;
     //endregion
 
     @Override
@@ -63,6 +68,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
         instance = this;
+        getSupportActionBar().setTitle("Choose a Doctor");
         //
         paramsApiUri = new Object[3];
         gson = new Gson();
@@ -75,8 +81,8 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         VariablesGlobal.spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, VariablesGlobal.DrNamesListFiltered);
         spinDrList.setAdapter(VariablesGlobal.spinAdapter);
 
-        btnCancelApp = (Button)findViewById(R.id.btnCancelApp);
-        btnCancelApp.setVisibility(View.INVISIBLE);
+        //btnCancelApp = (Button)findViewById(R.id.btnCancelApp);
+        //btnCancelApp.setVisibility(View.INVISIBLE);
 
         //Listener for spinner - will be attached & removed
         spinListener = new AdapterView.OnItemSelectedListener()
@@ -103,7 +109,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         txtV.setText("Address : " + getIntent().getStringExtra("infoWinTitle"));
 
         //region >>>DatePicker Set Up
-        dateTxtV = (TextView)findViewById(R.id.txtDate);
+  /*      dateTxtV = (TextView)findViewById(R.id.txtDate);
         cal = Calendar.getInstance();
         //Create Listener for DatePicker
         final DatePickerDialog.OnDateSetListener dateChangeListener = new DatePickerDialog.OnDateSetListener()
@@ -131,11 +137,11 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
                         ).show();
             }
         });
-        updateDateTxtV();
+        updateDateTxtV();*/
         //endregion
 
         //region >>>TimePicker Set Up
-        timeTxtV = (TextView)findViewById(R.id.txtTime);
+/*        timeTxtV = (TextView)findViewById(R.id.txtTime);
         //Create Listener for DatePicker
         final TimePickerDialog.OnTimeSetListener timeChangeListener = new TimePickerDialog.OnTimeSetListener()
         {
@@ -162,12 +168,12 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
                                 false
                         ).show();
             }
-        });
+        });*/
         //endregion
 
         //
         //region if editing existing booking sent from Booking_All
-        String jsonAppointment = getIntent().getStringExtra("appointment");
+/*        String jsonAppointment = getIntent().getStringExtra("appointment");
         app = gson.fromJson(jsonAppointment, Booking.class);
         if(app != null)
         {
@@ -193,13 +199,13 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
 
             spinDrList.setSelection(VariablesGlobal.DrNamesList.indexOf(app.getDoctor()));//GetDrArray() is slower so this line of code fixed selected index to '0' unless return bk to list of appoints & come bk
             cal.setTimeInMillis(dt.getTime());
-        }
+        }*/
         //endregion
 
         //set min to 00 so that TimePicker never launches to show any other min
-        cal.set(Calendar.MINUTE, 0);
+/*        cal.set(Calendar.MINUTE, 0);
         updateDateTxtV();
-        updateTimeTxtV();
+        updateTimeTxtV();*/
 
     }
 
@@ -332,7 +338,15 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
     @Override
     public void onResponseFromServer(String result, Context ctx)
     {
-        if(app != null)
+
+        lv_DrList = (ListView)((Activity)ctx).findViewById(R.id.lv_DoctorsList);
+        DrList_Adapter drList_adapter = new DrList_Adapter((Activity)ctx, R.layout.eachuser, VariablesGlobal.DrProfiles);
+        lv_DrList.setAdapter(drList_adapter);
+
+
+
+        //========old code starts==========
+     /*   if(app != null)
         {
             for (DrProfile dr : VariablesGlobal.DrProfiles)
             {
@@ -345,7 +359,9 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         }
 
         //filter DrNames by Specialty
-        filteredDrList();
+        filteredDrList();*/
+        //========old code ends==========
+
     }
 
     private void filteredDrList()
