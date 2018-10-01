@@ -1,6 +1,6 @@
 package com.comp313.activities;
 /*
- * By: David Tyler
+ * By: Shafiq
  * Purpose: Dashboard for admin
  */
 

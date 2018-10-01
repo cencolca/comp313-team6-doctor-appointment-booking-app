@@ -32,7 +32,8 @@ public class Booking_Adapter extends ArrayAdapter<Booking>
     Gson gson;
 
     //constructor
-    public Booking_Adapter(@NonNull Activity ctx, int layoutId, @NonNull List<Booking> list)
+    public Booking_Adapter(@NonNull Activity ctx, int layoutId, @NonNull List<Booking> list
+    )
     {
         super(ctx, layoutId, list);
         this.context = ctx;

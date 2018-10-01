@@ -151,6 +151,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("My Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //
+        mMap.setInfoWindowAdapter(infoWinAdapter);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker)
+            {
+                Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
+                i.putExtra("infoWinTitle", marker.getTitle());//address included here!!
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -237,7 +249,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     {
         getNearbyPlacesData = new GetNearbyPlacesData(this);
         dataTransfer = new Object[2];//will hold 2 objs
-
 
         //
         switch (v.getId())
