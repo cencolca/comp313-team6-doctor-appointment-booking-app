@@ -1,0 +1,206 @@
+  /*[
+    {
+      "Id_Appointment": 8,
+      "Id_User": 1,
+      "Clinic": "Address : 940 progress Ave Toronto",
+      "Doctor": "Dr.John Doe",
+      "AppointmentTime": "Fri, 1 Jun 2018 11:00 AM",
+      "CreationTime": "Fri, 1 Jun 2018 01:24 AM",
+      "Id_Doc": 1,
+      "DRAVAILABLE": "1"
+    },
+    {
+    "Id_Appointment": 38,
+    "Id_User": 1,
+    "Clinic": "Address : 940 progress Ave Toronto",
+    "Doctor": "Dr.Miney Moe",
+    "AppointmentTime": "Sun, 10 Jun 2018 11:00 PM",
+    "CreationTime": "Sun, 10 Jun 2018 11:24 PM",
+    "Id_Doc": 3,
+    "DRAVAILABLE": "1"
+    },
+    {
+    "Id_Appointment": 39,
+    "Id_User": 1,
+    "Clinic": "Address : 940 progress Ave Toronto",
+    "Doctor": "Dr.John Doe",
+    "AppointmentTime": "Mon, 11 Jun 2018 11:00 PM",
+    "CreationTime": "Sun, 10 Jun 2018 11:25 PM",
+    "Id_Doc": 1,
+    "DRAVAILABLE": "1"
+    }
+  ]*/
+
+  [
+        {
+          "AppointmentTime": "Fri, 1 Jun 2018 11:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Fri, 1 Jun 2018 01:24 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 8,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Sun, 10 Jun 2018 11:00 PM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Sun, 10 Jun 2018 11:24 PM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Miney Moe",
+          "Id_Appointment": 38,
+          "Id_Doc": 3,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Mon, 11 Jun 2018 11:00 PM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Sun, 10 Jun 2018 11:25 PM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 39,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Sun, 10 Jun 2018 11:00 PM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Sun, 10 Jun 2018 11:26 PM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Amelia Byng",
+          "Id_Appointment": 40,
+          "Id_Doc": 4,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Sat, 30 Jun 2018 11:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Mon, 11 Jun 2018 12:19 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Miney Moe",
+          "Id_Appointment": 41,
+          "Id_Doc": 3,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Wed, 20 Jun 2018 11:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Mon, 11 Jun 2018 11:21 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Miney Moe",
+          "Id_Appointment": 43,
+          "Id_Doc": 3,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Thu, 14 Jun 2018 12:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Thu, 14 Jun 2018 12:46 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Miney Moe",
+          "Id_Appointment": 49,
+          "Id_Doc": 3,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Thu, 14 Jun 2018 12:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Thu, 14 Jun 2018 12:46 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Amelia Byng",
+          "Id_Appointment": 50,
+          "Id_Doc": 4,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Thu, 14 Jun 2018 12:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Thu, 14 Jun 2018 12:46 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Elizabeth Dianne",
+          "Id_Appointment": 51,
+          "Id_Doc": 2,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Fri, 29 Jun 2018 06:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Fri, 29 Jun 2018 06:37 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 59,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Tue, 3 Jul 2018 06:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Mon, 2 Jul 2018 06:14 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 60,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Sat, 7 Jul 2018 12:00 AM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Sat, 7 Jul 2018 01:36 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 61,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Wed, 11 Jul 2018 11:00 PM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Tue, 10 Jul 2018 11:09 PM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Elizabeth Dianne",
+          "Id_Appointment": 62,
+          "Id_Doc": 2,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Sun, 5 Aug 2018 01:00 PM",
+          "Clinic": "Address : 940 progress Ave Toronto",
+          "CreationTime": "Sun, 5 Aug 2018 01:19 PM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 74,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Sat, 15 Sep 2018 02:00 AM",
+          "Clinic": "Address : Markham Rd Walk-in Clinic : 1825 Markham Rd, Toronto",
+          "CreationTime": "Sat, 15 Sep 2018 02:47 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 79,
+          "Id_Doc": 1,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Mon, 17 Sep 2018 03:00 PM",
+          "Clinic": "Address : Markham Rd Walk-in Clinic : 1825 Markham Rd, Toronto",
+          "CreationTime": "Sat, 15 Sep 2018 03:14 AM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.Miney Moe",
+          "Id_Appointment": 80,
+          "Id_Doc": 3,
+          "Id_User": 1
+        },
+        {
+          "AppointmentTime": "Wed, 26 Sep 2018 12:30 PM",
+          "Clinic": "Address : Markham Rd Walk-in Clinic : 1825 Markham Rd, Toronto",
+          "CreationTime": "Sun, 23 Sep 2018 01:55 PM",
+          "DRAVAILABLE": "1",
+          "Doctor": "Dr.John Doe",
+          "Id_Appointment": 85,
+          "Id_Doc": 1,
+          "Id_User": 1
+        }
+      ]
+

@@ -1,0 +1,101 @@
+{
+  "1":
+  {
+    "Id_User": 1,
+    "nameOfUser": "name",
+    "loginName": "name",
+    "pw": "DnVELRcAZH97k+lj5ivzYQ==",
+    "address": "940 progress ave toronto",
+    "email": "name@e.e",
+    "phone": "111",
+    "role": "1"
+  },
+  "2":
+  {
+    "Id_User": 2,
+    "nameOfUser": "Name1",
+    "loginName": "name1",
+    "pw": "wTbIaZRE7D19LFUiODweTg==",
+    "address": "Name1",
+    "email": "Name1@e.e",
+    "phone": "111",
+    "role": "1"
+  },
+  "3":
+  {
+    "Id_User": 3,
+    "nameOfUser": "Name2",
+    "loginName": "name2",
+    "pw": "m5QheVFAfPmKyOb4Ahdtyw==",
+    "address": "Name2",
+    "email": "Name2@e.e",
+    "phone": "222",
+    "role": "1"
+  },
+  "7":
+  {
+    "Id_User": 7,
+    "nameOfUser": "Aslan",
+    "loginName": "aslan",
+    "pw": "lrZNofhNfwtCCupoVU9eJw==",
+    "address": "708 Sheppard Ave E",
+    "email": "mirsakiyev7707@gmail.com",
+    "phone": "6477031920",
+    "role": "1"
+  },
+  "8":
+  {
+    "Id_User": 8,
+    "nameOfUser": "Abubakir",
+    "loginName": "Abuka",
+    "pw": "7TRVtu3p9mXTwnEzGdYeIw==",
+    "address": "708 Sheppard ave",
+    "email": "mirsakiyev7707@gmail.com",
+    "phone": "87051423333",
+    "role": "1"
+  },
+  "12":
+  {
+    "Id_User": 12,
+    "nameOfUser": "shafiq",
+    "loginName": "shafiq",
+    "pw": "dLlp59hWm++6tp8g4rNKOg==",
+    "address": "shafiq",
+    "email": "shafiq@email.com",
+    "phone": "123456",
+    "role": "1"
+  },
+  "13":
+  {
+    "Id_User": 13,
+    "nameOfUser": "mani",
+    "loginName": "mani",
+    "pw": "w9pXfCD32mYyVmCQD3svUQ==",
+    "address": "30 Tuxedo Crt Toronto",
+    "email": "mani@email.com",
+    "phone": "1234",
+    "role": "1"
+  },
+  "17":
+  {
+    "Id_User": 27,
+    "nameOfUser": "name0",
+    "loginName": "name0",
+    "pw": "LB57n2zHKTuVprcsttzbiQ==",
+    "address": "123 name0 address",
+    "email": "abc@def.com",
+    "phone": "123",
+    "role": "1"
+  },
+  "999999":
+  {
+    "Id_User": 999999,
+    "nameOfUser": "admin",
+    "loginName": "admin",
+    "pw": "PGytuvRI/Jmicfl8uOgxqQ==",
+    "address": "admin",
+    "email": "admin@e.e",
+    "phone": "000",
+    "role": "3"
+  }
+}

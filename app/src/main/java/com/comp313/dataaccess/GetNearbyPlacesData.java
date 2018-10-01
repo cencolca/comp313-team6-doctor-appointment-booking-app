@@ -58,7 +58,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>//args
     protected void onPostExecute(String s)
     {
         //read hard-coded JSON bcoz API is severely limited by Google
-        try
+     /*   try
         {
             InputStream is  = ctx.getResources().openRawResource(R.raw.nearbyclinics);
             byte[] buffer = new byte[is.available()];
@@ -68,12 +68,12 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>//args
         catch (IOException e)
         {
             Log.e("raw file reading:", ""+e.toString());
-        }
+        }*/
 
         //
         List<HashMap<String,String>> nearbyPlacesList = null;
         DataParser parser = new DataParser();
-        nearbyPlacesList = parser.parse(s);
+        nearbyPlacesList = parser.parse(s);//JSON parsed here
         showNearbyPlaces(nearbyPlacesList);
     }
 

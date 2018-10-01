@@ -1,0 +1,35 @@
+[
+  {
+    "id_doc": 1,
+    "Id_User": 111,
+    "name": "Dr.John Doe",
+    "phone": "111",
+    "email": "doc1@e.e",
+    "specialty": "General Physician"
+  },
+  {
+    "id_doc": 2,
+    "Id_User": 222,
+    "name": "Dr.Elizabeth Dianne",
+    "phone": "222",
+    "email": "doc2@e.e",
+    "specialty": "Gynecologist"
+  },
+  {
+    "id_doc": 3,
+    "Id_User": 333,
+    "name": "Dr.Miney Moe",
+    "phone": "333",
+    "email": "doc3@e.e",
+    "specialty": "Pediatrician"
+  },
+  {
+    "id_doc": 4,
+    "Id_User": 444,
+    "name": "Dr.Amelia Byng",
+    "phone": "444",
+    "email": "doc4@e.e",
+    "specialty": "General Physician"
+  }
+]
+
