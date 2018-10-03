@@ -43,6 +43,8 @@ public class BaseActivity extends AppCompatActivity
             case R.id.menuLogout:
                 getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
 
+
+
                 //taken back to Login screen
                 i = new Intent(this, LoginActivity.class);
                 startActivity(i);
