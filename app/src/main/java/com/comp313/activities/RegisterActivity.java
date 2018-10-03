@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp313.dataaccess.DbAdapter;
+import com.comp313.dataaccess.FBDB;
 import com.comp313.helpers.AESCrypt;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.User;
@@ -39,6 +40,11 @@ public class RegisterActivity extends BaseActivity {
     long rowID;
     TextView uNameV;
     EditText txtVeriCodeV, txtVerifyEmailV;
+
+    // Al - 2018-10-03 START
+    EditText txtUserName, txtPass, txtFName, txtLName, txtAdd, txtEmail, txtPhone;
+    // Al - 2018-10-03 END
+
     RadioButton radRoleDr, radRoleAdmin;
     RadioGroup radGrpRole;
     View lay;
@@ -62,11 +68,49 @@ public class RegisterActivity extends BaseActivity {
         roleStr = getSharedPreferences("prefs", 0).getString("role", "");
         isAdmin = roleStr.equals("3")?true:false;
         //
-        txtVeriCodeV = (EditText)findViewById(R.id.txtVerifyEmail);
+        txtVeriCodeV = findViewById(R.id.txtVerifyEmail);
         lay = findViewById(R.id.layNewUser);
-        btnVerifyEmail = (Button)findViewById(R.id.btnVerifyEmail);
-        txtVerifyEmailV = (EditText)findViewById(R.id.txtVerifyEmail);
-        radGrpRole = (RadioGroup)findViewById(R.id.radGrpRole);
+        btnVerifyEmail = findViewById(R.id.btnVerifyEmail);
+        txtVerifyEmailV = findViewById(R.id.txtVerifyEmail);
+        radGrpRole = findViewById(R.id.radGrpRole);
+
+        // Al - 2018-10-03 START
+        final EditText txtUserName, txtPass, txtFName, txtLName, txtAdd, txtEmail, txtPhone;
+
+        txtUserName = findViewById(R.id.txtUserName);
+        txtPass = findViewById(R.id.txtPass);
+        txtFName = findViewById(R.id.txtFName);
+        txtLName = findViewById(R.id.txtLName);
+        txtAdd = findViewById(R.id.txtAdd);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtPhone = findViewById(R.id.txtPhone);
+
+        btnCreateNewUser = findViewById(R.id.btnCreateNewUser);
+        btnCreateNewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get values from screen
+                // and create User object
+
+                User newUser = new User();
+                newUser.setNameOfUser(txtFName.getText().toString().trim() + " " + txtLName.getText().toString().trim());
+                newUser.setPw(txtPass.getText().toString().trim());
+                newUser.setLoginName(txtUserName.getText().toString().trim());
+                newUser.setAddress(txtAdd.getText().toString().trim());
+                newUser.setEmail(txtEmail.getText().toString().trim());
+                newUser.setPhone(txtPhone.getText().toString().trim());
+
+                boolean success = new FBDB().registerUser(newUser);
+
+                if(success)
+                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getApplicationContext(), "Registration failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        // Al - 2018-10-03 END
 
         //listener for RadioGroup
         radGrpRole.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()

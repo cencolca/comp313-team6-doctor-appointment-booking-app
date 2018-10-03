@@ -2,6 +2,9 @@
 
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
+    import com.comp313.models.User;
+    import com.google.firebase.database.DatabaseReference;
+    import com.google.firebase.database.FirebaseDatabase;
 
     import java.io.IOException;
     import java.util.HashMap;
@@ -19,8 +22,6 @@
         private DownloadUrl downloadUrl;
         private DataParser parser;
         private String jsonStr;
-
-        private String res = "";
 
         private String baseUrl = "https://drappdb.firebaseio.com/";
 
@@ -89,6 +90,25 @@
             return clinics;
         }
 
+        public boolean registerUser(User newUser)
+        {
+            boolean success = true;
+
+            try {
+                // Write a message to the database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+
+                myRef.child("Users").push().setValue(newUser);
+
+            }
+            catch(Exception ex)
+            {
+                success = false;
+            }
+
+            return success;
+        }
 
 
 
