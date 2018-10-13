@@ -100,7 +100,7 @@ public class RegisterActivity extends BaseActivity {
                 newUser.setEmail(txtEmail.getText().toString().trim());
                 newUser.setPhone(txtPhone.getText().toString().trim());
 
-                boolean success = new FBDB().registerUser(newUser);
+                boolean success = new FBDB(RegisterActivity.this).registerUser(newUser);
 
                 if(success)
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
