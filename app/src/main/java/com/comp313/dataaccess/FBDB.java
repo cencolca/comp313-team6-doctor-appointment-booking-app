@@ -1,5 +1,8 @@
     package com.comp313.dataaccess;
 
+    import android.content.Context;
+    import android.content.SharedPreferences;
+
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
     import com.comp313.models.User;
@@ -25,8 +28,11 @@
 
         private String baseUrl = "https://drappdb.firebaseio.com/";
 
-        public FBDB()
+        private Context ctx;
+
+        public FBDB(Context _ctx)
         {
+            ctx = _ctx;
             downloadUrl = new DownloadUrl();
             parser = new DataParser();
         }
@@ -92,19 +98,31 @@
 
         public boolean registerUser(User newUser)
         {
-            boolean success = true;
+            boolean success = false;
 
             try {
                 // Write a message to the database
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();
 
-                myRef.child("Users").push().setValue(newUser);
+                String userId = myRef.child("Users").push().getKey();
+                myRef.child(userId).setValue(newUser);
+
+                //get shared preference
+                SharedPreferences pref = ctx.getSharedPreferences("prefs", 0);
+
+                // store userID to sharedPref
+                pref.edit().putString("Id_User", userId).apply();
+
+                // set role to 0 (patient)
+                pref.edit().putString("role", "0").apply();
+
+                success = true;
 
             }
             catch(Exception ex)
             {
-                success = false;
+
             }
 
             return success;
