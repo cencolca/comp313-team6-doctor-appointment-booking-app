@@ -2,12 +2,17 @@
 
     import android.content.Context;
     import android.content.SharedPreferences;
+    import android.util.Log;
 
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
     import com.comp313.models.User;
+    import com.google.firebase.database.DataSnapshot;
+    import com.google.firebase.database.DatabaseError;
     import com.google.firebase.database.DatabaseReference;
     import com.google.firebase.database.FirebaseDatabase;
+    import com.google.firebase.database.Query;
+    import com.google.firebase.database.ValueEventListener;
 
     import java.io.IOException;
     import java.util.HashMap;
@@ -114,8 +119,8 @@
                 // store userID to sharedPref
                 pref.edit().putString("Id_User", userId).apply();
 
-                // set role to 0 (patient)
-                pref.edit().putString("role", "0").apply();
+                // set role to 1 (patient)
+                pref.edit().putString("role", "1").apply();
 
                 success = true;
 
@@ -127,6 +132,11 @@
 
             return success;
         }
+
+        boolean loginSuccess;
+
+
+
 
 
 
