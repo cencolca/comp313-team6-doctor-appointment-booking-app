@@ -20,8 +20,8 @@ public class DrProfileActivity extends BaseActivity
     ActivityDrProfileBinding binding;
 
     //region >>> Vars
-    int DrSelectedPos;
-    String DrSelectedName, userIdStr;
+    int DrSelectedPos, DrSelectedId;
+    String DrSelectedName, userIdStr,ClinicName;
     DrProfile dr;
     Intent i;
     Button btnDrProfile_SelectDrV, btnDrProfile_LoginV;
@@ -45,6 +45,8 @@ public class DrProfileActivity extends BaseActivity
         dr = new DrProfile();
         DrSelectedPos = getIntent().getIntExtra("DrSelectedIndex", 0);
         DrSelectedName = getIntent().getStringExtra("DrSelectedName");
+        DrSelectedId = getIntent().getIntExtra("DrSelectedId", 0);
+        ClinicName = getIntent().getStringExtra("ClinicName");
 
         if(DrSelectedPos != 0)
         {
@@ -96,6 +98,11 @@ public class DrProfileActivity extends BaseActivity
     public void clk_MakeAppoint_SelectTime(View view)
     {
         i = new Intent(this, SelectTime.class);
+        //i.putExtra("DrSelectedIndex",);
+        i.putExtra("DrSelectedName", DrSelectedName);
+        i.putExtra("DrSelectedId", DrSelectedId);
+        i.putExtra("ClinicName", ClinicName);
+
         startActivity(i);
     }
 

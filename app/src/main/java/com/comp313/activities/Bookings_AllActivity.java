@@ -100,7 +100,7 @@ if(BookingDetailsActivity.instance != null)
 
                 b = new Booking();
                 b.setId_Appointment(Integer.parseInt( j.getString("Id_Appointment") ));
-                b.setId_User(Integer.parseInt( j.getString("Id_User") ));
+                b.setId_User("0"/*Integer.parseInt( j.getString("Id_User") )*/);
                 b.setId_Doc(Integer.parseInt( j.getString("Id_Doc") ));
                 b.setClinic(j.getString("Clinic"));
                 b.setDoctor(j.getString("Doctor"));
