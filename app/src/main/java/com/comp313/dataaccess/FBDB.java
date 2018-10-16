@@ -6,6 +6,7 @@
 
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
+    import com.comp313.models.Booking;
     import com.comp313.models.User;
     import com.google.firebase.database.DataSnapshot;
     import com.google.firebase.database.DatabaseError;
@@ -128,6 +129,28 @@
             catch(Exception ex)
             {
 
+            }
+
+            return success;
+        }
+
+        public boolean createBooking(Booking newBooking)
+        {
+            boolean success = false;
+
+            try {
+                // Write a message to the database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Appointments");
+
+                String bookingId = myRef.push().getKey();
+                myRef.child(bookingId).setValue(newBooking);
+
+                success = true;
+            }
+            catch(Exception ex)
+            {
+                Log.e("> > Firebase Err: ", ex.getMessage());
             }
 
             return success;

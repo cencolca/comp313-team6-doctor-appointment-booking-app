@@ -1,7 +1,10 @@
 package com.comp313.activities;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +12,16 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.comp313.R;
+import com.comp313.dataaccess.FBDB;
+import com.comp313.models.Booking;
 import com.comp313.views.CustomTimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class SelectTime extends BaseActivity {
@@ -23,8 +30,11 @@ public class SelectTime extends BaseActivity {
     Button btnCancelApp;
     TextView dateTxtV, timeTxtV, txtV;
     Calendar cal;
-    String formData, dateStr, timeStr,AppointmentTime;
+    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr;
+    int  DrSelectedId;
     Long dateTimeUnix;
+    SharedPreferences prefs;
+    Intent i;
 
 
     //endregion
@@ -34,7 +44,18 @@ public class SelectTime extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_time);
         getSupportActionBar().setTitle("Appointment Details");
+        //
+        prefs = getSharedPreferences("prefs", 0);
+        userIdStr = prefs.getString("Id_User", "");
+        //userIdInt = Integer.parseInt(userIdStr);
+        //
+        Intent intent = getIntent();
+        DrSelectedName = intent.getStringExtra("DrSelectedName");
+        ClinicName = intent.getStringExtra("ClinicName");
+        DrSelectedName = intent.getStringExtra("DrSelectedName");
+        DrSelectedId = intent.getIntExtra("DrSelectedId", 0);
 
+        //
         btnCancelApp = (Button)findViewById(R.id.btnCancelApp);
         btnCancelApp.setVisibility(View.INVISIBLE);
 
@@ -128,5 +149,48 @@ public class SelectTime extends BaseActivity {
 
         //unix datetime for saving in db
         dateTimeUnix = cal.getTimeInMillis() / 1000L;
+    }
+
+    public void clk_SaveAppoint(View view)
+    {
+        this.AppointmentTime = getDateTime(dateTimeUnix);
+
+        Booking newBooking = new Booking();
+
+        newBooking.setId_User(userIdStr);
+        newBooking.setAppointmentTime(this.AppointmentTime);
+        newBooking.setClinic(ClinicName);
+        newBooking.setCreationTime(getDateTime(Calendar.getInstance().getTimeInMillis() /1000L));
+        newBooking.setDoctor(DrSelectedName);
+        newBooking.setDRAVAILABLE("1");
+        newBooking.setId_Doc(DrSelectedId);
+
+
+        boolean success = new FBDB(SelectTime.this).createBooking(newBooking);
+
+        if(success)
+        {
+            Toast.makeText(getApplicationContext(), "Appointment created!", Toast.LENGTH_LONG).show();
+            i = new Intent(this, Bookings_AllActivity.class);
+            //Bookings_AllActivity needs fixes before starting that activity
+            //startActivity(i);
+            //finish();
+        }
+
+        else
+            Toast.makeText(getApplicationContext(), "Error occurred!", Toast.LENGTH_SHORT).show();
+    }
+
+    private String getDateTime(Long dateTimeUnix)
+    {
+        //covert unix-datetime (in seconds) to string
+        Date appointTime = new Date(dateTimeUnix * 1000L);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy hh:mm aaa");
+        AppointmentTime = sdf.format(appointTime);
+        return AppointmentTime;
+    }
+
+    public void clk_CancelAppoint(View view)
+    {
     }
 }

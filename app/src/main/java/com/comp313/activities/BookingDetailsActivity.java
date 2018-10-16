@@ -285,7 +285,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         bModel = new Booking();
         userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
         int userIdInt = Integer.parseInt(userIdStr);
-        bModel.setId_User(userIdInt);
+        bModel.setId_User(userIdStr);
         bModel.setAppointmentTime(this.AppointmentTime);
         bModel.setClinic(txtV.getText().toString());
         bModel.setCreationTime(sdf.format( Calendar.getInstance().getTime() ));
