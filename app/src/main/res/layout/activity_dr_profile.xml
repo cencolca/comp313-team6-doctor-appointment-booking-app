@@ -2,7 +2,8 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16dp">
 
     <!--Binding Data to Views-->
     <!--https://guides.codepath.com/android/Applying-Data-Binding-for-Views-->
@@ -25,37 +26,54 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
+
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtDrEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text='@{"Email: " + dr.email}' />
-
-            <TextView
-                android:id="@+id/txtDrPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text='@{"Phone: " + dr.phone}' />
-
-            <TextView
-                android:id="@+id/txtDrSpecialty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text='@{dr.specialty}' />
 
             <TextView
                 android:id="@+id/txtDrName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+               android:textSize="20dp"
+                android:textStyle="bold"
+                android:drawableRight="@mipmap/ic_user"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:text='@{dr.name}' />
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txtDrSpecialty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:text='@{dr.specialty}' />
+            <TextView
+                android:id="@+id/txtDrEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:drawableLeft="@android:drawable/ic_dialog_email"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:gravity="center_vertical"
+            android:text='@{"    " + dr.email}' />
 
+            <TextView
+                android:id="@+id/txtDrPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:drawableLeft="@android:drawable/ic_menu_call"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:gravity="center_vertical"
+                android:text='@{"    " + dr.phone}' />
+
+
+
+
+        </LinearLayout>
+        <!--</android.support.v7.widget.CardView>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

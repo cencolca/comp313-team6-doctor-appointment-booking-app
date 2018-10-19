@@ -21,7 +21,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -108,7 +112,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
@@ -160,6 +164,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
             {
                 Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
                 i.putExtra("infoWinTitle", marker.getTitle());//address included here!!
+                i.putExtra("infoWinTitle", marker.getTitle());//Clinic name included here!!
+                i.putExtra("address", marker.getSnippet());//address included here!!
+                i.putExtra("timing", "09:00 AM - 05:00 PM");
+
                 startActivity(i);
             }
         });
@@ -278,6 +286,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                                 markerOptions.title(location);
                                 markerOptions.snippet(addressList.get(i).getFeatureName() + " " + addressList.get(i).getThoroughfare() +" "+ addressList.get(i).getLocality() +" "+ addressList.get(i).getAdminArea()+" "+addressList.get(i).getCountryName());
                                 mMap.addMarker(markerOptions);
+                                title = addressList.get(i).getFeatureName();
+                                markerOptions.title(location);
+
+                                address = addressList.get(i).getThoroughfare() + " " + addressList.get(i).getLocality() + " " + addressList.get(i).getAdminArea() + " " + addressList.get(i).getCountryName();
 
                                 mMap.setInfoWindowAdapter(infoWinAdapter);
                                 mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -286,6 +298,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                                     {
                                         Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
                                         i.putExtra("infoWinTitle", marker.getTitle());//address included here!!
+                                        i.putExtra("address",address);//address included here!!
+                                        i.putExtra("timing", "09:00 AM - 05:00 PM");//address included here!!
+
                                         startActivity(i);
                                     }
                                 });
@@ -416,5 +431,79 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
             }
         }
     }
+
+    String title = "";
+    String address="";
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflator = getMenuInflater();
+        inflator.inflate(R.menu.menuoptions, menu);
+        getNearbyPlacesData = new GetNearbyPlacesData(this);
+        dataTransfer = new Object[2];
+        MenuItem myActionMenuItem = menu.findItem( R.id.action_search);
+        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Toast like print
+                Toast.makeText(getApplicationContext(), "Here" + query, Toast.LENGTH_LONG).show();
+                String location = query;
+                final List<Address> addressList;
+
+                if (!location.equals("")) {
+                    Geocoder geocoder = new Geocoder(getApplicationContext());
+
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+
+                        if (addressList != null) {
+                            for (int i = 0; i < addressList.size(); i++) {
+                                latitude = addressList.get(i).getLatitude();
+                                longitude = addressList.get(i).getLongitude();
+
+                                LatLng latLng = new LatLng(addressList.get(i).getLatitude(), addressList.get(i).getLongitude());
+                                final MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(latLng);
+                                markerOptions.title(location);
+                                markerOptions.snippet(addressList.get(i).getFeatureName() + " " + addressList.get(i).getThoroughfare() + " " + addressList.get(i).getLocality() + " " + addressList.get(i).getAdminArea() + " " + addressList.get(i).getCountryName());
+                                mMap.addMarker(markerOptions);
+                                title = addressList.get(i).getFeatureName();
+                                address = addressList.get(i).getThoroughfare() + " " + addressList.get(i).getLocality() + " " + addressList.get(i).getAdminArea() + " " + addressList.get(i).getCountryName();
+                                mMap.setInfoWindowAdapter(infoWinAdapter);
+                                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                    @Override
+                                    public void onInfoWindowClick(Marker marker) {
+                                        Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
+                                        i.putExtra("infoWinTitle",markerOptions.getTitle());//address included here!!
+                                        i.putExtra("address",address);//address included here!!
+                                        i.putExtra("timing", "09:00 AM - 05:00 PM");//address included here!!
+                                        startActivity(i);
+                                    }
+                                });
+                                //----------------------------
+
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                showNearbyClinics();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
+    }
+
 }
+
+
 
