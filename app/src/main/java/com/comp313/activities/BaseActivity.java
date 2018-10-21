@@ -21,6 +21,11 @@ public class BaseActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        return displayThreeDotsOrSearchBar(menu);
+    }
+
+    public boolean displayThreeDotsOrSearchBar(Menu menu)
+    {
         userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
         roleStr = getSharedPreferences("prefs", 0).getString("role", "");
 
@@ -32,7 +37,6 @@ public class BaseActivity extends AppCompatActivity
 
         return true;
     }
-
 
 
     @Override

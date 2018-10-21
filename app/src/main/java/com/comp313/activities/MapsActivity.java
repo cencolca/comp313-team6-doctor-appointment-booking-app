@@ -436,6 +436,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     String address="";
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    @Override
+    public boolean displayThreeDotsOrSearchBar(Menu menu)
+    {
+         super.displayThreeDotsOrSearchBar(menu);
+        return alsoDisplaySearchBarInAdditionToThreeDots(menu);
+    }
+
+    private boolean alsoDisplaySearchBarInAdditionToThreeDots(Menu menu)
+    {
         MenuInflater inflator = getMenuInflater();
         inflator.inflate(R.menu.menuoptions, menu);
         getNearbyPlacesData = new GetNearbyPlacesData(this);
