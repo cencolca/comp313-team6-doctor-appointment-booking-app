@@ -6,10 +6,11 @@
 ## Technologies
 - Android
 - Firebase database with authentication
+- Firebase test tab to test automation
 
 ## Objectives
 - Practice Agile methodology
 - Practice team collaboration on Github
 - Practice Unit tests
 - Practice End to end tests
-- Practice Continous integration
+- Practice building Continous integration environment
