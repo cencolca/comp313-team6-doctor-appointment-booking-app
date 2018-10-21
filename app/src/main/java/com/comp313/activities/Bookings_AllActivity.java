@@ -149,7 +149,7 @@ if(BookingDetailsActivity.instance != null)
     {
 
         //region >>> Firebase - GET all appointments for logged in patient
-        boolean success = new FBDB(this).getAllAppoints_Pateint(userIdStr);
+        boolean success = new FBDB(this, new Bookings_AllActivity()).getAllAppoints_Pateint(userIdStr);
         //endregion
 
 

@@ -57,7 +57,14 @@
         public FBDB(Context _ctx)
         {
             ctx = _ctx;
-            callBk = (ICallBackFromDbAdapter)_ctx;
+            downloadUrl = new DownloadUrl();
+            parser = new DataParser();
+        }
+
+        public FBDB(Context _ctx, ICallBackFromDbAdapter _callBk)
+        {
+            ctx = _ctx;
+            callBk = _callBk;
             downloadUrl = new DownloadUrl();
             parser = new DataParser();
         }
