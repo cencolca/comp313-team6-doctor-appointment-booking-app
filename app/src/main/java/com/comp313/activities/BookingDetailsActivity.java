@@ -370,6 +370,11 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
 
     }
 
+    @Override
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
+
+    }
+
     private void filteredDrList()
     {
         spinSpecialtyList.setEnabled(false);

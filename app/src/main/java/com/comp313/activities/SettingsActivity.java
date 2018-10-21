@@ -15,10 +15,13 @@ import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.dataaccess.DbAdapter;
 import com.comp313.helpers.AESCrypt;
 import com.comp313.helpers.VariablesGlobal;
+import com.comp313.models.Booking;
 import com.comp313.models.User;
 import com.google.gson.Gson;
 
 import com.comp313.R;
+
+import java.util.List;
 
 public class SettingsActivity extends BaseActivity implements ICallBackFromDbAdapter {
 
@@ -170,6 +173,11 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
         {
             btnDeleteUserV.setVisibility(View.VISIBLE);
         }
+
+    }
+
+    @Override
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
 
     }
 

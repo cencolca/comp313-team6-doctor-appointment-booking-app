@@ -1,9 +1,16 @@
     package com.comp313.dataaccess;
 
+    import android.app.Activity;
     import android.content.Context;
+    import android.content.Intent;
     import android.content.SharedPreferences;
     import android.util.Log;
+    import android.widget.Toast;
 
+    import com.comp313.activities.Bookings_AllActivity;
+    import com.comp313.activities.DashboardActivity;
+    import com.comp313.activities.LoginActivity;
+    import com.comp313.adapters.ICallBackFromDbAdapter;
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
     import com.comp313.models.Booking;
@@ -14,10 +21,18 @@
     import com.google.firebase.database.FirebaseDatabase;
     import com.google.firebase.database.Query;
     import com.google.firebase.database.ValueEventListener;
+    import com.google.gson.Gson;
+
+    import org.json.JSONArray;
+    import org.json.JSONException;
+    import org.json.JSONObject;
 
     import java.io.IOException;
+    import java.util.ArrayList;
     import java.util.HashMap;
+    import java.util.Iterator;
     import java.util.List;
+    import java.util.Map;
 
     public class FBDB {
 
@@ -31,6 +46,9 @@
         private DownloadUrl downloadUrl;
         private DataParser parser;
         private String jsonStr;
+        private Gson gson;
+        ICallBackFromDbAdapter callBk;
+
 
         private String baseUrl = "https://drappdb.firebaseio.com/";
 
@@ -39,6 +57,7 @@
         public FBDB(Context _ctx)
         {
             ctx = _ctx;
+            callBk = (ICallBackFromDbAdapter)_ctx;
             downloadUrl = new DownloadUrl();
             parser = new DataParser();
         }
@@ -154,6 +173,121 @@
             }
 
             return success;
+        }
+
+        public boolean getAllAppoints_Pateint(String userIdStr)
+        {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            Query query = myRef.child("Appointments").orderByChild("id_User").equalTo(userIdStr);
+            query.addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    if (dataSnapshot.exists()) {
+
+                        if (dataSnapshot.hasChildren())
+                        {
+                            gson = new Gson();
+                            ArrayList<Booking> allAppoints = new ArrayList<>();
+                            Long childrenCount =  dataSnapshot.getChildrenCount();
+                            Booking newBooking;
+                            //DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
+                            //Booking newBooking = snap.getValue(Booking.class);
+
+                            //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
+                            Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
+                            try
+                            {
+                                while (it.hasNext())
+                                {
+                                    allAppoints.add(it.next().getValue(Booking.class));
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                Log.e("LoginError", e.getMessage());
+                            }
+
+                            callBk.onResponseFromServer(allAppoints, ctx);
+
+
+/*
+                            HashMap<String,ArrayList<Booking>> mapOfAppoints = new HashMap<String,ArrayList<Booking>>();
+                            mapOfAppoints.put("Appointments", allAppoints);
+                            try
+                            {
+                                JSONArray jarray = new JSONArray(mapOfAppoints.toString());
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+*/
+
+
+                            Log.e("LoginError", ". . . . . . ");
+
+
+                           /* for (DataSnapshot snap : dataSnapshot.getChildren())
+                            {
+                                try {
+                                    //Context ctx = Bookings_AllActivity.this;
+                                    //DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
+                                    //String appointment = anAppointment.getValue().toString();
+                                    //JSONObject jsonObject = new JSONObject(anAppointment.getValue());
+                                    //Map<String, Booking> map = (Map<String, Booking>)anAppointment.getValue();
+                                    //Booking newBooking = gson.fromJson(appointment, Booking.class);
+                                    //Booking newBooking = anAppointment.getValue(Booking.class);
+
+
+*//*
+                                    if(dbUser.getPw().equals(currUser.getPw()))
+                                    {
+//                                get shared preference
+                                        SharedPreferences pref = ctx.getSharedPreferences("prefs", 0);
+
+
+                                        String userId = snap.getKey();
+
+                                        // store userID to sharedPref
+                                        pref.edit().putString("Id_User", userId).apply();
+
+                                        // set role to 0 (patient)
+                                        pref.edit().putString("role", dbUser.getRole()).apply();
+
+                                        Toast.makeText(ctx, "Login successful", Toast.LENGTH_LONG).show();
+                                        i = new Intent(ctx, DashboardActivity.class);
+                                        ctx.startActivity(i);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(ctx, "Login failed", Toast.LENGTH_SHORT).show();
+                                    }*//*
+
+
+                                }
+
+
+                                catch(Exception e)
+                                {
+                                    Log.e("LoginError", e.getMessage());
+                                }
+                            }*/
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError firebaseError)
+                {
+                    Log.e("The read failed: " ,firebaseError.getMessage());
+                }
+            });
+
+            return true;
         }
 
         boolean loginSuccess;

@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comp313.adapters.InfoWinAdapter;
+import com.comp313.adapters.iSearchBar;
 import com.comp313.dataaccess.GetNearbyPlacesData;
 import com.comp313.helpers.VariablesGlobal;
 import com.google.android.gms.common.ConnectionResult;
@@ -49,7 +50,7 @@ import java.util.List;
 
 import com.comp313.R;
 
-public class MapsActivity extends BaseActivity implements OnMapReadyCallback, LocationListener {
+public class MapsActivity extends BaseActivity implements OnMapReadyCallback, LocationListener, iSearchBar {
 
     //region >>> Vars
     int PROXIMITY_RADIUS = 2000, GPS_ENABLE_REQUEST = 1, ACCESS_FINE_LOCATION_REQUEST = 2;
@@ -436,14 +437,14 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     String address="";
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
+
+        return super.displayThreeDots(menu);
     }
 
     @Override
-    public boolean displayThreeDotsOrSearchBar(Menu menu)
+    public void displaySearchBar(Menu menu)
     {
-         super.displayThreeDotsOrSearchBar(menu);
-        return alsoDisplaySearchBarInAdditionToThreeDots(menu);
+        alsoDisplaySearchBarInAdditionToThreeDots(menu);
     }
 
     private boolean alsoDisplaySearchBarInAdditionToThreeDots(Menu menu)
