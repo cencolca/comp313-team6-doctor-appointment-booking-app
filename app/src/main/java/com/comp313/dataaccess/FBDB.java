@@ -197,10 +197,6 @@
                         {
                             gson = new Gson();
                             ArrayList<Booking> allAppoints = new ArrayList<>();
-                            Long childrenCount =  dataSnapshot.getChildrenCount();
-                            Booking newBooking;
-                            //DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
-                            //Booking newBooking = snap.getValue(Booking.class);
 
                             //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
                             Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
@@ -218,71 +214,7 @@
 
                             callBk.onResponseFromServer(allAppoints, ctx);
 
-
-/*
-                            HashMap<String,ArrayList<Booking>> mapOfAppoints = new HashMap<String,ArrayList<Booking>>();
-                            mapOfAppoints.put("Appointments", allAppoints);
-                            try
-                            {
-                                JSONArray jarray = new JSONArray(mapOfAppoints.toString());
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-*/
-
-
                             Log.e("LoginError", ". . . . . . ");
-
-
-                           /* for (DataSnapshot snap : dataSnapshot.getChildren())
-                            {
-                                try {
-                                    //Context ctx = Bookings_AllActivity.this;
-                                    //DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
-                                    //String appointment = anAppointment.getValue().toString();
-                                    //JSONObject jsonObject = new JSONObject(anAppointment.getValue());
-                                    //Map<String, Booking> map = (Map<String, Booking>)anAppointment.getValue();
-                                    //Booking newBooking = gson.fromJson(appointment, Booking.class);
-                                    //Booking newBooking = anAppointment.getValue(Booking.class);
-
-
-*//*
-                                    if(dbUser.getPw().equals(currUser.getPw()))
-                                    {
-//                                get shared preference
-                                        SharedPreferences pref = ctx.getSharedPreferences("prefs", 0);
-
-
-                                        String userId = snap.getKey();
-
-                                        // store userID to sharedPref
-                                        pref.edit().putString("Id_User", userId).apply();
-
-                                        // set role to 0 (patient)
-                                        pref.edit().putString("role", dbUser.getRole()).apply();
-
-                                        Toast.makeText(ctx, "Login successful", Toast.LENGTH_LONG).show();
-                                        i = new Intent(ctx, DashboardActivity.class);
-                                        ctx.startActivity(i);
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(ctx, "Login failed", Toast.LENGTH_SHORT).show();
-                                    }*//*
-
-
-                                }
-
-
-                                catch(Exception e)
-                                {
-                                    Log.e("LoginError", e.getMessage());
-                                }
-                            }*/
-
-
                         }
                     }
                 }
@@ -298,10 +230,5 @@
         }
 
         boolean loginSuccess;
-
-
-
-
-
 
     }

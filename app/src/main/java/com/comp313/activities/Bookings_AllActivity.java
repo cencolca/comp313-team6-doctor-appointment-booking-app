@@ -147,23 +147,7 @@ if(BookingDetailsActivity.instance != null)
 
     private void LoadAllAppoints()
     {
-
-        //region >>> Firebase - GET all appointments for logged in patient
         boolean success = new FBDB(this, new Bookings_AllActivity()).getAllAppoints_Pateint(userIdStr);
-        //endregion
-
-
-
-        //------------Old Azure calls - STARTs---------------
-/*        dbAdapter = new DbAdapter(Bookings_AllActivity.this, new Bookings_AllActivity());//new Bookings_All() just to give access to DbAdapter to onResponseFromServer()
-
-        paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/Appointments/" + userIdStr;
-        paramsApiUri[1] = "";//formData not needed for this GET req since user_id is appended to URL
-        paramsApiUri[2] = "GET";
-
-        //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);*/
-        //------------Old Azure calls - ENDs---------------
     }
 
     private void LoadAllAppointsForDr()
