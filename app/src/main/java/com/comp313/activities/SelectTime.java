@@ -172,9 +172,8 @@ public class SelectTime extends BaseActivity {
         {
             Toast.makeText(getApplicationContext(), "Appointment created!", Toast.LENGTH_LONG).show();
             i = new Intent(this, Bookings_AllActivity.class);
-            //Bookings_AllActivity needs fixes before starting that activity
-            //startActivity(i);
-            //finish();
+            startActivity(i);
+            finish();
         }
 
         else
