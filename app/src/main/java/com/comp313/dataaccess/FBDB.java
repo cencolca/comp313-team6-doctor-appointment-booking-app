@@ -265,6 +265,17 @@
             return success;
         }
 
+        public boolean cancelBooking(String appIdStr)
+        {
+            boolean success = false;
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("Appointments").child(appIdStr);
+
+            myRef.setValue(null);
+
+            return success;
+        }
+
         boolean loginSuccess;
 
     }

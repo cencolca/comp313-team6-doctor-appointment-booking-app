@@ -249,5 +249,17 @@ public class SelectTime extends BaseActivity {
 
     public void clk_CancelAppoint(View view)
     {
+        boolean success = false;
+        success = new FBDB(SelectTime.this).cancelBooking(appIdStr);
+        if(success)
+        {
+            Toast.makeText(getApplicationContext(), "Appointment deleted!", Toast.LENGTH_LONG).show();
+            i = new Intent(this, Bookings_AllActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+        else
+            Toast.makeText(getApplicationContext(), "Error occurred!", Toast.LENGTH_SHORT).show();
     }
 }
