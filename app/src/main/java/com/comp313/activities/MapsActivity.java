@@ -110,10 +110,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         {
             return;
         }
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.setMyLocationEnabled(true);//https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap#setMyLocationEnabled(boolean)
+        mMap.getUiSettings().setCompassEnabled(true);//https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings.html#isCompassEnabled()
+        mMap.getUiSettings().setZoomControlsEnabled(true);//https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings.html#setZoomControlsEnabled(boolean)
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);//https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings.html#setMyLocationButtonEnabled(boolean)
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
@@ -123,10 +123,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
         if (location != null) {
             onLocationChanged(location);
-
+        }
+        else
+        {
+            //alternate to using : LatLng myLoc = new LatLng(43.784030, -79.233090);
+            Location loc = new Location("dummyprovider");
+            loc.setLatitude(43.784030);
+            loc.setLongitude(-79.233090);
+            onLocationChanged(loc);
         }
 
-        locationManager.requestLocationUpdates(bestProvider, 1800000, 0, this);
+
+        locationManager.requestLocationUpdates(bestProvider, 1800000, 0, this);//onLocationChanged(Location) method will be called for each location update
 
     }
 
@@ -147,7 +155,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         return true;
     }
 
-    @Override    public void onLocationChanged(Location location)
+    @Override
+    public void onLocationChanged(Location location)
     {
          latitude = location.getLatitude();
          longitude = location.getLongitude();
@@ -175,12 +184,14 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
+    public void onStatusChanged(String s, int i, Bundle bundle)
+    {
 
     }
 
     @Override
-    public void onProviderEnabled(String s) {
+    public void onProviderEnabled(String s)
+    {
 
     }
 
@@ -256,7 +267,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
     public void onClick(View v)
     {
-        getNearbyPlacesData = new GetNearbyPlacesData(this);
+        getNearbyPlacesData = new GetNearbyPlacesData(this);//this sends URL request to Google, for addresses on .execute() later
         dataTransfer = new Object[2];//will hold 2 objs
 
         //
@@ -278,6 +289,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                         {
                             for(int i = 0;i<addressList.size();i++)
                             {
+                                //Placing the initial marker
                                 latitude = addressList.get(i).getLatitude();
                                 longitude = addressList.get(i).getLongitude();
 
@@ -364,6 +376,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         dataTransfer[0] = mMap;
         dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB;//Instead of Google, get hardCoded addresses from Firebase
 
+        //this sends URL request to Google, for addresses
         getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
 
         Toast.makeText(this, "Showing nearby hospitals", Toast.LENGTH_LONG).show();
@@ -438,22 +451,12 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        return super.displayThreeDots(menu);
-    }
-
-    @Override
-    public void displaySearchBar(Menu menu)
-    {
-        alsoDisplaySearchBarInAdditionToThreeDots(menu);
-    }
-
-    private boolean alsoDisplaySearchBarInAdditionToThreeDots(Menu menu)
-    {
         MenuInflater inflator = getMenuInflater();
         inflator.inflate(R.menu.menuoptions, menu);
+        inflator.inflate(R.menu.searchmenu, menu);
         getNearbyPlacesData = new GetNearbyPlacesData(this);
         dataTransfer = new Object[2];
-        MenuItem myActionMenuItem = menu.findItem( R.id.action_search);
+        MenuItem myActionMenuItem = menu.findItem( R.id.action_search);//it's magnifying glass icon, which is an <item> of menuoptions.xml
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -513,9 +516,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                 return false;
             }
         });
-        return true;
-    }
-
+        return true;    }
 }
 
 
