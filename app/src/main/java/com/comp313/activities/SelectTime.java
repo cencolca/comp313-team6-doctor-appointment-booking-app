@@ -32,7 +32,7 @@ public class SelectTime extends BaseActivity {
     Button btnCancelApp;
     TextView dateTxtV, timeTxtV, txtClinicV, txtDrV;
     Calendar cal;
-    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr;
+    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr, appIdStr;
     int  DrSelectedId;
     Long dateTimeUnix;
     SharedPreferences prefs;
@@ -63,6 +63,7 @@ public class SelectTime extends BaseActivity {
         ClinicName = intent.getStringExtra("ClinicName");
         DrSelectedName = intent.getStringExtra("DrSelectedName");
         DrSelectedId = intent.getIntExtra("DrSelectedId", 0);
+        appIdStr = intent.getStringExtra("appId_clicked");
 
         //
         btnCancelApp = (Button)findViewById(R.id.btnCancelApp);
@@ -136,6 +137,10 @@ public class SelectTime extends BaseActivity {
         app = gson.fromJson(jsonAppointment, Booking.class);
         if(app != null)
         {
+            DrSelectedName = app.getDoctor();
+            ClinicName = app.getClinic();
+            DrSelectedId = app.getId_Doc();
+            //
             btnCancelApp.setVisibility(View.VISIBLE);
 
             getSharedPreferences("prefs", 0).edit().putInt("Id_Appointment", app.getId_Appointment()).commit();
@@ -214,7 +219,7 @@ public class SelectTime extends BaseActivity {
 
         if(app != null)//editing existing booking (not creating a new one)
         {
-            success = new FBDB(SelectTime.this).updateBooking(newBooking);
+            success = new FBDB(SelectTime.this).updateBooking(newBooking, appIdStr);
         }
         else //creating a new appoint
         {
@@ -223,7 +228,7 @@ public class SelectTime extends BaseActivity {
 
         if(success)
         {
-            Toast.makeText(getApplicationContext(), "Appointment created!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Appointment saved!", Toast.LENGTH_LONG).show();
             i = new Intent(this, Bookings_AllActivity.class);
             startActivity(i);
             finish();

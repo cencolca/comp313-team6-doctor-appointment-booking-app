@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.comp313.activities.BookingDetailsActivity;
 import com.comp313.activities.SelectTime;
+import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
 import com.google.gson.Gson;
 
@@ -47,7 +48,7 @@ public class Booking_Adapter extends ArrayAdapter<Booking>
         protected TextView rowTime;
         protected TextView rowDrName, rowPtName;
         protected TextView rowClinic;
-
+        protected TextView rowAppId;
     }
 
 
@@ -66,23 +67,28 @@ public class Booking_Adapter extends ArrayAdapter<Booking>
         viewHolder.rowDrName = (TextView) view.findViewById(R.id.rowDrName);
         viewHolder.rowClinic = (TextView) view.findViewById(R.id.rowClinic);
         viewHolder.rowPtName = view.findViewById(R.id.rowPtName);
+        viewHolder.rowAppId = view.findViewById(R.id.rowAppId_Hidden);
+
 
         //viewHolder.rowTime.setText(list.get(position).);
         view.setTag(viewHolder);
 
         Booking app = list.get(position);
+        String appIdStr = VariablesGlobal.mapAppoints.get(position).first;
 
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.rowPtName.setText(app.getUser());
         holder.rowTime.setText(app.getAppointmentTime());
         holder.rowDrName.setText(app.getDoctor());
         holder.rowClinic.setText(app.getClinic());
+        holder.rowAppId.setText(appIdStr);
         if(app.getUser().equals(app.getDoctor()))//Dr created appoint for oneself = unavailable slot
         {
             view.setBackgroundColor(ContextCompat.getColor(context,  R.color.dashboard_segment2));
             holder.rowPtName.setText(R.string.strDrUnAvailable);//"*** Un-Available***"
             holder.rowDrName.setText(R.string.strDrUnAvailable);
             holder.rowClinic.setText(R.string.strDrUnAvailable);
+            holder.rowAppId.setText(appIdStr);
             holder.rowPtName.setBackgroundColor(ContextCompat.getColor(context, R.color.dashboard_segment4));
         }
 
@@ -106,10 +112,11 @@ public class Booking_Adapter extends ArrayAdapter<Booking>
         @Override
         public void onClick(View view)
         {
-
+            String appIdStr = ((TextView)view.findViewById(R.id.rowAppId_Hidden)).getText().toString();
 
             Intent i = new Intent(context, SelectTime.class/*BookingDetailsActivity.class*/);
             i.putExtra("appointment", gson.toJson(app));
+            i.putExtra("appId_clicked",appIdStr);
             context.startActivity(i);
         }
     }

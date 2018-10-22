@@ -5,6 +5,7 @@
     import android.content.Intent;
     import android.content.SharedPreferences;
     import android.util.Log;
+    import android.util.Pair;
     import android.widget.Toast;
 
     import com.comp313.activities.Bookings_AllActivity;
@@ -197,9 +198,10 @@
                         if (dataSnapshot.hasChildren())
                         {
                             gson = new Gson();
-                            ArrayList<Booking> allAppoints = new ArrayList<>();
-                            //HashMap<String, Booking> mapAppoints = new HashMap<>();
+                            VariablesGlobal.allAppoints.clear();// = new ArrayList<>();
+                            VariablesGlobal.mapAppoints.clear();// = new HashMap<>();
                             String key;
+                            Pair p;
 
                             //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
                             Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
@@ -208,7 +210,9 @@
                                 while (it.hasNext())
                                 {
                                     key = it.next().getKey();
-                                    VariablesGlobal.mapAppoints.put(key , dataSnapshot.child(key).getValue(Booking.class));
+                                    p = new Pair(key , dataSnapshot.child(key).getValue(Booking.class));
+
+                                    VariablesGlobal.mapAppoints.add(p);
                                     //allAppoints.add(it.next().getValue(Booking.class));
                                 }
                             }
@@ -217,12 +221,12 @@
                                 Log.e("LoginError", e.getMessage());
                             }
 
-                            for(Map.Entry<String, Booking> pair : VariablesGlobal.mapAppoints.entrySet())
+                            for(Pair<String, Booking> pair : VariablesGlobal.mapAppoints)
                             {
-                                allAppoints.add(pair.getValue());
+                                VariablesGlobal.allAppoints.add(pair.second);
                             }
 
-                            callBk.onResponseFromServer(allAppoints, ctx);
+                            callBk.onResponseFromServer(VariablesGlobal.allAppoints, ctx);
 
                             Log.e("LoginError", ". . . . . . ");
                         }
@@ -240,17 +244,16 @@
         }
 
 
-        public boolean updateBooking(Booking newBooking)
+        public boolean updateBooking(Booking newBooking, String appIdStr)
         {
             boolean success = false;
 
             try {
                 //Update an existing appointment to the database
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Appointments");
+                DatabaseReference myRef = database.getReference("Appointments").child(appIdStr);
 
-                String bookingId = myRef.push().getKey();
-                myRef.child(bookingId).setValue(newBooking);
+                myRef.setValue(newBooking);
 
                 success = true;
             }
