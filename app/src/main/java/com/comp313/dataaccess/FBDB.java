@@ -13,6 +13,7 @@
     import com.comp313.adapters.ICallBackFromDbAdapter;
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
+    import com.comp313.helpers.VariablesGlobal;
     import com.comp313.models.Booking;
     import com.comp313.models.User;
     import com.google.firebase.database.DataSnapshot;
@@ -197,6 +198,8 @@
                         {
                             gson = new Gson();
                             ArrayList<Booking> allAppoints = new ArrayList<>();
+                            //HashMap<String, Booking> mapAppoints = new HashMap<>();
+                            String key;
 
                             //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
                             Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
@@ -204,12 +207,19 @@
                             {
                                 while (it.hasNext())
                                 {
-                                    allAppoints.add(it.next().getValue(Booking.class));
+                                    key = it.next().getKey();
+                                    VariablesGlobal.mapAppoints.put(key , dataSnapshot.child(key).getValue(Booking.class));
+                                    //allAppoints.add(it.next().getValue(Booking.class));
                                 }
                             }
                             catch(Exception e)
                             {
                                 Log.e("LoginError", e.getMessage());
+                            }
+
+                            for(Map.Entry<String, Booking> pair : VariablesGlobal.mapAppoints.entrySet())
+                            {
+                                allAppoints.add(pair.getValue());
                             }
 
                             callBk.onResponseFromServer(allAppoints, ctx);
@@ -227,6 +237,29 @@
             });
 
             return true;
+        }
+
+
+        public boolean updateBooking(Booking newBooking)
+        {
+            boolean success = false;
+
+            try {
+                //Update an existing appointment to the database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Appointments");
+
+                String bookingId = myRef.push().getKey();
+                myRef.child(bookingId).setValue(newBooking);
+
+                success = true;
+            }
+            catch(Exception ex)
+            {
+                Log.e("> > Firebase Err: ", ex.getMessage());
+            }
+
+            return success;
         }
 
         boolean loginSuccess;

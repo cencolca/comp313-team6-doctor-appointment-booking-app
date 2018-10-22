@@ -2,9 +2,11 @@ package com.comp313.helpers;
 
 import android.widget.ArrayAdapter;
 
+import com.comp313.models.Booking;
 import com.comp313.models.DrProfile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -23,6 +25,7 @@ public class VariablesGlobal
     public static   List<String> DrNamesListFiltered = new ArrayList<String>();
     public static ArrayAdapter spinAdapter;
     public static String KeyToAccessFirebaseDB = "xuMPG9VJbpjYXXPgPPAgwKYCA1kyx4Lvg4YNkz1a";
+    public static HashMap<String, Booking> mapAppoints = new HashMap<>();
 
 
 }

@@ -210,8 +210,16 @@ public class SelectTime extends BaseActivity {
         newBooking.setDRAVAILABLE("1");
         newBooking.setId_Doc(DrSelectedId);
 
+        boolean success = false;
 
-        boolean success = new FBDB(SelectTime.this).createBooking(newBooking);
+        if(app != null)//editing existing booking (not creating a new one)
+        {
+            success = new FBDB(SelectTime.this).updateBooking(newBooking);
+        }
+        else //creating a new appoint
+        {
+            success = new FBDB(SelectTime.this).createBooking(newBooking);
+        }
 
         if(success)
         {
