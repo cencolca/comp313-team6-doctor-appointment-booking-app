@@ -38,6 +38,9 @@ public class BaseActivity extends AppCompatActivity implements iSearchBar
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
+        roleStr = getSharedPreferences("prefs", 0).getString("role", "");
+
         switch (item.getItemId())
         {
             case R.id.menuLogout:

@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.comp313.activities.BookingDetailsActivity;
+import com.comp313.activities.SelectTime;
 import com.comp313.models.Booking;
 import com.google.gson.Gson;
 
@@ -105,7 +106,9 @@ public class Booking_Adapter extends ArrayAdapter<Booking>
         @Override
         public void onClick(View view)
         {
-            Intent i = new Intent(context, BookingDetailsActivity.class);
+
+
+            Intent i = new Intent(context, SelectTime.class/*BookingDetailsActivity.class*/);
             i.putExtra("appointment", gson.toJson(app));
             context.startActivity(i);
         }

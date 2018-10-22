@@ -18,7 +18,9 @@ import com.comp313.R;
 import com.comp313.dataaccess.FBDB;
 import com.comp313.models.Booking;
 import com.comp313.views.CustomTimePickerDialog;
+import com.google.gson.Gson;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,13 +30,15 @@ public class SelectTime extends BaseActivity {
 
     //region Vars
     Button btnCancelApp;
-    TextView dateTxtV, timeTxtV, txtV;
+    TextView dateTxtV, timeTxtV, txtClinicV, txtDrV;
     Calendar cal;
     String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr;
     int  DrSelectedId;
     Long dateTimeUnix;
     SharedPreferences prefs;
     Intent i;
+    Booking app;
+    Gson gson;
 
 
     //endregion
@@ -45,8 +49,13 @@ public class SelectTime extends BaseActivity {
         setContentView(R.layout.activity_select_time);
         getSupportActionBar().setTitle("Appointment Details");
         //
+        gson = new Gson();
         prefs = getSharedPreferences("prefs", 0);
         userIdStr = prefs.getString("Id_User", "");
+        //
+        txtDrV = (TextView)findViewById(R.id.txtDr_in_SelectTime);
+        txtClinicV = (TextView)findViewById(R.id.txtClinic_in_SelectTime);
+
         //userIdInt = Integer.parseInt(userIdStr);
         //
         Intent intent = getIntent();
@@ -120,6 +129,42 @@ public class SelectTime extends BaseActivity {
                         ).show();
             }
         });
+        //endregion
+
+        //region if editing existing booking sent from Booking_All
+        String jsonAppointment = getIntent().getStringExtra("appointment");
+        app = gson.fromJson(jsonAppointment, Booking.class);
+        if(app != null)
+        {
+            btnCancelApp.setVisibility(View.VISIBLE);
+
+            getSharedPreferences("prefs", 0).edit().putInt("Id_Appointment", app.getId_Appointment()).commit();
+            txtClinicV.setText(app.getClinic());
+            txtDrV.setText(app.getDoctor());
+            //
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy hh:mm aaa");
+            Date dt = null;
+            try
+            {
+                dt = sdf.parse(app.getAppointmentTime());
+            }
+            catch (ParseException e)//import java.text.ParseException;
+            {
+                e.printStackTrace();
+            }
+            sdf = new SimpleDateFormat("EEE, d MMM yyyy");
+            dateTxtV.setText(sdf.format(dt));
+            sdf = new SimpleDateFormat("hh:mm aaa");
+            timeTxtV.setText(sdf.format(dt));
+
+            //spinDrList.setSelection(VariablesGlobal.DrNamesList.indexOf(app.getDoctor()));//GetDrArray() is slower so this line of code fixed selected index to '0' unless return bk to list of appoints & come bk
+            cal.setTimeInMillis(dt.getTime());
+        }
+        else
+        {
+            txtClinicV.setText(ClinicName);
+            txtDrV.setText(DrSelectedName);
+        }
         //endregion
 
         //set min to 00 so that TimePicker never launches to show any other min
