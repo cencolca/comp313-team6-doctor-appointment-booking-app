@@ -267,7 +267,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
     public void onClick(View v)
     {
-        getNearbyPlacesData = new GetNearbyPlacesData(this);//this sends URL request to Google, for addresses on .execute() later
+        getNearbyPlacesData = new GetNearbyPlacesData(this);//this sends URL request for addresses on .execute() later
         dataTransfer = new Object[2];//will hold 2 objs
 
         //
@@ -376,7 +376,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         dataTransfer[0] = mMap;
         dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB;//Instead of Google, get hardCoded addresses from Firebase
 
-        //this sends URL request to Google, for addresses
+        //this sends URL request for addresses
         getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
 
         Toast.makeText(this, "Showing nearby hospitals", Toast.LENGTH_LONG).show();
@@ -463,6 +463,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Toast like print
+                //region >>>This region could be commented out as long as we are using hard-coded addresses from Firebase.
                 Toast.makeText(getApplicationContext(), "Here" + query, Toast.LENGTH_LONG).show();
                 String location = query;
                 final List<Address> addressList;
@@ -507,6 +508,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                         e.printStackTrace();
                     }
                 }
+                //endregion
                 showNearbyClinics();
                 return true;
             }
