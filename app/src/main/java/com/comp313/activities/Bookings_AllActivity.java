@@ -38,8 +38,7 @@ import java.util.List;
 import com.comp313.R;
 
 
-public class Bookings_AllActivity extends BaseActivity implements ICallBackFromDbAdapter
-{
+public class Bookings_AllActivity extends BaseActivity implements ICallBackFromDbAdapter {
 
     //region Vars
     DbAdapter dbAdapter;
@@ -55,55 +54,48 @@ public class Bookings_AllActivity extends BaseActivity implements ICallBackFromD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookings_all);
         instance = this;
-        listAllAppV = (ListView)findViewById(R.id.listAllAppoints);
+        listAllAppV = (ListView) findViewById(R.id.listAllAppoints);
         gson = new Gson();
         paramsApiUri = new Object[3];
         userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
         roleStr = getSharedPreferences("prefs", 0).getString("role", "");
 
-switch (roleStr)
-{
-    case "1":
-        LoadAllAppoints();
-        break;
-    case "2":
-        LoadAllAppointsForDr();
-        break;
-    case "":
-        break;
-}
-if(BookingDetailsActivity.instance != null)
-{
-    BookingDetailsActivity.instance.finish();
-}
+        switch (roleStr) {
+            case "1":
+                LoadAllAppoints();
+                break;
+            case "2":
+                LoadAllAppointsForDr();
+                break;
+            case "":
+                break;
+        }
+        if (BookingDetailsActivity.instance != null) {
+            BookingDetailsActivity.instance.finish();
+        }
 
-        if (MapsActivity.instance != null)
-        {
+        if (MapsActivity.instance != null) {
             MapsActivity.instance.finish();
         }
     }
 
     @Override
-    public void onResponseFromServer(List<Booking> allBookings, Context ctx)
-    {
-        listAllAppV = (ListView)((Activity)ctx).findViewById(R.id.listAllAppoints);
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
+        listAllAppV = (ListView) ((Activity) ctx).findViewById(R.id.listAllAppoints);
         Booking_Adapter adapter = new Booking_Adapter((Activity) ctx, R.layout.eachbooking, allBookings);
         listAllAppV.setAdapter(adapter);
     }
 
 
     @Override
-    public void onResponseFromServer(String result, Context ctx)
-    {
-        if(!Bookings_AllActivity.this.isFinishing())
-        {
-            Toast.makeText(ctx, "Call Back successful" , Toast.LENGTH_SHORT).show();
+    public void onResponseFromServer(String result, Context ctx) {
+        if (!Bookings_AllActivity.this.isFinishing()) {
+            Toast.makeText(ctx, "Call Back successful", Toast.LENGTH_SHORT).show();
         }
         Log.e("Call Back Success", "==== >>>>> Call Back Success");
 
         //extract Array of Appoints from json-str
-        try
-        {
+        try {
             JSONArray jsonArray = new JSONArray(result);
             JSONObject jsonObj = jsonArray.getJSONObject(0);
             String appointsJsonArrayStr = jsonObj.getString("Appointments");
@@ -113,45 +105,39 @@ if(BookingDetailsActivity.instance != null)
 
             Booking b;
 
-            for (int i = 0; i <appointsJsonArray.length(); i++)
-            {
+            for (int i = 0; i < appointsJsonArray.length(); i++) {
                 JSONObject j = appointsJsonArray.getJSONObject(i);
 
                 b = new Booking();
-                b.setId_Appointment(Integer.parseInt( j.getString("Id_Appointment") ));
+                b.setId_Appointment(Integer.parseInt(j.getString("Id_Appointment")));
                 b.setId_User("0"/*Integer.parseInt( j.getString("Id_User") )*/);
-                b.setId_Doc(Integer.parseInt( j.getString("Id_Doc") ));
+                b.setId_Doc(Integer.parseInt(j.getString("Id_Doc")));
                 b.setClinic(j.getString("Clinic"));
                 b.setDoctor(j.getString("Doctor"));
                 b.setAppointmentTime(j.getString("AppointmentTime"));
                 b.setCreationTime(j.getString("CreationTime"));
 
                 //list for Docs has 1 extra prop "PatientName". List for patients doesn't. See sample JSON fo Docs below:
-                if(j.has("PatientName"))
-                {
+                if (j.has("PatientName")) {
                     b.setUser(j.getString("PatientName"));//name of patient
                 }
                 allAppList.add(b);
             }
 
-            listAllAppV = (ListView)((Activity)ctx).findViewById(R.id.listAllAppoints);
+            listAllAppV = (ListView) ((Activity) ctx).findViewById(R.id.listAllAppoints);
             Booking_Adapter adapter = new Booking_Adapter((Activity) ctx, R.layout.eachbooking, allAppList);
 
             listAllAppV.setAdapter(adapter);
-        }
-        catch (JSONException e)
-        {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void LoadAllAppoints()
-    {
-        boolean success = new FBDB(this, new Bookings_AllActivity()).getAllAppoints_Pateint(userIdStr);
+    private void LoadAllAppoints() {
+        boolean success = new FBDB(this, this).getAllAppoints_Pateint(userIdStr);
     }
 
-    private void LoadAllAppointsForDr()
-    {
+    private void LoadAllAppointsForDr() {
         dbAdapter = new DbAdapter(Bookings_AllActivity.this, new Bookings_AllActivity());//new Bookings_All() just to give access to DbAdapter to onResponseFromServer()
 
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/AppointmentsForDr/" + userIdStr;
@@ -160,7 +146,6 @@ if(BookingDetailsActivity.instance != null)
         //pass args to AsyncTask to read db
         dbAdapter.execute(paramsApiUri);
     }
-
 
 
 }
