@@ -73,13 +73,13 @@ public class User {
         isLoggedIn = loggedIn;
     }
 
-    String loginName;
-    String pw;
-    int Id_User = 0;
-    String nameOfUser;
-    String address;
-    String email;
-    String phone;
-    String role = "1";
-    boolean isLoggedIn = false;
+    private String loginName;
+    private String pw;
+    private int Id_User = 0;
+    private String nameOfUser;
+    private String address;
+    private String email;
+    private String phone;
+    private String role = "1";
+    private boolean isLoggedIn = false;
 }

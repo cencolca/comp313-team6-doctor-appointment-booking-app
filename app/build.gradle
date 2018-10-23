@@ -13,7 +13,7 @@ android {
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        applicationId "comp231.drbooking"
+        applicationId "com.comp313"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.android.gms:play-services-maps:11.4.0'
 //15.0.1' is bad version & causes PlacePicker to close soon aft launch
+    implementation 'com.google.firebase:firebase-database:11.4.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -49,7 +50,11 @@ dependencies {
     //Snackbar
     implementation 'com.android.support:design:26.1.0'
 
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:11.4.0'
+
     //https://stackoverflow.com/questions/40268805/how-to-update-google-play-service-on-emulator-android-studio/40375645#40375645
     //compile 'com.google.android.gms:play-services-maps:9.6.0'
     //Do as 1st answer here:https://stackoverflow.com/questions/35476182/updating-google-play-services-in-emulator
 }
+apply plugin: 'com.google.gms.google-services'

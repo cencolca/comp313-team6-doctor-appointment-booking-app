@@ -21,13 +21,19 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comp313.adapters.InfoWinAdapter;
+import com.comp313.adapters.iSearchBar;
 import com.comp313.dataaccess.GetNearbyPlacesData;
+import com.comp313.helpers.VariablesGlobal;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,7 +50,7 @@ import java.util.List;
 
 import com.comp313.R;
 
-public class MapsActivity extends BaseActivity implements OnMapReadyCallback, LocationListener {
+public class MapsActivity extends BaseActivity implements OnMapReadyCallback, LocationListener, iSearchBar {
 
     //region >>> Vars
     int PROXIMITY_RADIUS = 2000, GPS_ENABLE_REQUEST = 1, ACCESS_FINE_LOCATION_REQUEST = 2;
@@ -57,6 +63,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
     InfoWinAdapter infoWinAdapter;
     public static MapsActivity instance = null;
     AlertDialog mGPSDialog;
+    Object[] dataTransfer;
+    GetNearbyPlacesData getNearbyPlacesData;
     //endregion
 
     @Override
@@ -102,10 +110,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         {
             return;
         }
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        mMap.setMyLocationEnabled(true);//https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap#setMyLocationEnabled(boolean)
+        mMap.getUiSettings().setCompassEnabled(true);//https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings.html#isCompassEnabled()
+        mMap.getUiSettings().setZoomControlsEnabled(true);//https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings.html#setZoomControlsEnabled(boolean)
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);//https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings.html#setMyLocationButtonEnabled(boolean)
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
@@ -115,10 +123,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
         if (location != null) {
             onLocationChanged(location);
-
+        }
+        else
+        {
+            //alternate to using : LatLng myLoc = new LatLng(43.784030, -79.233090);
+            Location loc = new Location("dummyprovider");
+            loc.setLatitude(43.784030);
+            loc.setLongitude(-79.233090);
+            onLocationChanged(loc);
         }
 
-        locationManager.requestLocationUpdates(bestProvider, 1800000, 0, this);
+
+        locationManager.requestLocationUpdates(bestProvider, 1800000, 0, this);//onLocationChanged(Location) method will be called for each location update
 
     }
 
@@ -139,7 +155,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         return true;
     }
 
-    @Override    public void onLocationChanged(Location location)
+    @Override
+    public void onLocationChanged(Location location)
     {
          latitude = location.getLatitude();
          longitude = location.getLongitude();
@@ -148,15 +165,33 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("My Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //
+        mMap.setInfoWindowAdapter(infoWinAdapter);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker)
+            {
+                Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
+                i.putExtra("infoWinTitle", marker.getTitle());//address included here!!
+                i.putExtra("infoWinTitle", marker.getTitle());//Clinic name included here!!
+                i.putExtra("address", marker.getSnippet());//address included here!!
+                i.putExtra("timing", "09:00 AM - 05:00 PM");
+
+                startActivity(i);
+            }
+        });
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
+    public void onStatusChanged(String s, int i, Bundle bundle)
+    {
 
     }
 
     @Override
-    public void onProviderEnabled(String s) {
+    public void onProviderEnabled(String s)
+    {
 
     }
 
@@ -232,9 +267,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
     public void onClick(View v)
     {
-        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData(this);
-        Object dataTransfer[] = new Object[2];//will hold 2 objs
-
+        getNearbyPlacesData = new GetNearbyPlacesData(this);//this sends URL request for addresses on .execute() later
+        dataTransfer = new Object[2];//will hold 2 objs
 
         //
         switch (v.getId())
@@ -255,6 +289,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                         {
                             for(int i = 0;i<addressList.size();i++)
                             {
+                                //Placing the initial marker
                                 latitude = addressList.get(i).getLatitude();
                                 longitude = addressList.get(i).getLongitude();
 
@@ -264,6 +299,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                                 markerOptions.title(location);
                                 markerOptions.snippet(addressList.get(i).getFeatureName() + " " + addressList.get(i).getThoroughfare() +" "+ addressList.get(i).getLocality() +" "+ addressList.get(i).getAdminArea()+" "+addressList.get(i).getCountryName());
                                 mMap.addMarker(markerOptions);
+                                title = addressList.get(i).getFeatureName();
+                                markerOptions.title(location);
+
+                                address = addressList.get(i).getThoroughfare() + " " + addressList.get(i).getLocality() + " " + addressList.get(i).getAdminArea() + " " + addressList.get(i).getCountryName();
 
                                 mMap.setInfoWindowAdapter(infoWinAdapter);
                                 mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -272,6 +311,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                                     {
                                         Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
                                         i.putExtra("infoWinTitle", marker.getTitle());//address included here!!
+                                        i.putExtra("address",address);//address included here!!
+                                        i.putExtra("timing", "09:00 AM - 05:00 PM");//address included here!!
+
                                         startActivity(i);
                                     }
                                 });
@@ -285,20 +327,21 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
                         e.printStackTrace();
                     }
                 }
+                showNearbyClinics();
                 break;
-            case R.id.B_hopistals:
+ /*            case R.id.B_hopistals:
                 mMap.clear();
                 String hospital = "hospital";
                 String url = getUrl(latitude, longitude, hospital);
                 dataTransfer[0] = mMap;
-                dataTransfer[1] = url;
+                dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB;//Instead of Google, get hardCoded addresses from Firebase
 
                 getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
 
                 Toast.makeText(this, "Showing nearby hospitals", Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.B_restaurants:
+           case R.id.B_restaurants:
                 mMap.clear();
                 String school = "school";
                 url = getUrl(latitude, longitude, school);
@@ -321,8 +364,22 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
 
                 Toast.makeText(this, "Showing nearby restaurants", Toast.LENGTH_LONG).show();
 
-                break;
+                break;*/
         }
+    }
+
+    private void showNearbyClinics()
+    {
+        mMap.clear();
+        String hospital = "hospital";
+        String url = getUrl(latitude, longitude, hospital);
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url = "https://drappdb.firebaseio.com/MockClinics.json?auth=" + VariablesGlobal.KeyToAccessFirebaseDB;//Instead of Google, get hardCoded addresses from Firebase
+
+        //this sends URL request for addresses
+        getNearbyPlacesData.execute(dataTransfer);//AsyncTask.execute();
+
+        Toast.makeText(this, "Showing nearby hospitals", Toast.LENGTH_LONG).show();
     }
 
 
@@ -388,5 +445,81 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Lo
             }
         }
     }
+
+    String title = "";
+    String address="";
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflator = getMenuInflater();
+        inflator.inflate(R.menu.menuoptions, menu);
+        inflator.inflate(R.menu.searchmenu, menu);
+        getNearbyPlacesData = new GetNearbyPlacesData(this);
+        dataTransfer = new Object[2];
+        MenuItem myActionMenuItem = menu.findItem( R.id.action_search);//it's magnifying glass icon, which is an <item> of menuoptions.xml
+        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Toast like print
+                //region >>>This region could be commented out as long as we are using hard-coded addresses from Firebase.
+                Toast.makeText(getApplicationContext(), "Here" + query, Toast.LENGTH_LONG).show();
+                String location = query;
+                final List<Address> addressList;
+
+                if (!location.equals("")) {
+                    Geocoder geocoder = new Geocoder(getApplicationContext());
+
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+
+                        if (addressList != null) {
+                            for (int i = 0; i < addressList.size(); i++) {
+                                latitude = addressList.get(i).getLatitude();
+                                longitude = addressList.get(i).getLongitude();
+
+                                LatLng latLng = new LatLng(addressList.get(i).getLatitude(), addressList.get(i).getLongitude());
+                                final MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(latLng);
+                                markerOptions.title(location);
+                                markerOptions.snippet(addressList.get(i).getFeatureName() + " " + addressList.get(i).getThoroughfare() + " " + addressList.get(i).getLocality() + " " + addressList.get(i).getAdminArea() + " " + addressList.get(i).getCountryName());
+                                mMap.addMarker(markerOptions);
+                                title = addressList.get(i).getFeatureName();
+                                address = addressList.get(i).getThoroughfare() + " " + addressList.get(i).getLocality() + " " + addressList.get(i).getAdminArea() + " " + addressList.get(i).getCountryName();
+                                mMap.setInfoWindowAdapter(infoWinAdapter);
+                                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                    @Override
+                                    public void onInfoWindowClick(Marker marker) {
+                                        Intent i = new Intent(getApplicationContext(), BookingDetailsActivity.class);
+                                        i.putExtra("infoWinTitle",markerOptions.getTitle());//address included here!!
+                                        i.putExtra("address",address);//address included here!!
+                                        i.putExtra("timing", "09:00 AM - 05:00 PM");//address included here!!
+                                        startActivity(i);
+                                    }
+                                });
+                                //----------------------------
+
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //endregion
+                showNearbyClinics();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;    }
 }
+
+
 

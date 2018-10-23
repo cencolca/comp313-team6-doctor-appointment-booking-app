@@ -1,51 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent">
 
     <!--https://github.com/priyankapakhale/GoogleMapsNearbyPlacesDemo-->
     <!--https://www.youtube.com/watch?v=_Oljjn1fIAc-->
+    <!--https://www.youtube.com/watch?v=_Oljjn1fIAc-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="468dp"
+        tools:context="comp231.drbooking.MapsActivity"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone">
+
+
     <EditText
         android:id="@+id/TF_location"
-        android:layout_width="290dp"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_weight="0.9"
+        android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="940 progress Ave Toronto" />
+        android:text="940 progress Ave Toronto"
+        android:textColorLink="@android:color/darker_gray" />
 
-    <Button
+
+
+
+        <Button
         android:id="@+id/B_search"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/TF_location"
-        android:onClick="onClick"
-        android:text="Search" />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.1"
+            android:background="@drawable/places_ic_search"
+            android:backgroundTint="@color/place_autocomplete_prediction_primary_text_highlight"
+            android:onClick="onClick" />
 
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="comp231.drbooking.MapsActivity"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentBottom="true"
-    android:layout_below="@+id/B_hopistals"/>
 
-    <Button
+
+        <Button
         android:id="@+id/B_hopistals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/TF_location"
         android:onClick="onClick"
-        android:text="Hospitals" />
+        android:text="Hospitals"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/B_schools"
@@ -56,7 +76,7 @@
         android:enabled="false"
         android:onClick="onClick"
         android:text="Schools"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/B_restaurants"
@@ -67,7 +87,7 @@
         android:enabled="false"
         android:onClick="onClick"
         android:text="Restautants"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/B_to"
@@ -78,5 +98,7 @@
         android:enabled="false"
         android:onClick="onClick"
         android:text="To"
-        android:visibility="invisible" />
+        android:visibility="gone" />
+    </LinearLayout>
+    </FrameLayout>
 </RelativeLayout>

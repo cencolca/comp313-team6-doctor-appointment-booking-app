@@ -7,13 +7,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.comp313.R;
+import com.comp313.adapters.iSearchBar;
 
 
 /*
  * By: SHAFIQ-UR-REHMAN
  * Purpose: Base class for all activities that will show a menuoptions (three dots) on top right corner. e.g. to logout etc
  */
-public class BaseActivity extends AppCompatActivity
+public class BaseActivity extends AppCompatActivity implements iSearchBar
 {
     Intent i;
     String userIdStr, roleStr;
@@ -34,14 +35,18 @@ public class BaseActivity extends AppCompatActivity
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
+        roleStr = getSharedPreferences("prefs", 0).getString("role", "");
+
         switch (item.getItemId())
         {
             case R.id.menuLogout:
                 getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
+
+
 
                 //taken back to Login screen
                 i = new Intent(this, LoginActivity.class);
@@ -64,5 +69,10 @@ public class BaseActivity extends AppCompatActivity
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void displaySearchBar(Menu menu) {
+
     }
 }

@@ -33,6 +33,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/markerRating"
+            android:layout_width="50dp"
+            android:layout_height="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ratings3" />
+
+        <TextView
+            android:id="@+id/markerWorkHrs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/work_hrs_title"/>
+        <TextView
+            android:id="@+id/markerWorkHrsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/work_hrs_value"/>
     </LinearLayout>
 
 </LinearLayout>

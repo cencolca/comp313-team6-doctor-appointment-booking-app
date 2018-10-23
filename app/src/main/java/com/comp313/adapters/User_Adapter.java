@@ -1,7 +1,7 @@
 package com.comp313.adapters;
 
 /*
- * By: David Tyler
+ * By: Shafiq
  * Purpose: custom adapter to display result-set when admin searches for users by a part of username
  */
 import android.app.Activity;
@@ -46,8 +46,6 @@ public class User_Adapter extends ArrayAdapter<User>
         protected TextView rowNameOfUser;
         protected TextView userId_From;
     }
-
-
 
     @NonNull
     @Override
