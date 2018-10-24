@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
     tools:context="com.comp313.activities.BookingDetailsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="24dp"
+        android:elevation="1dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,38 +30,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Clinic Info"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/black"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="20px"
                 android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
                 android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/txtBookingActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Hospital Address"
+                android:drawableRight="@android:drawable/stat_sys_phone_call"
                 android:drawableTint="@color/colorPrimaryDark"
                 android:gravity="center_vertical"
-                android:drawableRight="@android:drawable/stat_sys_phone_call"/>
+                android:hint="Hospital Address" />
+
             <TextView
                 android:id="@+id/txtTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Timmings"
+                android:drawableLeft="@android:drawable/ic_menu_recent_history"
                 android:drawableTint="@color/colorPrimaryDark"
                 android:gravity="center_vertical"
-                android:drawableLeft="@android:drawable/ic_menu_recent_history"/>
+                android:hint="Timmings" />
+
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ratings3"/>
+                android:src="@drawable/ratings3" />
 
 
         </LinearLayout>
@@ -75,8 +85,8 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="20px"
                 android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
 
@@ -84,8 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="10px"
-            android:background="@drawable/spinner_background"
             android:layout_marginTop="10dp"
+            android:background="@drawable/spinner_background"
             android:visibility="gone">
 
             <Spinner
@@ -127,18 +137,19 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <ListView
-        android:id="@+id/lv_DoctorsList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </ListView>
+            <ListView
+                android:id="@+id/lv_DoctorsList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-</LinearLayout>
+            </ListView>
+
+        </LinearLayout>
 
         <!--   <LinearLayout
                android:orientation="vertical"
@@ -153,57 +164,57 @@
                    style="@style/actionbar_text"/>
            </LinearLayout>-->
 
-    <!--    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <TextView
+        <!--    <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date and time"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="20px"
-                android:layout_marginTop="20px"
-                android:background="@android:color/darker_gray" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtDate"
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.5"
-                    android:text="Wed,4 Apr 2018"
-                    android:textAlignment="center"
+                    android:text="Date and time"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtTime"
-                    android:layout_width="0dip"
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginTop="20px"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.5"
-                    android:text="hh:mm  AM/PM"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-        </LinearLayout> -->
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.5"
+                        android:text="Wed,4 Apr 2018"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtTime"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.5"
+                        android:text="hh:mm  AM/PM"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </LinearLayout> -->
     </LinearLayout>
 
     <!--<LinearLayout
@@ -229,4 +240,4 @@
     </LinearLayout>-->
 
 
-</RelativeLayout>
+</LinearLayout>

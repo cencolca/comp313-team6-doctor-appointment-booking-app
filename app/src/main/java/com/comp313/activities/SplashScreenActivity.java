@@ -19,8 +19,6 @@ public class SplashScreenActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        getSupportActionBar().hide();
-
         //IntentService
         startService(new Intent(this, ServiceIntro.class));
 
@@ -29,7 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity
             public void run(){
                 try{
 //                  sleep(100);
-                    ImageView icon = (ImageView) findViewById(R.id.icon);
+                    ImageView icon = findViewById(R.id.icon);
                     Animation rotateAni = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
                     icon.startAnimation(rotateAni);
 

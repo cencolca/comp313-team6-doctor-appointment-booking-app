@@ -1,101 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="16dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!--Binding Data to Views-->
     <!--https://guides.codepath.com/android/Applying-Data-Binding-for-Views-->
-<data>
+    <data>
 
-    <variable
-        name="dr"
-        type="com.comp313.models.DrProfile" />
-    <!--props MUST be PUBLIC on ViewModel class to be accessed here-->
-</data>
+        <variable
+            name="dr"
+            type="com.comp313.models.DrProfile" />
+        <!--props MUST be PUBLIC on ViewModel class to be accessed here-->
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg"
         android:orientation="vertical"
         tools:context="com.comp313.activities.DrProfileActivity">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="24dp"
+            android:elevation="1dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtDrName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-               android:textSize="20dp"
-                android:textStyle="bold"
-                android:drawableRight="@mipmap/ic_user"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:text='@{dr.name}' />
-            <TextView
-                android:id="@+id/txtDrSpecialty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                android:text='@{dr.specialty}' />
-            <TextView
-                android:id="@+id/txtDrEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                android:drawableLeft="@android:drawable/ic_dialog_email"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:gravity="center_vertical"
-            android:text='@{"    " + dr.email}' />
-
-            <TextView
-                android:id="@+id/txtDrPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                android:drawableLeft="@android:drawable/ic_menu_call"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:gravity="center_vertical"
-                android:text='@{"    " + dr.phone}' />
-
-
-
-
-        </LinearLayout>
-        <!--</android.support.v7.widget.CardView>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/btnDrProfile_SelectDr"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".1"
-                android:onClick="clk_MakeAppoint_SelectTime"
-                android:text="Make Appointment" />
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnDrProfile_Login"
+                <TextView
+                    android:id="@+id/txtDrName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:drawableRight="@mipmap/ic_user"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:text='@{dr.name}'
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDrSpecialty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text='@{dr.specialty}'
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+
+                <TextView
+                    android:id="@+id/txtDrEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:drawableLeft="@android:drawable/ic_dialog_email"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:text='@{"    " + dr.email}'
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                <TextView
+                    android:id="@+id/txtDrPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:drawableLeft="@android:drawable/ic_menu_call"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:text='@{"    " + dr.phone}'
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+
+            </LinearLayout>
+            <!--</android.support.v7.widget.CardView>-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".1"
-                android:onClick="clk_Login"
-                android:text="Login" />
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <Button
+                    android:id="@+id/btnDrProfile_SelectDr"
+                    style="@style/btnPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="clk_MakeAppoint_SelectTime"
+                    android:text="Make Appointment" />
+
+                <Button
+                    android:id="@+id/btnDrProfile_Login"
+                    style="@style/btnPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="clk_Login"
+                    android:text="Login" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

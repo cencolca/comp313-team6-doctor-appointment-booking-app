@@ -63,7 +63,7 @@ public class RegisterActivity extends BaseActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_register);
-        getSupportActionBar().setTitle("Create New Account");
+        super.setupToolbar("Create New Account");
         //chk if admin is creating a new user
         roleStr = getSharedPreferences("prefs", 0).getString("role", "");
         isAdmin = roleStr.equals("3")?true:false;

@@ -42,7 +42,7 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        getSupportActionBar().setTitle("Update User Profile");
+        super.setupToolbar("Update User Profile");
 
         //get refs to EditText views
         loginNameV = (EditText)findViewById(R.id.txtEditUserName);

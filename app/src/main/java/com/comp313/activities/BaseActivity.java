@@ -1,78 +1,62 @@
 package com.comp313.activities;
 
 import android.content.Intent;
+import android.databinding.ViewDataBinding;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.comp313.R;
-import com.comp313.adapters.iSearchBar;
-
+import com.comp313.views.MenuDialog;
 
 /*
  * By: SHAFIQ-UR-REHMAN
  * Purpose: Base class for all activities that will show a menuoptions (three dots) on top right corner. e.g. to logout etc
  */
-public class BaseActivity extends AppCompatActivity implements iSearchBar
-{
+public class BaseActivity extends AppCompatActivity {
     Intent i;
     String userIdStr, roleStr;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
-        roleStr = getSharedPreferences("prefs", 0).getString("role", "");
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflator = getMenuInflater();
-        inflator.inflate(R.menu.menuoptions, menu);
-        //alter bw "Login / Register" & "Logout" on menu item; based on whether user is loggedin or not
-        MenuItem logInOutItem = menu.findItem(R.id.menuLogout);
-        logInOutItem.setTitle(getSharedPreferences("prefs",0).getString("Id_User", "").equals("")?"Login / Register":"Logout");
+        inflator.inflate(R.menu.right_menu, menu);
 
         return true;
     }
 
+    protected void setupToolbar(String title) {
+        this.setupToolbar(title, true);
+    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
-        roleStr = getSharedPreferences("prefs", 0).getString("role", "");
-
-        switch (item.getItemId())
-        {
-            case R.id.menuLogout:
-                getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
-
-
-
-                //taken back to Login screen
-                i = new Intent(this, LoginActivity.class);
-                startActivity(i);
-                finish();
-                break;
-            case R.id.menuDashboard:
-                //only if logged-in then show Dashboard
-                if(roleStr.equals("3"))//admin is logged in
-                {
-                    i = new Intent(this, AdminDashboardActivity.class);
-
-                }
-                else
-                {
-                    i = new Intent(this, DashboardActivity.class);
-                }
-                startActivity(i);
-                finish();
-                break;
+    protected void setupToolbar(String title, boolean displayBack) {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(title);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(displayBack);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void displaySearchBar(Menu menu) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+/*        userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
+        roleStr = getSharedPreferences("prefs", 0).getString("role", "");*/
 
+        switch (item.getItemId()) {
+            case R.id.action_menu:
+                MenuDialog dialog = MenuDialog.getInstance(this);
+                dialog.show(this.getSupportFragmentManager(), "Show menu");
+                break;
+
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -3,16 +3,14 @@ package com.comp313.activities;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.comp313.helpers.VariablesGlobal;
-import com.comp313.models.DrProfile;
-
 import com.comp313.R;
 import com.comp313.databinding.ActivityDrProfileBinding;
+import com.comp313.helpers.VariablesGlobal;
+import com.comp313.models.DrProfile;
 
 public class DrProfileActivity extends BaseActivity
 {
@@ -31,10 +29,12 @@ public class DrProfileActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dr_profile);
-        getSupportActionBar().setTitle("Review the Doctor");
-
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_profile);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("Review the Doctor");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //get ref AFTER binding's setContentView
         getReferences();
         hideBtnBasedOnLoginStatus();

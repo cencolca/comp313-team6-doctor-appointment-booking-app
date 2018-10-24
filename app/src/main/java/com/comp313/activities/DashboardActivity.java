@@ -47,7 +47,7 @@ public class DashboardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         instance = this;
-        getSupportActionBar().setTitle("Dashboard");
+        super.setupToolbar("Dashboard");
     }
 
 
@@ -134,7 +134,7 @@ public class DashboardActivity extends BaseActivity {
                 Toast.makeText(this, "Name: " + clinicName
                 + "\nAddress: " + clinicAddress, Toast.LENGTH_LONG).show();
 
-                getSupportActionBar().setTitle(clinicAddress);
+//                getSupportActionBar().setTitle(clinicAddress);
 
 
             }
