@@ -12,6 +12,7 @@
     import com.comp313.activities.DashboardActivity;
     import com.comp313.activities.LoginActivity;
     import com.comp313.adapters.ICallBackFromDbAdapter;
+    import com.comp313.adapters.ISingleBookingCallback;
     import com.comp313.helpers.DataParser;
     import com.comp313.helpers.DownloadUrl;
     import com.comp313.helpers.VariablesGlobal;
@@ -267,11 +268,17 @@
 
         public boolean cancelBooking(String appIdStr)
         {
-            boolean success = false;
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Appointments").child(appIdStr);
+            boolean success = true;
+            try {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Appointments").child(appIdStr);
 
-            myRef.setValue(null);
+                myRef.setValue(null);
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
 
             return success;
         }
@@ -279,7 +286,7 @@
         boolean loginSuccess;
 
 
-        /////// For testing ///////////
+        //region FOR TESTING
 
         public void testGetAllAppoints_Patient(String userIdStr, final ICallBackFromDbAdapter cb)
         {
@@ -338,6 +345,58 @@
             });
 
         }
+
+        public void testGetAppointment(String userID, final ISingleBookingCallback cb)
+        {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            Query query = myRef.child("Appointments").orderByChild("id_User").equalTo(userID);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+
+                        if (dataSnapshot.hasChildren()) {
+
+                            DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
+
+                            Booking booking = snap.getValue(Booking.class);
+
+                            booking.setAppointmentKey(snap.getKey());
+
+                            cb.onBookingRetrieved(booking);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        public String testCreateBooking(Booking newBooking)
+        {
+            String bookingId = "";
+
+            try {
+                // Write a message to the database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Appointments");
+
+                bookingId = myRef.push().getKey();
+                myRef.child(bookingId).setValue(newBooking);
+
+            }
+            catch(Exception ex)
+            {
+                Log.e("> > Firebase Err: ", ex.getMessage());
+            }
+
+            return bookingId;
+        }
+
+        //endregion
 
 
 
