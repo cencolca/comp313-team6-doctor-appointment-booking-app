@@ -38,5 +38,7 @@ public class FirebaseTestCaller implements ICallBackFromDbAdapter {
     @Override
     public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
         this.bookings = allBookings;
+
+        System.out.println("testCaller bookings size: " + allBookings.size());
     }
 }
