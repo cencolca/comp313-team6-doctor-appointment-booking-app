@@ -54,7 +54,7 @@
             android:background="@drawable/ic_menu" />
     </RelativeLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -129,6 +129,6 @@
             android:onClick="onClick"
             android:text="To"
             android:visibility="gone" />
-    </LinearLayout>
+    </LinearLayout>-->
     <!--</FrameLayout>-->
 </RelativeLayout>
