@@ -87,6 +87,16 @@ public class Booking
     private String User = "";//Name of Patient
     private String DRAVAILABLE;
 
+    public String getAppointmentKey() {
+        return AppointmentKey;
+    }
+
+    public void setAppointmentKey(String appointmentKey) {
+        AppointmentKey = appointmentKey;
+    }
+
+    private String AppointmentKey;
+
 
     @Override
     public String toString() {
