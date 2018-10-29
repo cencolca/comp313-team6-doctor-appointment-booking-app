@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:title="Logout" android:id="@+id/menuLogout"/>
     <item android:title="Dashboard" android:id="@+id/menuDashboard"/>
-    <item
+<!--    <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always"
         android:tooltipText="Address"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        android:title="Search"/>
+        android:title="Search"/>-->
 
 </menu>

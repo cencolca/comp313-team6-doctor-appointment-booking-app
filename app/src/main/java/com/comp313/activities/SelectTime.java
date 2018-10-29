@@ -1,11 +1,9 @@
 package com.comp313.activities;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +16,9 @@ import com.comp313.R;
 import com.comp313.dataaccess.FBDB;
 import com.comp313.models.Booking;
 import com.comp313.views.CustomTimePickerDialog;
+import com.google.gson.Gson;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,13 +28,15 @@ public class SelectTime extends BaseActivity {
 
     //region Vars
     Button btnCancelApp;
-    TextView dateTxtV, timeTxtV, txtV;
+    TextView dateTxtV, timeTxtV, txtClinicV, txtDrV;
     Calendar cal;
-    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr;
+    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr, appIdStr;
     int  DrSelectedId;
     Long dateTimeUnix;
     SharedPreferences prefs;
     Intent i;
+    Booking app;
+    Gson gson;
 
 
     //endregion
@@ -43,10 +45,15 @@ public class SelectTime extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_time);
-        getSupportActionBar().setTitle("Appointment Details");
+        super.setupToolbar("Appointment Details");
         //
+        gson = new Gson();
         prefs = getSharedPreferences("prefs", 0);
         userIdStr = prefs.getString("Id_User", "");
+        //
+        txtDrV = (TextView)findViewById(R.id.txtDr_in_SelectTime);
+        txtClinicV = (TextView)findViewById(R.id.txtClinic_in_SelectTime);
+
         //userIdInt = Integer.parseInt(userIdStr);
         //
         Intent intent = getIntent();
@@ -54,6 +61,7 @@ public class SelectTime extends BaseActivity {
         ClinicName = intent.getStringExtra("ClinicName");
         DrSelectedName = intent.getStringExtra("DrSelectedName");
         DrSelectedId = intent.getIntExtra("DrSelectedId", 0);
+        appIdStr = intent.getStringExtra("appId_clicked");
 
         //
         btnCancelApp = (Button)findViewById(R.id.btnCancelApp);
@@ -122,6 +130,46 @@ public class SelectTime extends BaseActivity {
         });
         //endregion
 
+        //region if editing existing booking sent from Booking_All
+        String jsonAppointment = getIntent().getStringExtra("appointment");
+        app = gson.fromJson(jsonAppointment, Booking.class);
+        if(app != null)
+        {
+            DrSelectedName = app.getDoctor();
+            ClinicName = app.getClinic();
+            DrSelectedId = app.getId_Doc();
+            //
+            btnCancelApp.setVisibility(View.VISIBLE);
+
+            getSharedPreferences("prefs", 0).edit().putInt("Id_Appointment", app.getId_Appointment()).commit();
+            txtClinicV.setText(app.getClinic());
+            txtDrV.setText(app.getDoctor());
+            //
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy hh:mm aaa");
+            Date dt = null;
+            try
+            {
+                dt = sdf.parse(app.getAppointmentTime());
+            }
+            catch (ParseException e)//import java.text.ParseException;
+            {
+                e.printStackTrace();
+            }
+            sdf = new SimpleDateFormat("EEE, d MMM yyyy");
+            dateTxtV.setText(sdf.format(dt));
+            sdf = new SimpleDateFormat("hh:mm aaa");
+            timeTxtV.setText(sdf.format(dt));
+
+            //spinDrList.setSelection(VariablesGlobal.DrNamesList.indexOf(app.getDoctor()));//GetDrArray() is slower so this line of code fixed selected index to '0' unless return bk to list of appoints & come bk
+            cal.setTimeInMillis(dt.getTime());
+        }
+        else
+        {
+            txtClinicV.setText(ClinicName);
+            txtDrV.setText(DrSelectedName);
+        }
+        //endregion
+
         //set min to 00 so that TimePicker never launches to show any other min
         cal.set(Calendar.MINUTE, 0);
         updateDateTxtV();
@@ -165,16 +213,23 @@ public class SelectTime extends BaseActivity {
         newBooking.setDRAVAILABLE("1");
         newBooking.setId_Doc(DrSelectedId);
 
+        boolean success = false;
 
-        boolean success = new FBDB(SelectTime.this).createBooking(newBooking);
+        if(app != null)//editing existing booking (not creating a new one)
+        {
+            success = new FBDB(SelectTime.this).updateBooking(newBooking, appIdStr);
+        }
+        else //creating a new appoint
+        {
+            success = new FBDB(SelectTime.this).createBooking(newBooking);
+        }
 
         if(success)
         {
-            Toast.makeText(getApplicationContext(), "Appointment created!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Appointment saved!", Toast.LENGTH_LONG).show();
             i = new Intent(this, Bookings_AllActivity.class);
-            //Bookings_AllActivity needs fixes before starting that activity
-            //startActivity(i);
-            //finish();
+            startActivity(i);
+            finish();
         }
 
         else
@@ -192,5 +247,17 @@ public class SelectTime extends BaseActivity {
 
     public void clk_CancelAppoint(View view)
     {
+        boolean success = false;
+        success = new FBDB(SelectTime.this).cancelBooking(appIdStr);
+        if(success)
+        {
+            Toast.makeText(getApplicationContext(), "Appointment deleted!", Toast.LENGTH_LONG).show();
+            i = new Intent(this, Bookings_AllActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+        else
+            Toast.makeText(getApplicationContext(), "Error occurred!", Toast.LENGTH_SHORT).show();
     }
 }

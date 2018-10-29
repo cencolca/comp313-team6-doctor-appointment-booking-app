@@ -68,7 +68,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
         instance = this;
-        getSupportActionBar().setTitle("Choose a Doctor");
+        super.setupToolbar("Choose a Doctor");
         //
         paramsApiUri = new Object[3];
         gson = new Gson();
@@ -367,6 +367,11 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         //filter DrNames by Specialty
         filteredDrList();*/
         //========old code ends==========
+
+    }
+
+    @Override
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
 
     }
 

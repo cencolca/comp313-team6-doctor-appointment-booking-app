@@ -6,6 +6,8 @@ package com.comp313.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
@@ -14,8 +16,16 @@ import android.widget.Toast;
 import com.comp313.adapters.Booking_Adapter;
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.dataaccess.DbAdapter;
+import com.comp313.dataaccess.FBDB;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
+import com.comp313.models.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -74,6 +84,15 @@ if(BookingDetailsActivity.instance != null)
     }
 
     @Override
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx)
+    {
+        listAllAppV = (ListView)((Activity)ctx).findViewById(R.id.listAllAppoints);
+        Booking_Adapter adapter = new Booking_Adapter((Activity) ctx, R.layout.eachbooking, allBookings);
+        listAllAppV.setAdapter(adapter);
+    }
+
+
+    @Override
     public void onResponseFromServer(String result, Context ctx)
     {
         if(!Bookings_AllActivity.this.isFinishing())
@@ -128,14 +147,7 @@ if(BookingDetailsActivity.instance != null)
 
     private void LoadAllAppoints()
     {
-        dbAdapter = new DbAdapter(Bookings_AllActivity.this, new Bookings_AllActivity());//new Bookings_All() just to give access to DbAdapter to onResponseFromServer()
-
-        paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/Appointments/" + userIdStr;
-        paramsApiUri[1] = "";//formData not needed for this GET req since user_id is appended to URL
-        paramsApiUri[2] = "GET";
-
-        //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        boolean success = new FBDB(this, new Bookings_AllActivity()).getAllAppoints_Pateint(userIdStr);
     }
 
     private void LoadAllAppointsForDr()

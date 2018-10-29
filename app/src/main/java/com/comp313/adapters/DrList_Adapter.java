@@ -99,7 +99,7 @@ public class DrList_Adapter extends ArrayAdapter<DrProfile>
 
 
             DrSelectedName = ((TextView)view.findViewById(R.id.rowUserName)).getText().toString();
-            String ClinicName = ((TextView) ((Activity)ctx).findViewById(R.id.txtBookingActivity)).getText().toString();
+            String ClinicName = ((TextView) ((Activity)ctx).findViewById(R.id.txtClinicName)).getText().toString();
 
             //String item_2 = ((TextView)view.findViewById(R.id.rowFullName)).getText().toString();
 

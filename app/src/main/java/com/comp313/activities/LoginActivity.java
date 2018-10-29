@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -36,11 +37,14 @@ public class LoginActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setTitle("Login or Create New Account");
         getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
         //get references
-        uNameView = (EditText) findViewById(R.id.txtLoginName);
-        uPassView = (EditText) findViewById(R.id.txtLoginPass);
+        uNameView = findViewById(R.id.txtLoginName);
+        uPassView = findViewById(R.id.txtLoginPass);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -156,6 +160,8 @@ public class LoginActivity extends BaseActivity
                             Log.e("LoginError", e.getMessage());
                         }
                     }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Username/password not found", Toast.LENGTH_SHORT).show();
                 }
             }
 
