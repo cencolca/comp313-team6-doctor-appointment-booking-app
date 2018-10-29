@@ -31,7 +31,7 @@ public class DrProfileActivity extends BaseActivity
         setContentView(R.layout.activity_dr_profile);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_profile);
-        setSupportActionBar(binding.toolbar);
+//        setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("Review the Doctor");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

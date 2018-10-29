@@ -47,7 +47,6 @@ public class DashboardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         instance = this;
-        super.setupToolbar("Dashboard");
     }
 
 

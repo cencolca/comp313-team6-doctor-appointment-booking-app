@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -38,10 +39,12 @@ public class LoginActivity extends BaseActivity
         setContentView(R.layout.activity_login);
         getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
         //get references
-        uNameView = (EditText) findViewById(R.id.txtLoginName);
-        uPassView = (EditText) findViewById(R.id.txtLoginPass);
+        uNameView = findViewById(R.id.txtLoginName);
+        uPassView = findViewById(R.id.txtLoginPass);
 
-        super.setupToolbar(null, true);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

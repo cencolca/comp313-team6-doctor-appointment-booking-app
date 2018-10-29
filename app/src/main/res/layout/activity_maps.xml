@@ -39,7 +39,6 @@
             android:layout_marginRight="20dp"
             android:focusable="false"
             android:inputType="none"
-            android:textColor="@color/colorPrimary"
             android:maxLines="1"
             android:singleLine="true"
             android:background="@android:color/transparent"

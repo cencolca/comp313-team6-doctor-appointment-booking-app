@@ -1,10 +1,7 @@
 package com.comp313.activities;
 
 import android.content.Intent;
-import android.databinding.ViewDataBinding;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,8 +15,6 @@ import com.comp313.views.MenuDialog;
  */
 public class BaseActivity extends AppCompatActivity {
     Intent i;
-    String userIdStr, roleStr;
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,19 +29,12 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setupToolbar(String title, boolean displayBack) {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(title);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(displayBack);
-        }
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(displayBack);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-/*        userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
-        roleStr = getSharedPreferences("prefs", 0).getString("role", "");*/
-
         switch (item.getItemId()) {
             case R.id.action_menu:
                 MenuDialog dialog = MenuDialog.getInstance(this);
@@ -57,6 +45,7 @@ public class BaseActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

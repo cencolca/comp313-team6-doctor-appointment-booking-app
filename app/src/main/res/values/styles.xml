@@ -6,13 +6,29 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="windowActionBarOverlay">true</item>
+        <item name="actionBarStyle">@style/actionBarStyle</item>
+        <item name="actionBarTheme">@style/actionBarTheme</item>
+    </style>
+
+    <style name="actionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="actionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@android:color/white</item>
+        <item name="titleTextStyle">@style/actionbarTextStyle</item>
+    </style>
+
+    <style name="actionbarTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorControlNormal">@android:color/white</item>
-        <item name="titleTextColor">@android:color/white</item>
-        <item name="subtitleTextColor">@android:color/white</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionNavBar">
