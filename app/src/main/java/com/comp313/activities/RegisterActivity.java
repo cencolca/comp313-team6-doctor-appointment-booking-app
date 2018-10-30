@@ -63,7 +63,7 @@ public class RegisterActivity extends BaseActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_register);
-        getSupportActionBar().setTitle("Create New Account");
+        super.setupToolbar("Create New Account");
         //chk if admin is creating a new user
         roleStr = getSharedPreferences("prefs", 0).getString("role", "");
         isAdmin = roleStr.equals("3")?true:false;
@@ -100,7 +100,7 @@ public class RegisterActivity extends BaseActivity {
                 newUser.setEmail(txtEmail.getText().toString().trim());
                 newUser.setPhone(txtPhone.getText().toString().trim());
 
-                boolean success = new FBDB().registerUser(newUser);
+                boolean success = new FBDB(RegisterActivity.this).registerUser(newUser);
 
                 if(success)
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();

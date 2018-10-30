@@ -29,6 +29,8 @@ android {
     }
 }
 
+repositories { jcenter() }
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -36,7 +38,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:11.4.0'
 //15.0.1' is bad version & causes PlacePicker to close soon aft launch
     implementation 'com.google.firebase:firebase-database:11.4.0'
+
+    // test dependencies
     testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'org.mockito:mockito-android:2.+'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

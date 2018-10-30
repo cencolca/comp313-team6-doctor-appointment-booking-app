@@ -13,11 +13,11 @@ public class Booking
         Id_Appointment = id_Appointment;
     }
 
-    public int getId_User() {
+    public String getId_User() {
         return Id_User;
     }
 
-    public void setId_User(int id_User) {
+    public void setId_User(String id_User) {
         Id_User = id_User;
     }
 
@@ -77,15 +77,25 @@ public class Booking
         this.DRAVAILABLE = DRAVAILABLE;
     }
 
-    int Id_Appointment;//PK
-    int Id_User;//Foreign Key
-    int Id_Doc = 0;
-    String Clinic;
-    String Doctor;
-    String AppointmentTime;
-    String CreationTime;
-    String User = "";//Name of Patient
-    String DRAVAILABLE;
+    private int Id_Appointment;//PK
+    private String Id_User;//Foreign Key
+    private int Id_Doc = 0;
+    private String Clinic;
+    private String Doctor;
+    private String AppointmentTime;
+    private String CreationTime;
+    private String User = "";//Name of Patient
+    private String DRAVAILABLE;
+
+    public String getAppointmentKey() {
+        return AppointmentKey;
+    }
+
+    public void setAppointmentKey(String appointmentKey) {
+        AppointmentKey = appointmentKey;
+    }
+
+    private String AppointmentKey;
 
 
     @Override

@@ -10,6 +10,7 @@ package com.comp313.adapters;
         import android.content.Intent;
         import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
+        import android.text.Layout;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -18,6 +19,7 @@ package com.comp313.adapters;
 
         import com.comp313.activities.DrProfileActivity;
         import com.comp313.activities.SettingsActivity;
+        import com.comp313.helpers.VariablesGlobal;
         import com.comp313.models.DrProfile;
         import com.comp313.models.DrProfile;
         import com.google.gson.Gson;
@@ -82,6 +84,7 @@ public class DrList_Adapter extends ArrayAdapter<DrProfile>
         Context ctx;
         DrProfile app;
         int DrSelectedIndex;
+        String DrSelectedName, ClinicName;
 
         public myClkListener(Context ctx, DrProfile app, int DrSelectedIndex)
         {
@@ -94,12 +97,19 @@ public class DrList_Adapter extends ArrayAdapter<DrProfile>
         public void onClick(View view)
         {
 
-            String DrSelectedName = ((TextView)view.findViewById(R.id.rowUserName)).getText().toString();
+
+            DrSelectedName = ((TextView)view.findViewById(R.id.rowUserName)).getText().toString();
+            String ClinicName = ((TextView) ((Activity)ctx).findViewById(R.id.txtClinicName)).getText().toString();
+
             //String item_2 = ((TextView)view.findViewById(R.id.rowFullName)).getText().toString();
 
             Intent i = new Intent(context, DrProfileActivity.class);
             i.putExtra("DrSelectedIndex", DrSelectedIndex);
+            i.putExtra("ClinicName", ClinicName);
             i.putExtra("DrSelectedName", DrSelectedName);
+
+            i.putExtra("DrSelectedId", VariablesGlobal.DrProfiles.get(DrSelectedIndex - 1).id_doc);
+
             context.startActivity(i);
 
 
