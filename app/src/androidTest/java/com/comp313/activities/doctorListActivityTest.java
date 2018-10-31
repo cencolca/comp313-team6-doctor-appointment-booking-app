@@ -3,10 +3,9 @@ package com.comp313.activities;
 
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
-import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.rule.GrantPermissionRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -20,10 +19,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -43,11 +40,6 @@ public class doctorListActivityTest {
     @Rule
     public ActivityTestRule<SplashScreenActivity> mActivityTestRule = new ActivityTestRule<>(SplashScreenActivity.class);
 
-    @Rule
-    public GrantPermissionRule mGrantPermissionRule =
-            GrantPermissionRule.grant(
-                    "android.permission.ACCESS_FINE_LOCATION");
-
     @Test
     public void doctorListActivityTest() {
         // Added a sleep statement to match the app's execution delay.
@@ -59,26 +51,23 @@ public class doctorListActivityTest {
             e.printStackTrace();
         }
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-
-        ViewInteraction appCompatTextView = onView(
-                allOf(withId(R.id.title), withText("Login / Register"),
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.btnMenu),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.support.v7.view.menu.ListMenuItemView")),
-                                        0),
-                                0),
+                                        withClassName(is("android.widget.RelativeLayout")),
+                                        1),
+                                1),
                         isDisplayed()));
-        appCompatTextView.perform(click());
+        appCompatImageButton.perform(click());
+
+        DataInteraction linearLayout = onData(anything())
+                .inAdapterView(allOf(withId(R.id.menuList),
+                        childAtPosition(
+                                withClassName(is("android.widget.LinearLayout")),
+                                0)))
+                .atPosition(0);
+        linearLayout.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -107,16 +96,9 @@ public class doctorListActivityTest {
                                         2),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("name"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("User3"), closeSoftKeyboard());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //pressBack();
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.txtLoginPass),
@@ -126,7 +108,9 @@ public class doctorListActivityTest {
                                         2),
                                 1),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("name"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("pass3"), closeSoftKeyboard());
+
+        //pressBack();
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.button), withText("Log In"),
@@ -147,31 +131,14 @@ public class doctorListActivityTest {
             e.printStackTrace();
         }
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.btnAppointments),
+        ViewInteraction linearLayout2 = onView(
+                allOf(withId(R.id.btnMap),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.TableLayout")),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
-        linearLayout.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction linearLayout2 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.listAllAppoints),
-                        childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")),
-                                0)))
-                .atPosition(0);
         linearLayout2.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
@@ -191,111 +158,6 @@ public class doctorListActivityTest {
                 .atPosition(0);
         linearLayout3.perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction linearLayout4 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.lv_DoctorsList),
-                        childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")),
-                                0)))
-                .atPosition(1);
-        linearLayout4.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction linearLayout5 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.lv_DoctorsList),
-                        childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")),
-                                0)))
-                .atPosition(2);
-        linearLayout5.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction linearLayout6 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.lv_DoctorsList),
-                        childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")),
-                                0)))
-                .atPosition(3);
-        linearLayout6.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
     }
 
     private static Matcher<View> childAtPosition(
