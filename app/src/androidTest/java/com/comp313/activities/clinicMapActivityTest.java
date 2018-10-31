@@ -122,7 +122,7 @@ public class clinicMapActivityTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatButton = onView(
+        /*ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.B_search), withText("Search"),
                         childAtPosition(
                                 childAtPosition(
@@ -140,7 +140,7 @@ public class clinicMapActivityTest {
                                         2),
                                 0),
                         isDisplayed()));
-        imageView2.perform(click());
+        imageView2.perform(click());*/
     }
 
     private static Matcher<View> childAtPosition(
