@@ -46,6 +46,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
 
     //PlacePicker : https://stackoverflow.com/questions/38063648/cannot-import-google-places-placepicker-into-android-project?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     implementation 'com.google.android.gms:play-services-location:11.4.0'//9.2.0'
