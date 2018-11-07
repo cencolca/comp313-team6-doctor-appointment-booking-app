@@ -1,10 +1,15 @@
 package com.comp313.activities;
 
 
+import android.graphics.Rect;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiSelector;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +51,7 @@ public class doctorListActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(7000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -73,7 +78,7 @@ public class doctorListActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(7000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -126,7 +131,7 @@ public class doctorListActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(7000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -145,10 +150,30 @@ public class doctorListActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(7000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        // start - search and click on map
+        UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        try {
+            UiObject searchBox = device.findObject(new UiSelector().textContains("Search"));
+            searchBox.click();
+
+            searchBox = device.findObject(new UiSelector().textContains("Search"));
+            searchBox.setText("Centennial College");
+
+            UiObject searchResult = device.findObject(new UiSelector().textContains("Progress"));
+            searchResult.click();
+
+            UiObject marker = device.findObject(new UiSelector().descriptionContains("Progress Medical"));
+            marker.click();
+            Rect bounds = marker.getBounds();
+
+            device.click(bounds.centerX(), bounds.top - 20);
+        } catch (Exception e) {}
+        // end - search and click on map
 
         DataInteraction linearLayout3 = onData(anything())
                 .inAdapterView(allOf(withId(R.id.lv_DoctorsList),
