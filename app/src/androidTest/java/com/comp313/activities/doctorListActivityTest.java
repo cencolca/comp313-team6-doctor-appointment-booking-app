@@ -30,6 +30,7 @@ import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -161,11 +162,29 @@ public class doctorListActivityTest {
             UiObject searchBox = device.findObject(new UiSelector().textContains("Search"));
             searchBox.click();
 
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             searchBox = device.findObject(new UiSelector().textContains("Search"));
             searchBox.setText("Centennial College");
 
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             UiObject searchResult = device.findObject(new UiSelector().textContains("Progress"));
             searchResult.click();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             UiObject marker = device.findObject(new UiSelector().descriptionContains("Progress Medical"));
             marker.click();
@@ -175,14 +194,21 @@ public class doctorListActivityTest {
         } catch (Exception e) {}
         // end - search and click on map
 
-        DataInteraction linearLayout3 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.lv_DoctorsList),
-                        childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")),
-                                0)))
-                .atPosition(0);
-        linearLayout3.perform(click());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.rowUserName), withText("Dr.John Doe"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.lv_DoctorsList),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("Dr.John Doe")));
     }
 
     private static Matcher<View> childAtPosition(
