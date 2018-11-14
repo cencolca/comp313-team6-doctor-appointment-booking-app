@@ -25,10 +25,7 @@ import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 <<<<<<< HEAD
-<<<<<<< HEAD
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
-=======
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 =======
 >>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 import static android.support.test.espresso.action.ViewActions.replaceText;
@@ -128,7 +125,6 @@ public class updateAndCancelActivityTest {
         appCompatEditText3.perform(replaceText("pass3"), closeSoftKeyboard());
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.txtLoginPass), withText("pass3"),
                         childAtPosition(
@@ -138,9 +134,6 @@ public class updateAndCancelActivityTest {
                                 1),
                         isDisplayed()));
         appCompatEditText4.perform(pressImeActionButton());
-=======
-        //pressBack();
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 =======
         //pressBack();
 >>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
@@ -220,11 +213,8 @@ public class updateAndCancelActivityTest {
         appCompatButton2.perform(scrollTo(), click());
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         ViewInteraction appCompatButton3 = onView(
 =======
-=======
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
         ViewInteraction appCompatTextView2 = onView(
                 allOf(withId(R.id.txtTime), withText("10:00 PM"),
                         childAtPosition(
@@ -246,9 +236,6 @@ public class updateAndCancelActivityTest {
         appCompatButton3.perform(click());
 
         ViewInteraction appCompatButton4 = onView(
-<<<<<<< HEAD
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
-=======
 >>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
                 allOf(withId(R.id.btnBookApp), withText("S A V E"),
                         childAtPosition(
@@ -258,11 +245,7 @@ public class updateAndCancelActivityTest {
                                 0),
                         isDisplayed()));
 <<<<<<< HEAD
-<<<<<<< HEAD
         appCompatButton3.perform(click());
-=======
-        appCompatButton4.perform(click());
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 =======
         appCompatButton4.perform(click());
 >>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
@@ -294,11 +277,7 @@ public class updateAndCancelActivityTest {
         }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         ViewInteraction appCompatButton4 = onView(
-=======
-        ViewInteraction appCompatButton5 = onView(
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 =======
         ViewInteraction appCompatButton5 = onView(
 >>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
@@ -310,11 +289,7 @@ public class updateAndCancelActivityTest {
                                 1),
                         isDisplayed()));
 <<<<<<< HEAD
-<<<<<<< HEAD
         appCompatButton4.perform(click());
-=======
-        appCompatButton5.perform(click());
->>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 =======
         appCompatButton5.perform(click());
 >>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
