@@ -9,13 +9,7 @@
         android:padding="2dip"
         android:clickable="true"
         />-->
-    <Button
-        android:id="@+id/markerIcon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="2dip"
-        android:text="Select This" />
+
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -54,5 +48,14 @@
             android:textSize="14sp"
             android:text="@string/work_hrs_value"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/markerIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        style="@style/btnPrimary"
+        android:text="Select This" />
 
 </LinearLayout>

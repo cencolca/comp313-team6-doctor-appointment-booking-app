@@ -154,7 +154,7 @@ public class DbAdapter extends AsyncTask<Object, Integer, String>//<args,progres
                 }
 
                 VariablesGlobal.spinAdapter.notifyDataSetChanged();
-                callBk.onResponseFromServer(null, ctx);
+                callBk.onResponseFromServer("", ctx);
             }
             catch (JSONException e)
             {

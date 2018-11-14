@@ -9,75 +9,116 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date and time"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="20px"
-            android:layout_marginTop="20px"
-            android:background="@android:color/darker_gray" />
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtDate"
-                android:layout_width="0dip"
+                android:id="@+id/txtClinic_in_SelectTime"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
-                android:text="Wed,4 Apr 2018"
-                android:textAlignment="center"
+                android:text="Address"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:background="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/txtTime"
-                android:layout_width="0dip"
+                android:id="@+id/txtDr_in_SelectTime"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
-                android:text="hh:mm  AM/PM"
-                android:textAlignment="center"
+                android:text="Doctor"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date and time"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.5"
+                    android:text="Wed,4 Apr 2018"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.5"
+                    android:text="hh:mm  AM/PM"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btnBookApp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="clk_SaveAppoint"
-            android:text="S A V E" />
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnCancelApp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="clk_CancelAppoint"
-            android:text="Cancel Appointment" />
+            <Button
+                android:id="@+id/btnBookApp"
+                style="@style/btnPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="clk_SaveAppoint"
+                android:text="S A V E" />
+
+            <Button
+                android:id="@+id/btnCancelApp"
+                style="@style/btnSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="clk_CancelAppoint"
+                android:text="Cancel Appointment" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

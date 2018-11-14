@@ -47,7 +47,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
 
     //region Variables
     boolean isYES = false;
-    TextView dateTxtV, timeTxtV, txtV;
+    TextView dateTxtV, timeTxtV, txtV, txt_clinicName, txt_timings;
     Button btnCancelApp;
     Spinner spinDrList, spinSpecialtyList;
     Calendar cal;
@@ -68,7 +68,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
         instance = this;
-        getSupportActionBar().setTitle("Choose a Doctor");
+        super.setupToolbar("Choose a Doctor");
         //
         paramsApiUri = new Object[3];
         gson = new Gson();
@@ -76,6 +76,9 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         VariablesGlobal.DrNamesListFiltered.clear();
         //ref to views
         txtV = findViewById(R.id.txtBookingActivity);
+        txt_clinicName = findViewById(R.id.txtClinicName);
+        txt_timings = findViewById(R.id.txtTime);
+
         spinDrList = findViewById(R.id.spinDrList);
         spinSpecialtyList = findViewById(R.id.spinSpecialtyList);
         VariablesGlobal.spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, VariablesGlobal.DrNamesListFiltered);
@@ -106,7 +109,10 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         GetDrArray();
 
         //get Extras passed from InfoWindow of marker
-        txtV.setText("Address : " + getIntent().getStringExtra("infoWinTitle"));
+        txtV.setText(getIntent().getStringExtra("address"));
+        txt_clinicName.setText(getIntent().getStringExtra("infoWinTitle"));
+        txt_timings.setText("  " + getIntent().getStringExtra("timing"));
+
 
         //region >>>DatePicker Set Up
   /*      dateTxtV = (TextView)findViewById(R.id.txtDate);
@@ -279,7 +285,7 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         bModel = new Booking();
         userIdStr = getSharedPreferences("prefs", 0).getString("Id_User", "1");
         int userIdInt = Integer.parseInt(userIdStr);
-        bModel.setId_User(userIdInt);
+        bModel.setId_User(userIdStr);
         bModel.setAppointmentTime(this.AppointmentTime);
         bModel.setClinic(txtV.getText().toString());
         bModel.setCreationTime(sdf.format( Calendar.getInstance().getTime() ));
@@ -361,6 +367,11 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
         //filter DrNames by Specialty
         filteredDrList();*/
         //========old code ends==========
+
+    }
+
+    @Override
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
 
     }
 

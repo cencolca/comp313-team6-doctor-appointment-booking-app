@@ -24,7 +24,10 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+<<<<<<< HEAD
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
+=======
+>>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -121,6 +124,7 @@ public class updateAndCancelActivityTest {
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("pass3"), closeSoftKeyboard());
 
+<<<<<<< HEAD
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.txtLoginPass), withText("pass3"),
                         childAtPosition(
@@ -130,6 +134,9 @@ public class updateAndCancelActivityTest {
                                 1),
                         isDisplayed()));
         appCompatEditText4.perform(pressImeActionButton());
+=======
+        //pressBack();
+>>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.button), withText("Log In"),
@@ -205,7 +212,31 @@ public class updateAndCancelActivityTest {
                                 3)));
         appCompatButton2.perform(scrollTo(), click());
 
+<<<<<<< HEAD
         ViewInteraction appCompatButton3 = onView(
+=======
+        ViewInteraction appCompatTextView2 = onView(
+                allOf(withId(R.id.txtTime), withText("10:00 PM"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        6),
+                                1),
+                        isDisplayed()));
+        appCompatTextView2.perform(click());
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
+
+        ViewInteraction appCompatButton4 = onView(
+>>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
                 allOf(withId(R.id.btnBookApp), withText("S A V E"),
                         childAtPosition(
                                 childAtPosition(
@@ -213,7 +244,11 @@ public class updateAndCancelActivityTest {
                                         1),
                                 0),
                         isDisplayed()));
+<<<<<<< HEAD
         appCompatButton3.perform(click());
+=======
+        appCompatButton4.perform(click());
+>>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -241,7 +276,11 @@ public class updateAndCancelActivityTest {
             e.printStackTrace();
         }
 
+<<<<<<< HEAD
         ViewInteraction appCompatButton4 = onView(
+=======
+        ViewInteraction appCompatButton5 = onView(
+>>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
                 allOf(withId(R.id.btnCancelApp), withText("Cancel Appointment"),
                         childAtPosition(
                                 childAtPosition(
@@ -249,7 +288,11 @@ public class updateAndCancelActivityTest {
                                         1),
                                 1),
                         isDisplayed()));
+<<<<<<< HEAD
         appCompatButton4.perform(click());
+=======
+        appCompatButton5.perform(click());
+>>>>>>> e06ca40b3d38d31d8cc70fde40b4df5d435de26e
 
     }
 

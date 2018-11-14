@@ -2,14 +2,26 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="5dp">
     <TextView
         android:id="@+id/rowUserName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Doctor Name"
+        android:layout_marginTop="3dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
     <TextView
         android:id="@+id/rowFullName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Physition"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorActionBar"/>
+
 </LinearLayout>
