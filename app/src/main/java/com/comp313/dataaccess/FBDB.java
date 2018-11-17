@@ -39,6 +39,8 @@
 
     public class FBDB {
 
+
+
         public enum FB_REQUESTS
         {
             DrProfile,
@@ -201,6 +203,16 @@
 
                 }
             });
+            success = true;
+            return success;
+        }
+
+        public boolean updateUserProfile(User user, String userIdStr)
+        {
+            boolean success = false;
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = db.getReference("Users").child(userIdStr);
+            myRef.setValue(user);
             success = true;
             return success;
         }
