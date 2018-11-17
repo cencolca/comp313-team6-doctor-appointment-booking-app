@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.dataaccess.DbAdapter;
+import com.comp313.dataaccess.FBDB;
 import com.comp313.helpers.AESCrypt;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
@@ -80,12 +81,14 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
             return;
         }
         //
-        dbAdapter = new DbAdapter(this, new SettingsActivity());
+        boolean success = new FBDB(this, this).getUserById(userIdStr);
+
+     /*   dbAdapter = new DbAdapter(this, new SettingsActivity());
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/getuserdetail/" + userIdStr;
         paramsApiUri[1] = "";
         paramsApiUri[2] = "GET";
         //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
 
 
     }
@@ -144,16 +147,19 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
 
         //map user-JSON to user-obj
         u = gson.fromJson(result, User.class);
+        //
+        uPass   = u.getPw();
+
 
         //de-crypt pw
-        try
+    /*    try
         {
             uPass   = AESCrypt.decrypt(u.getPw());
         }
         catch (Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
 
         //populate EditTexts w details of retrieved user
         loginNameV.setText(u.getLoginName());

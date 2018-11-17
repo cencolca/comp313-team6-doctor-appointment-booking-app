@@ -163,6 +163,48 @@
             return success;
         }
 
+        public boolean getUserById(String userIdStr)
+        {
+            boolean success = false;
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            Query query = myRef.child("Users").orderByKey().equalTo(userIdStr);
+            query.addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    if(dataSnapshot.exists())
+                    {
+                        if(dataSnapshot.hasChildren())
+                        {
+                            try
+                            {
+                                DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
+                                User user = snap.getValue(User.class);
+                                //
+                                Gson gson = new Gson();
+                                String userJsonStr = gson.toJson(user);
+                                //
+                                callBk.onResponseFromServer(userJsonStr, ctx);
+                            }
+                            catch (Exception e)
+                            {
+                                Log.e("getUserById()", e.getMessage());
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+
+                }
+            });
+            success = true;
+            return success;
+        }
+
         public boolean createBooking(Booking newBooking)
         {
             boolean success = false;
