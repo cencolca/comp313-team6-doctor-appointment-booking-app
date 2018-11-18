@@ -1,6 +1,6 @@
 package com.comp313.activities;
 /*
- * By: David Tyler
+ * By: Shafiq
  * Purpose: Dashboard for admin
  */
 
@@ -19,6 +19,7 @@ import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.adapters.User_Adapter;
 import com.comp313.dataaccess.DbAdapter;
 import com.comp313.helpers.VariablesGlobal;
+import com.comp313.models.Booking;
 import com.comp313.models.User;
 
 import org.json.JSONArray;
@@ -112,6 +113,11 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
         {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
+
     }
 
     public void onNewUserClick(View view)

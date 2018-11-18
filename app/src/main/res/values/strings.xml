@@ -2,6 +2,7 @@
     <string name="google_place_api">AIzaSyDXPrRsFiTlESAhSXoQkKT78SJF2nKABDI</string>
 
     <string name="app_name">Book Doctor Appointment</string>
+    <string name="app_name_abbv">DAPP</string>
     <string name="strDrUnAvailable">"*** Un-Available***"</string>
 
     <string name="userName">User Name: </string>
@@ -28,5 +29,7 @@
 
     <string name="dashOpen">Open Dashboard</string>
     <string name="dashClose">Close Dashboard</string>
+    <string name="work_hrs_title"><b>Work Hours</b> (Mon-Fri)</string>
+    <string name="work_hrs_value"> <p>9:00 AM - 5:00 PM</p></string>
 
 </resources>

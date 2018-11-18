@@ -15,7 +15,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_name_abbv"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -32,7 +32,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.SplashScreenActivity">
+        <activity
+            android:name=".activities.SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionNavBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,8 +43,11 @@
         </activity>
         <activity
             android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".activities.LoginActivity" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.FindClinicActivity" />
         <activity android:name=".activities.BookingDetailsActivity" />
 
@@ -52,11 +57,14 @@
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.VerifyEmailActivity" />
         <activity android:name=".activities.DrProfileActivity" />
-        <activity android:name=".activities.DashboardActivity" />
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:theme="@style/AppTheme.NoActionNavBar" />
 
         <service android:name=".helpers.ServiceIntro" />
 
-        <activity android:name=".activities.AdminDashboardActivity"></activity>
+        <activity android:name=".activities.AdminDashboardActivity" />
+        <activity android:name=".activities.SelectTime"></activity>
     </application>
 
 </manifest>
