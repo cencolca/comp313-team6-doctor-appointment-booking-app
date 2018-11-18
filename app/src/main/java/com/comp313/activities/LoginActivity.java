@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -145,6 +146,10 @@ public class LoginActivity extends BaseActivity
 
                                 // set role to 0 (patient)
                                 pref.edit().putString("role", dbUser.getRole()).apply();
+
+                                //store name of user -> needed for method getAllAppoints_Dr in FBDB
+                                pref.edit().putString("Name_of_User", dbUser.getNameOfUser()).apply();
+
 
                                 Toast.makeText(ctx, "Login successful", Toast.LENGTH_LONG).show();
                                 i = new Intent(ctx, DashboardActivity.class);
