@@ -13,103 +13,109 @@
         android:layout_marginTop="24dp"
         android:elevation="1dp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:stretchColumns="1">
-
-            <EditText
-                android:id="@+id/txtLoginName"
-                style="@style/editText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Username"
-                android:padding="5dp"
-                android:text="" />
-
-
-            <EditText
-                android:id="@+id/txtLoginPass"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="30dp"
-                style="@style/editText"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="5dp"
-                android:text="" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            android:padding="20dp"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button"
-                style="@style/btnPrimary"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="clk_Login"
-                android:text="Log In" />
+                android:layout_height="100dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/logo" />
 
-            <Button
-                android:id="@+id/btn_CreateAcc"
-                style="@style/btnSecondary"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="clk_NewUserRegister"
-                android:text="Create Account" />
+                android:text="Login"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:stretchColumns="1">
+
+                <EditText
+                    android:id="@+id/txtLoginName"
+                    style="@style/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Username"
+                    android:padding="5dp"
+                    android:text="" />
+
+
+                <EditText
+                    android:id="@+id/txtLoginPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    style="@style/editText"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="5dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/btnPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:onClick="clk_Login"
+                    android:text="Log In" />
+
+                <Button
+                    android:id="@+id/btn_CreateAcc"
+                    style="@style/btnSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="clk_NewUserRegister"
+                    android:text="Create Account" />
+
+            </LinearLayout>
+
+            <!--    <Button
+                    android:id="@+id/btnTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Map"
+                    android:onClick="clk_btnTest"/>-->
+
+            <!--   <Button
+                   android:id="@+id/btnAllPref"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="50dp"
+                   android:onClick="btnClk_DisplayAllPref"
+                   android:text="Display All Preferences"
+                   android:visibility="invisible" />
+
+               <Button
+                   android:id="@+id/btnDelDb"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:onClick="DeleteWholeDB"
+                   android:text="Delete Database"
+                   android:visibility="invisible" />-->
         </LinearLayout>
-
-        <!--    <Button
-                android:id="@+id/btnTest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Map"
-                android:onClick="clk_btnTest"/>-->
-
-        <!--   <Button
-               android:id="@+id/btnAllPref"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="50dp"
-               android:onClick="btnClk_DisplayAllPref"
-               android:text="Display All Preferences"
-               android:visibility="invisible" />
-
-           <Button
-               android:id="@+id/btnDelDb"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:onClick="DeleteWholeDB"
-               android:text="Delete Database"
-               android:visibility="invisible" />-->
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
