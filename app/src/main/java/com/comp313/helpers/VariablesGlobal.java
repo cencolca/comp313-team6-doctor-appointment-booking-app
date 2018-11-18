@@ -30,5 +30,4 @@ public class VariablesGlobal
     public static ArrayList<Booking> allAppoints = new ArrayList<>();
 
 
-
 }

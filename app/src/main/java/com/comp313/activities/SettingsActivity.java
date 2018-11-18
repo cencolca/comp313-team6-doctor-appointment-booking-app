@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.dataaccess.DbAdapter;
+import com.comp313.dataaccess.FBDB;
 import com.comp313.helpers.AESCrypt;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
@@ -80,19 +82,22 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
             return;
         }
         //
-        dbAdapter = new DbAdapter(this, new SettingsActivity());
+        boolean success = new FBDB(this, this).getUserById(userIdStr);
+
+     /*   dbAdapter = new DbAdapter(this, new SettingsActivity());
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/getuserdetail/" + userIdStr;
         paramsApiUri[1] = "";
         paramsApiUri[2] = "GET";
         //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
 
 
     }
 
     public void btnClk_UpdateUser(View view)
     {
-        dbAdapter = new DbAdapter(this);
+        //dbAdapter = new DbAdapter(this);
+        FBDB fbdb = new FBDB(this);
 
         //references to EditText & bind model
         uName  = (loginNameV).getText().toString();
@@ -103,7 +108,10 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
         uModel.setAddress(add);
         uModel.setEmail((emailV).getText().toString());
         uModel.setPhone((phoneV).getText().toString());
-        //encrypt pw
+        uPass = ((EditText)findViewById(R.id.txtEditPass)).getText().toString();
+        uModel.setPw(uPass);
+
+/*        //encrypt pw
         try
         {
             uPass   = AESCrypt.encrypt(((EditText)findViewById(R.id.txtEditPass)).getText().toString());
@@ -112,19 +120,30 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
         catch (Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
 
         //get shared preference
         pref = getSharedPreferences("prefs", 0);
 
         //make json from model
         formData = gson.toJson(uModel);
-        //prep args
+        //
+        boolean success = fbdb.updateUserProfile(uModel, userIdStr);
+        if(success)
+        {
+            Toast.makeText(this, "Profile Updated", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(this, "Profile could not be updated", Toast.LENGTH_LONG).show();
+        }
+
+  /*      //prep args
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/UpdateUser/" + userIdStr;
         paramsApiUri[1] = formData;
         paramsApiUri[2] = "POST";
         //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
     }
 
     //populate detail of user in EditText boxes
@@ -144,16 +163,19 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
 
         //map user-JSON to user-obj
         u = gson.fromJson(result, User.class);
+        //
+        uPass   = u.getPw();
+
 
         //de-crypt pw
-        try
+    /*    try
         {
             uPass   = AESCrypt.decrypt(u.getPw());
         }
         catch (Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
 
         //populate EditTexts w details of retrieved user
         loginNameV.setText(u.getLoginName());

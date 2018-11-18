@@ -48,7 +48,7 @@
 
         private DownloadUrl downloadUrl;
         private DataParser parser;
-        private String jsonStr;
+        private String jsonStr, NameOfUser;
         private Gson gson;
         ICallBackFromDbAdapter callBk;
 
@@ -138,9 +138,9 @@
             try {
                 // Write a message to the database
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
+                DatabaseReference myRef = database.getReference("Users");
 
-                String userId = myRef.child("Users").push().getKey();
+                String userId = myRef.push().getKey();
                 myRef.child(userId).setValue(newUser);
 
                 //get shared preference
@@ -160,6 +160,60 @@
 
             }
 
+            return success;
+        }
+
+        public boolean getUserById(String userIdStr)
+        {
+            boolean success = false;
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            Query query = myRef.child("Users").orderByKey().equalTo(userIdStr);
+            query.addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    if(dataSnapshot.exists())
+                    {
+                        if(dataSnapshot.hasChildren())
+                        {
+                            try
+                            {
+                                DataSnapshot snap = dataSnapshot.getChildren().iterator().next();
+                                User user = snap.getValue(User.class);
+                                //store name of user -> needed for method getAllAppoints_Dr
+                                //NameOfUser = user.getNameOfUser();
+                                //
+                                Gson gson = new Gson();
+                                String userJsonStr = gson.toJson(user);
+                                //
+                                callBk.onResponseFromServer(userJsonStr, ctx);
+                            }
+                            catch (Exception e)
+                            {
+                                Log.e("getUserById()", e.getMessage());
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+
+                }
+            });
+            success = true;
+            return success;
+        }
+
+        public boolean updateUserProfile(User user, String userIdStr)
+        {
+            boolean success = false;
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = db.getReference("Users").child(userIdStr);
+            myRef.setValue(user);
+            success = true;
             return success;
         }
 
@@ -244,6 +298,70 @@
             return true;
         }
 
+        public boolean getAllAppoints_Dr(String userIdStr)
+        {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            //region >>> get doctor's name
+            NameOfUser = ctx.getSharedPreferences("prefs", 0).getString("Name_of_User", "");
+            //endregion
+
+            //region >>> get all appointments for doctor
+            Query queryAppointments = myRef.child("Appointments").orderByChild("doctor").equalTo(NameOfUser);
+            queryAppointments.addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    if (dataSnapshot.exists()) {
+
+                        if (dataSnapshot.hasChildren())
+                        {
+                            gson = new Gson();
+                            VariablesGlobal.allAppoints.clear();// = new ArrayList<>();
+                            VariablesGlobal.mapAppoints.clear();// = new HashMap<>();
+                            String key;
+                            Pair p;
+
+                            //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
+                            Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
+                            try
+                            {
+                                while (it.hasNext())
+                                {
+                                    key = it.next().getKey();
+                                    p = new Pair(key , dataSnapshot.child(key).getValue(Booking.class));
+
+                                    VariablesGlobal.mapAppoints.add(p);
+                                    //allAppoints.add(it.next().getValue(Booking.class));
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                Log.e("LoginError", e.getMessage());
+                            }
+
+                            for(Pair<String, Booking> pair : VariablesGlobal.mapAppoints)
+                            {
+                                VariablesGlobal.allAppoints.add(pair.second);
+                            }
+
+                            callBk.onResponseFromServer(VariablesGlobal.allAppoints, ctx);
+
+                            Log.e("LoginError", ". . . . . . ");
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError firebaseError)
+                {
+                    Log.e("The read failed: " ,firebaseError.getMessage());
+                }
+            });
+            //endregion
+
+            return true;
+        }
 
         public boolean updateBooking(Booking newBooking, String appIdStr)
         {

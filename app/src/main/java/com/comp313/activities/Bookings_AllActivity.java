@@ -133,18 +133,22 @@ public class Bookings_AllActivity extends BaseActivity implements ICallBackFromD
         }
     }
 
-    private void LoadAllAppoints() {
+    private void LoadAllAppoints()
+    {
         boolean success = new FBDB(this, this).getAllAppoints_Pateint(userIdStr);
     }
 
-    private void LoadAllAppointsForDr() {
-        dbAdapter = new DbAdapter(Bookings_AllActivity.this, new Bookings_AllActivity());//new Bookings_All() just to give access to DbAdapter to onResponseFromServer()
+    private void LoadAllAppointsForDr()
+    {
+        boolean success = new FBDB(this, this).getAllAppoints_Dr(userIdStr);
+
+ /*       dbAdapter = new DbAdapter(Bookings_AllActivity.this, new Bookings_AllActivity());//new Bookings_All() just to give access to DbAdapter to onResponseFromServer()
 
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/AppointmentsForDr/" + userIdStr;
         paramsApiUri[1] = "";//formData not needed for this GET req since user_id is appended to URL
         paramsApiUri[2] = "GET";
         //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
     }
 
 
