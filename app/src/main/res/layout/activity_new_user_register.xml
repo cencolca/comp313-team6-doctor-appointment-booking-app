@@ -9,12 +9,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:id="@+id/layNewUser"
-        android:padding="10dp"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             android:orientation="vertical">
 
             <TableLayout
