@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        tools:context="comp231.drbooking.MapsActivity" />
+        tools:context=".activities.MapsActivity" />
 
     <RelativeLayout
         android:layout_width="match_parent"
