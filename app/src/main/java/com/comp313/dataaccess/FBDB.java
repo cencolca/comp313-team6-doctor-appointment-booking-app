@@ -39,6 +39,8 @@
 
     public class FBDB {
 
+
+
         public enum FB_REQUESTS
         {
             DrProfile,
@@ -144,6 +146,7 @@
                 DatabaseReference myRef = database.getReference("Users");
 
                 String userId = myRef.push().getKey();
+                newUser.setId_User(userId);
                 myRef.child(userId).setValue(newUser);
 
                 //get shared preference
@@ -592,6 +595,19 @@
 
                 }
             });
+        }
+
+        public void deleteUser(String id_userEditing)
+        {
+            try {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Users").child(id_userEditing);
+                myRef.setValue(null);
+            }
+            catch (Exception ex)
+            {
+                //success = false;
+            }
         }
 
         boolean loginSuccess;
