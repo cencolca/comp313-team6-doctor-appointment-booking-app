@@ -114,7 +114,7 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
                 usr = new User();
                 usr.setLoginName(j.getString("loginName"));
                 usr.setNameOfUser(j.getString("nameOfUser"));
-                usr.setId_User(j.getInt("Id_User"));
+                //usr.setId_User(j.getInt("Id_User"));//changed int to String in Model "User" bcoz FB Keys r strings
 
                 allUserList.add(usr);
             }
