@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ import java.util.List;
 
 
 public class AdminDashboardActivity extends BaseActivity implements ICallBackFromDbAdapter {
+    //region >>> Vars
     Object[] paramsApiUri;
     EditText etUserName;
     String stUserName;
     DbAdapter dbAdapter;
     ListView lvUserList;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,15 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
     }
 
     @Override
-    public void onResponseFromServer(String result, Context ctx)
+    public void onResponseFromServer(ArrayList<User> allUserList, Context ctx)//new Firebase implementation
+    {
+        lvUserList = (ListView) ((Activity) ctx).findViewById(R.id.lvUserList);
+        User_Adapter adapter = new User_Adapter((Activity) ctx, R.layout.eachuser, allUserList);
+        lvUserList.setAdapter(adapter);//listAllAppV ref fetched in onCreate becomes NULL in this callBk!!! So get a fresh ref!
+    }
+
+    @Override
+    public void onResponseFromServer(String result, Context ctx)//OLD Azure implementation
     {
 
         if (!this.isFinishing()) {
@@ -123,6 +134,8 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
     public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
 
     }
+
+
 
     public void onNewUserClick(View view)
     {

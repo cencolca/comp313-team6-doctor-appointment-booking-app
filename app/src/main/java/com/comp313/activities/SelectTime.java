@@ -17,11 +17,13 @@ import com.comp313.R;
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.dataaccess.FBDB;
 import com.comp313.models.Booking;
+import com.comp313.models.User;
 import com.comp313.views.CustomTimePickerDialog;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -284,6 +286,11 @@ public class SelectTime extends BaseActivity implements ICallBackFromDbAdapter {
     @Override
     public void onResponseFromServer(List<Booking> allBookings, Context ctx)
     {
+
+    }
+
+    @Override
+    public void onResponseFromServer(ArrayList<User> allUsersAdminSearched, Context ctx) {
 
     }
 }

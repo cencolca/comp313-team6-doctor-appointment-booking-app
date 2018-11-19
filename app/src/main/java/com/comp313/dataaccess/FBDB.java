@@ -496,7 +496,7 @@
                             }
                             catch(Exception e)
                             {
-                                Log.e("LoginError", e.getMessage());
+                                Log.e("Error", e.getMessage());
                             }
 
                             for(Pair<String, Booking> pair : VariablesGlobal.mapAppoints)
@@ -506,7 +506,7 @@
 
                             callBk.onResponseFromServer(VariablesGlobal.allAppoints, ctx);
 
-                            Log.e("LoginError", ". . . . . . ");
+                            Log.e("Error", ". . . . . . ");
                         }
                     }
                 }
@@ -541,6 +541,57 @@
 
         public void searchUserByName(String stUserName)
         {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            //https://github.com/firebase/FirebaseUI-Android/issues/48
+            Query queryUsers = myRef.child("Users").orderByChild("loginName").startAt(stUserName).endAt(stUserName+"\uf8ff");
+            queryUsers.addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    if (dataSnapshot.exists())
+                    {
+                        if (dataSnapshot.hasChildren())
+                        {
+                            gson = new Gson();
+                            VariablesGlobal.allUsersAdminSearched.clear();// = new ArrayList<>();
+                            VariablesGlobal.mapUsers.clear();// = new HashMap<>();
+                            String key;
+                            Pair p;
+                            Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
+                            try
+                            {
+                                while (it.hasNext())
+                                {
+                                    key = it.next().getKey();
+                                    p = new Pair(key , dataSnapshot.child(key).getValue(User.class));
+                                    VariablesGlobal.mapUsers.add(p);
+
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                Log.e("Error", e.getMessage());
+                            }
+
+                            for(Pair<String, User> pair : VariablesGlobal.mapUsers)
+                            {
+                                VariablesGlobal.allUsersAdminSearched.add(pair.second);
+                            }
+
+                            callBk.onResponseFromServer(VariablesGlobal.allUsersAdminSearched, ctx);
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+
+                }
+            });
         }
 
         boolean loginSuccess;

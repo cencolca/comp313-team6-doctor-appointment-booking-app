@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 
 import com.comp313.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsActivity extends BaseActivity implements ICallBackFromDbAdapter {
@@ -200,6 +201,11 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
 
     @Override
     public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
+
+    }
+
+    @Override
+    public void onResponseFromServer(ArrayList<User> allUsersAdminSearched, Context ctx) {
 
     }
 

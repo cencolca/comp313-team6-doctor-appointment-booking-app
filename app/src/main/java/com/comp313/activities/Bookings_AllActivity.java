@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -84,6 +85,11 @@ public class Bookings_AllActivity extends BaseActivity implements ICallBackFromD
         listAllAppV = (ListView) ((Activity) ctx).findViewById(R.id.listAllAppoints);
         Booking_Adapter adapter = new Booking_Adapter((Activity) ctx, R.layout.eachbooking, allBookings);
         listAllAppV.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResponseFromServer(ArrayList<User> allUsersAdminSearched, Context ctx) {
+
     }
 
 
