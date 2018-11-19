@@ -49,8 +49,11 @@
         private DownloadUrl downloadUrl;
         private DataParser parser;
         private String jsonStr, NameOfUser;
+        private boolean isTimeAvailable = false;
         private Gson gson;
         ICallBackFromDbAdapter callBk;
+        FirebaseDatabase fbdb;
+        DatabaseReference dbRef;
 
 
         private String baseUrl = "https://drappdb.firebaseio.com/";
@@ -217,26 +220,182 @@
             return success;
         }
 
-        public boolean createBooking(Booking newBooking)
+        public void createBooking(final Booking newBooking)
         {
-            boolean success = false;
+            //boolean success = false;
 
             try {
                 // Write a message to the database
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Appointments");
+                fbdb = FirebaseDatabase.getInstance();
+                dbRef = fbdb.getReference("Appointments");
+                //check if appointment time is available
+                Query query = dbRef.orderByChild("doctor").equalTo(newBooking.getDoctor());
+                                                          //.equalTo(newBooking.getAppointmentTime() , "appointmentTime")
+                                                          //.equalTo(newBooking.getClinic() , "clinic");
+                query.addListenerForSingleValueEvent(new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        if (dataSnapshot.exists())
+                        {
+                            if (dataSnapshot.hasChildren())
+                            {
+                                String key;
+                                Pair p;
 
-                String bookingId = myRef.push().getKey();
-                myRef.child(bookingId).setValue(newBooking);
+                                //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
+                                Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
+                                try
+                                {
+                                    while (it.hasNext())
+                                    {
+                                        key = it.next().getKey();
+                                        Booking existingBooking = dataSnapshot.child(key).getValue(Booking.class);
+                                        String existingBookTime = existingBooking.getAppointmentTime();
+                                        String existingBookClinic = existingBooking.getClinic();
+                                        String newgBookTime = newBooking.getAppointmentTime();
+                                        String newBookClinic = newBooking.getClinic();
 
-                success = true;
+
+                                        if(existingBookTime.equals(newgBookTime) && existingBookClinic.equals(newBookClinic))
+                                        {
+                                            isTimeAvailable = false;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            isTimeAvailable = true;
+                                        }
+                                    }//while-loop ends
+
+                                    //outside while-loop
+                                    if (isTimeAvailable)
+                                    {
+                                        //if time is available then create a booking
+                                        String bookingId = dbRef.push().getKey();
+                                        dbRef.child(bookingId).setValue(newBooking);
+                                        callBk.onResponseFromServer("timeIsAvailable" , ctx);
+                                    }
+                                    else
+                                     {
+                                        callBk.onResponseFromServer("timeUnAvailable" , ctx);
+                                     }
+                                }
+                                catch(Exception e)
+                                {
+                                    Log.e("LoginError", e.getMessage());
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+
+                    }
+                });
+           /*     //if time is available then create a booking
+                String bookingId = tblAppointment.push().getKey();
+                tblAppointment.child(bookingId).setValue(newBooking);*/
+
+                //success = true;
             }
             catch(Exception ex)
             {
                 Log.e("> > Firebase Err: ", ex.getMessage());
             }
 
-            return success;
+            //return true;
+        }
+
+        public void updateBooking(final Booking newBooking, final String appIdStr)
+        {
+            //boolean success = false;
+
+            try {
+                //Update an existing appointment to the database
+                fbdb = FirebaseDatabase.getInstance();
+                dbRef = fbdb.getReference("Appointments");
+                //
+                Query query = dbRef.orderByChild("doctor").equalTo(newBooking.getDoctor());
+                query.addListenerForSingleValueEvent(new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        if (dataSnapshot.exists())
+                        {
+                            if (dataSnapshot.hasChildren())
+                            {
+                                String key;
+                                Pair p;
+
+                                //https://stackoverflow.com/questions/50840053/iterator-next-is-not-working
+                                Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator();
+                                try
+                                {
+                                    while (it.hasNext())
+                                    {
+                                        key = it.next().getKey();
+                                        Booking existingBooking = dataSnapshot.child(key).getValue(Booking.class);
+                                        String existingBookTime = existingBooking.getAppointmentTime();
+                                        String existingBookClinic = existingBooking.getClinic();
+                                        String newgBookTime = newBooking.getAppointmentTime();
+                                        String newBookClinic = newBooking.getClinic();
+
+
+                                        if(existingBookTime.equals(newgBookTime) && existingBookClinic.equals(newBookClinic))
+                                        {
+                                            isTimeAvailable = false;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            isTimeAvailable = true;
+                                        }
+                                    }//while-loop ends
+
+                                    //outside while-loop
+                                    if (isTimeAvailable)
+                                    {
+                                        //if time is available then create a booking
+                                        dbRef = fbdb.getReference("Appointments").child(appIdStr);
+                                        dbRef.setValue(newBooking);
+                                        callBk.onResponseFromServer("timeIsAvailable" , ctx);
+                                    }
+                                    else
+                                    {
+                                        callBk.onResponseFromServer("timeUnAvailable" , ctx);
+                                    }
+                                }
+                                catch(Exception e)
+                                {
+                                    Log.e("LoginError", e.getMessage());
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+
+                    }
+                });
+                //
+               /* dbRef = fbdb.getReference("Appointments").child(appIdStr);
+                dbRef.setValue(newBooking);*/
+
+                //success = true;
+            }
+            catch(Exception ex)
+            {
+                Log.e("> > Firebase Err: ", ex.getMessage());
+            }
+
+            //return success;
         }
 
         public boolean getAllAppoints_Pateint(String userIdStr)
@@ -361,27 +520,6 @@
             //endregion
 
             return true;
-        }
-
-        public boolean updateBooking(Booking newBooking, String appIdStr)
-        {
-            boolean success = false;
-
-            try {
-                //Update an existing appointment to the database
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Appointments").child(appIdStr);
-
-                myRef.setValue(newBooking);
-
-                success = true;
-            }
-            catch(Exception ex)
-            {
-                Log.e("> > Firebase Err: ", ex.getMessage());
-            }
-
-            return success;
         }
 
         public boolean cancelBooking(String appIdStr)
