@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.comp313.R;
+import com.comp313.activities.AdminDashboardActivity;
 import com.comp313.activities.DashboardActivity;
 import com.comp313.activities.LoginActivity;
 import com.comp313.adapters.MenuAdapter;
@@ -32,6 +33,8 @@ public class MenuDialog extends BottomSheetDialogFragment {
         final View contentView = View.inflate(getContext(), R.layout.menu_dialog, null);
 
         String userIdStr = context.getSharedPreferences("prefs",0).getString("Id_User", "");
+        final String userRoleStr = context.getSharedPreferences("prefs",0).getString("role", "");
+
         final boolean isLoggedIn = userIdStr != "";
 
         String[] titles = new String[]{"Login"};
@@ -60,7 +63,10 @@ public class MenuDialog extends BottomSheetDialogFragment {
                             break;
 
                         case 1:
-                            intent = new Intent(context, DashboardActivity.class);
+                            if(userRoleStr.equals("3"))
+                                intent = new Intent(context, AdminDashboardActivity.class);
+                            else
+                                intent = new Intent(context, DashboardActivity.class);
                             break;
 
                         default:
