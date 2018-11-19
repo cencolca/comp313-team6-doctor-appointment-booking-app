@@ -33,7 +33,7 @@ public class SelectTime extends BaseActivity implements ICallBackFromDbAdapter {
     Button btnCancelApp;
     TextView dateTxtV, timeTxtV, txtClinicV, txtDrV;
     Calendar cal;
-    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr, appIdStr;
+    String formData, DrSelectedName, ClinicName, dateStr, timeStr,AppointmentTime,userIdStr, nameOfUser, appIdStr;
     int  DrSelectedId;
     Long dateTimeUnix;
     SharedPreferences prefs;
@@ -53,6 +53,7 @@ public class SelectTime extends BaseActivity implements ICallBackFromDbAdapter {
         gson = new Gson();
         prefs = getSharedPreferences("prefs", 0);
         userIdStr = prefs.getString("Id_User", "");
+        nameOfUser = prefs.getString("UserWhoCreateApp","");
         //
         txtDrV = (TextView)findViewById(R.id.txtDr_in_SelectTime);
         txtClinicV = (TextView)findViewById(R.id.txtClinic_in_SelectTime);
@@ -215,6 +216,7 @@ public class SelectTime extends BaseActivity implements ICallBackFromDbAdapter {
         newBooking.setDoctor(DrSelectedName);
         newBooking.setDRAVAILABLE("1");
         newBooking.setId_Doc(DrSelectedId);
+        newBooking.setUser(nameOfUser);
 
         boolean success = false;
 

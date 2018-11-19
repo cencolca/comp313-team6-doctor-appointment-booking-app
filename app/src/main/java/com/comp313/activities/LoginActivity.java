@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
+        getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("UserWhoCreateApp","").putString("role", "").commit();
         //get references
         uNameView = findViewById(R.id.txtLoginName);
         uPassView = findViewById(R.id.txtLoginPass);
@@ -52,7 +52,7 @@ public class LoginActivity extends BaseActivity
     protected void onResume()
     {
         super.onResume();
-        getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("role", "").commit();
+        getSharedPreferences("prefs",0).edit().putString("Id_User", "").putString("UserWhoCreateApp","").putString("role", "").commit();
 
     }
 
@@ -143,6 +143,8 @@ public class LoginActivity extends BaseActivity
 
                                 // store userID to sharedPref
                                 pref.edit().putString("Id_User", userId).apply();
+                                // store name of user who is creating appointment
+                                pref.edit().putString("UserWhoCreateApp",dbUser.getNameOfUser()).apply();
 
                                 // set role to 0 (patient)
                                 pref.edit().putString("role", dbUser.getRole()).apply();
