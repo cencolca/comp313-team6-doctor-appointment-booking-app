@@ -539,6 +539,10 @@
             return success;
         }
 
+        public void searchUserByName(String stUserName)
+        {
+        }
+
         boolean loginSuccess;
 
 

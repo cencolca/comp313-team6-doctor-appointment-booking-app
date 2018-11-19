@@ -18,6 +18,7 @@ import com.comp313.R;
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.adapters.User_Adapter;
 import com.comp313.dataaccess.DbAdapter;
+import com.comp313.dataaccess.FBDB;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
 import com.comp313.models.User;
@@ -62,13 +63,16 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
         {
             return;
         }
-        dbAdapter = new DbAdapter(this, new AdminDashboardActivity());
+
+        new FBDB(this,this).searchUserByName(stUserName);
+
+        /*dbAdapter = new DbAdapter(this, new AdminDashboardActivity());
 
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/searchUserByName/" + stUserName;
         paramsApiUri[1] = "";
         paramsApiUri[2] = "GET";
         //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
     }
 
     @Override

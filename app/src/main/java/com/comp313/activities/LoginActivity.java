@@ -154,8 +154,16 @@ public class LoginActivity extends BaseActivity
 
 
                                 Toast.makeText(ctx, "Login successful", Toast.LENGTH_LONG).show();
-                                i = new Intent(ctx, DashboardActivity.class);
-                                ctx.startActivity(i);
+                                if (dbUser.getRole().equals("3"))
+                                {
+                                    i = new Intent(ctx, AdminDashboardActivity.class);
+                                    ctx.startActivity(i);
+                                }
+                                else
+                                {
+                                    i = new Intent(ctx, DashboardActivity.class);
+                                    ctx.startActivity(i);
+                                }
                             }
                             else
                             {
