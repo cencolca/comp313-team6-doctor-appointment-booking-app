@@ -2,6 +2,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal">
+    <android.support.v7.widget.CardView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         style="@style/menuLine"
@@ -19,4 +23,5 @@
             android:layout_height="wrap_content"
             android:text="Login" />
     </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

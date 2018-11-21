@@ -11,7 +11,7 @@
 
 
 
-    <color name="colorPrimary">#1DA1F2</color>
+    <color name="colorPrimary">#1da1f2</color>
     <color name="colorPrimaryDark">@android:color/darker_gray</color>
     <color name="colorAccent">#FF4081</color>
 
