@@ -17,11 +17,11 @@ public class User {
         this.pw = pw;
     }
 
-    public int getId_User() {
+    public String getId_User() {
         return Id_User;
     }
 
-    public void setId_User(int id_User) {
+    public void setId_User(String id_User) {
         Id_User = id_User;
     }
 
@@ -75,7 +75,7 @@ public class User {
 
     private String loginName;
     private String pw;
-    private int Id_User = 0;
+    private String Id_User = "0";
     private String nameOfUser;
     private String address;
     private String email;

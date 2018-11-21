@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 
 import com.comp313.models.Booking;
 import com.comp313.models.DrProfile;
+import com.comp313.models.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,6 @@ public class VariablesGlobal
     public static String KeyToAccessFirebaseDB = "xuMPG9VJbpjYXXPgPPAgwKYCA1kyx4Lvg4YNkz1a";
     public static List<Pair<String, Booking>> mapAppoints = new ArrayList<>();
     public static ArrayList<Booking> allAppoints = new ArrayList<>();
-
-
+    public static List<Pair<String, User>> mapUsers = new ArrayList<>();
+    public static ArrayList<User> allUsersAdminSearched = new ArrayList<>();
 }

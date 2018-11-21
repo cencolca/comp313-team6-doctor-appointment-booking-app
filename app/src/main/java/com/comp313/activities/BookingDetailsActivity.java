@@ -29,11 +29,13 @@ import com.comp313.dataaccess.DbAdapter;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
 import com.comp313.models.DrProfile;
+import com.comp313.models.User;
 import com.comp313.views.CustomTimePickerDialog;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -372,6 +374,11 @@ public class BookingDetailsActivity extends BaseActivity implements ICallBackFro
 
     @Override
     public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
+
+    }
+
+    @Override
+    public void onResponseFromServer(ArrayList<User> allUsersAdminSearched, Context ctx) {
 
     }
 
