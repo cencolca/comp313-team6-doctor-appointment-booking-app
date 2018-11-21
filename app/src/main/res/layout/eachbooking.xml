@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/rowPtName"
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="5dp"
-        android:drawableTint="@color/colorPrimaryDark"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/rowTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="5dp"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"/>
+        <TextView
+            android:id="@+id/rowPtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
+
+        <TextView
+            android:id="@+id/rowTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"/>
+       
+  
     <TextView
         android:id="@+id/rowDrName"
         android:layout_width="match_parent"
@@ -36,10 +43,18 @@
         android:drawableTint="@color/colorPrimaryDark"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
-    <TextView
-        android:id="@+id/rowAppId_Hidden"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+       
+        
 
-</LinearLayout>
+       
+        
+        <TextView
+            android:id="@+id/rowAppId_Hidden"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+
