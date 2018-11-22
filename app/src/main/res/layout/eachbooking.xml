@@ -28,6 +28,7 @@
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"/>
 
+
         <TextView
             android:id="@+id/rowDrName"
             android:layout_width="match_parent"
@@ -44,6 +45,8 @@
             android:drawableTint="@color/colorPrimaryDark"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
+       
+        
         <TextView
             android:id="@+id/rowAppId_Hidden"
             android:layout_width="match_parent"
