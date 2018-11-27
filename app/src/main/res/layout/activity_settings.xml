@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,8 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Edit Profile"
-        android:onClick="btnClk_EditUserProfile"/>
+        android:background="@color/colorPrimary"
+        android:onClick="btnClk_EditUserProfile"
+        android:text="Edit Profile" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -226,7 +232,8 @@
                 android:layout_height="wrap_content"
                 android:layout_span="2"
                 android:onClick="btnClk_UpdateUser"
-                android:text="Update User Profile" />
+                android:text="Update User Profile"
+                tools:background="@android:color/holo_blue_dark" />
 
 
         </TableRow>
@@ -237,6 +244,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
+                android:background="@color/colorPrimary"
                 android:onClick="btnClk_DeleteUser"
                 android:text="Delete User" />
 
@@ -250,3 +258,4 @@
         android:layout_weight="1"
         android:text="Set Default Location" />-->
 </LinearLayout>
+</android.support.v7.widget.CardView>
