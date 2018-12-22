@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#f2f2f2"
     tools:context="com.comp313.activities.BookingDetailsActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <LinearLayout
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtClinicName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Clinic Info"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
-            <TextView
-                android:id="@+id/txtClinicName"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Clinic Info"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20px"
-                android:layout_marginBottom="20px"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/txtBookingActivity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@android:drawable/stat_sys_phone_call"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:gravity="center_vertical"
-                android:hint="Hospital Address" />
-
-            <TextView
-                android:id="@+id/txtTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@android:drawable/ic_menu_recent_history"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:gravity="center_vertical"
-                android:hint="Timmings" />
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ratings3" />
+                android:padding="5dp"
+                android:orientation="vertical">
 
 
-        </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginTop="20px"
+                    android:visibility="gone"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/txtBookingActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Hospital Address"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:drawableRight="@android:drawable/stat_sys_phone_call"/>
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Timmings"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@android:drawable/ic_menu_recent_history"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ratings3"/>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
             android:orientation="vertical">
 
             <TextView
@@ -77,8 +87,8 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="20px"
                 android:layout_marginBottom="20px"
+                android:layout_marginTop="20px"
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
 
@@ -86,8 +96,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="10px"
-            android:layout_marginTop="10dp"
             android:background="@drawable/spinner_background"
+            android:layout_marginTop="10dp"
             android:visibility="gone">
 
             <Spinner
@@ -129,19 +139,22 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="5dp">
 
             <ListView
                 android:id="@+id/lv_DoctorsList"
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
             </ListView>
 
-        </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
 
         <!--   <LinearLayout
                android:orientation="vertical"
@@ -232,4 +245,5 @@
     </LinearLayout>-->
 
 
-</LinearLayout>
+</RelativeLayout>
+

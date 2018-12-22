@@ -18,6 +18,7 @@ import com.comp313.R;
 import com.comp313.adapters.ICallBackFromDbAdapter;
 import com.comp313.adapters.User_Adapter;
 import com.comp313.dataaccess.DbAdapter;
+import com.comp313.dataaccess.FBDB;
 import com.comp313.helpers.VariablesGlobal;
 import com.comp313.models.Booking;
 import com.comp313.models.User;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,11 +35,13 @@ import java.util.List;
 
 
 public class AdminDashboardActivity extends BaseActivity implements ICallBackFromDbAdapter {
+    //region >>> Vars
     Object[] paramsApiUri;
     EditText etUserName;
     String stUserName;
     DbAdapter dbAdapter;
     ListView lvUserList;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +66,28 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
         {
             return;
         }
-        dbAdapter = new DbAdapter(this, new AdminDashboardActivity());
+
+        new FBDB(this,this).searchUserByName(stUserName);
+
+        /*dbAdapter = new DbAdapter(this, new AdminDashboardActivity());
 
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/searchUserByName/" + stUserName;
         paramsApiUri[1] = "";
         paramsApiUri[2] = "GET";
         //pass args to AsyncTask to read db
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
     }
 
     @Override
-    public void onResponseFromServer(String result, Context ctx)
+    public void onResponseFromServer(ArrayList<User> allUserList, Context ctx)//new Firebase implementation
+    {
+        lvUserList = (ListView) ((Activity) ctx).findViewById(R.id.lvUserList);
+        User_Adapter adapter = new User_Adapter((Activity) ctx, R.layout.eachuser, allUserList);
+        lvUserList.setAdapter(adapter);//listAllAppV ref fetched in onCreate becomes NULL in this callBk!!! So get a fresh ref!
+    }
+
+    @Override
+    public void onResponseFromServer(String result, Context ctx)//OLD Azure implementation
     {
 
         if (!this.isFinishing()) {
@@ -99,7 +114,7 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
                 usr = new User();
                 usr.setLoginName(j.getString("loginName"));
                 usr.setNameOfUser(j.getString("nameOfUser"));
-                usr.setId_User(j.getInt("Id_User"));
+                //usr.setId_User(j.getInt("Id_User"));//changed int to String in Model "User" bcoz FB Keys r strings
 
                 allUserList.add(usr);
             }
@@ -119,6 +134,8 @@ public class AdminDashboardActivity extends BaseActivity implements ICallBackFro
     public void onResponseFromServer(List<Booking> allBookings, Context ctx) {
 
     }
+
+
 
     public void onNewUserClick(View view)
     {

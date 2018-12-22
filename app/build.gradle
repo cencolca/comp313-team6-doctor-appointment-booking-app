@@ -55,6 +55,7 @@ dependencies {
 
     //Snackbar
     implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
 
     //Firebase
     implementation 'com.google.firebase:firebase-core:11.4.0'

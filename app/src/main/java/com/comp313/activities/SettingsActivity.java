@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 
 import com.comp313.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsActivity extends BaseActivity implements ICallBackFromDbAdapter {
@@ -203,6 +204,11 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
 
     }
 
+    @Override
+    public void onResponseFromServer(ArrayList<User> allUsersAdminSearched, Context ctx) {
+
+    }
+
     //only ADMIN an delete a user
     public void btnClk_DeleteUser(View btn_v)
     {
@@ -213,14 +219,14 @@ public class SettingsActivity extends BaseActivity implements ICallBackFromDbAda
     {
         //get Id_User from hidden ctrl
         String Id_UserEditing = getSharedPreferences("prefs", 0).getString("Id_UserEditing", "");
-
-        //send id to be deleted to API
+        new FBDB(this).deleteUser(Id_UserEditing);
+/*        //send id to be deleted to API
         dbAdapter = new DbAdapter(this);
         //e.g. /api/values/DeleteUser/13
         paramsApiUri[0] = VariablesGlobal.API_URI + "/api/values/DeleteUser/" + Id_UserEditing;
         paramsApiUri[1] = formData = "";
         paramsApiUri[2] = "POST";
-        dbAdapter.execute(paramsApiUri);
+        dbAdapter.execute(paramsApiUri);*/
         finish();
     }
 
